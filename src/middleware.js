@@ -4,7 +4,7 @@ const { NextResponse } = require('next/server');
 const PUBLIC_FILE = /\.(.*)$/; // Files
 
 async function middleware(req) {
-  // lone the URL
+  // clone the URL
   const url = req.nextUrl.clone();
   // Skip public files
   if (PUBLIC_FILE.test(url.pathname) || url.pathname.includes('_next')) return;
