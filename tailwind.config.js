@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+    important:true,
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -9,7 +10,8 @@ module.exports = {
     screens:{
         'tablet': '640px',
         'laptop': '1024px',
-        'desktop': '1280px'
+        'desktop': '1280px',
+        'mobile':'480px'
     },
     extend: {
       backgroundImage: {

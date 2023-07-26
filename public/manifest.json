@@ -1,0 +1,42 @@
+{
+    "short_name":"Nerds",
+    "name":"Nerdsnepal",
+    "icons":[
+        {
+            "src":"next.svg",
+            "type":"image/svg+xml",
+            "sizes":"512x512"
+        }
+    ],
+    "id":"/?source=pwa",
+    "start_url":"/",
+    "background_color":"#000000",
+    "display":"standalone",
+    "scope":"/",
+    "theme_color":"#000000",
+    "shortcuts":[
+        {
+            "name":"Admin",
+            "short_name":"Admin",
+            "description":"For Admin",
+            "url":"/admin",
+            "icons":[{"src":"next.svg"}]
+        }
+    ],
+    "description":"NerdsNepal an ecommerce platform",
+    "screenshots":[
+        {
+            "src":"next.svg",
+            "type":"image/svg+xml",
+            "sizes":"512x512",
+            "display":"wide"
+        },
+        {
+            "src":"next.svg",
+            "type":"image/svg+xml",
+            "sizes":"512x512",
+            "display":"narrow"
+        }
+    ]
+
+}

@@ -8,13 +8,13 @@ async function middleware(req) {
   const url = req.nextUrl.clone();
   // Skip public files
   if (PUBLIC_FILE.test(url.pathname) || url.pathname.includes('_next')) return;
-
+  const path = getFirstPathName(url.pathname)
     const host = req.headers.get('host');
     if(host.includes("192.168."))return
     let subdomain = getValidSubdomain(host);
     console.log(subdomain);
     if(subdomain===undefined||subdomain===null||subdomain==="") subdomain="www";
-    const path = getFirstPathName(url.pathname)
+    
     if(path==="www" || path==='admin'){
        return NextResponse.redirect(new URL('/',`http://${path}.${req.nextUrl.host}/${path}`));
     }
