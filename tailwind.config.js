@@ -11,7 +11,13 @@ module.exports = {
         'tablet': '640px',
         'laptop': '1024px',
         'desktop': '1280px',
-        'mobile':'480px'
+        'mobile':'480px',
+        'md':'768px',
+        'tablet_md':{'min':'480px','max':'768px'},
+        'md_laptop':{'min':'768px','max':'1024px'},
+        'tablet_laptop':{'min':'480px','max':'1024px'},
+        'mobile_tablet':{'min':'480px','max':'640px'},
+        'above_laptop':{'min':'1024px'}
     },
     extend: {
       backgroundImage: {
