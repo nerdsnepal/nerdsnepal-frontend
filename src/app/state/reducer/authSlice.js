@@ -10,8 +10,8 @@ const AuthSlice =  createSlice({
         isAdmin:false
     },
     reducers:{
-        toggleAuth:(state)=>{
-            state.isAuth = !state.isAuth
+        setAuth:(state)=>{
+            state.isAuth =!state.isAuth
         },
         setUserData:(state,action)=>{
             state.data = action.payload
@@ -28,6 +28,6 @@ const AuthSlice =  createSlice({
     }
 })
 
-export const {toggleAuth,setUserData,removeUserData,toogleIsAdmin} = AuthSlice.actions 
+export const {setAuth,setUserData,removeUserData,toogleIsAdmin} = AuthSlice.actions 
 
 export default AuthSlice.reducer 

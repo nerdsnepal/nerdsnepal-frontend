@@ -1,9 +1,16 @@
+import axios from 'axios';
+import { ADMIN_URL, API_URL, COOKIE_NAME } from './app/lib/utils/utils';
+
+
 const { NextResponse } = require('next/server');
 
 // RegExp for public files
 const PUBLIC_FILE = /\.(.*)$/; // Files
 
 async function middleware(req) {
+    const cookies = req.cookies
+    const token = getCookie(cookies.get(COOKIE_NAME))
+    let currentPath = ""
   // clone the URL
   const url = req.nextUrl.clone();
   // Skip public files
@@ -12,20 +19,37 @@ async function middleware(req) {
     const host = req.headers.get('host');
     if(host.includes("192.168."))return
     let subdomain = getValidSubdomain(host);
-    console.log(subdomain);
     if(subdomain===undefined||subdomain===null||subdomain==="") subdomain="www";
     
     if(path==="www" || path==='admin'){
        return NextResponse.redirect(new URL('/',`http://${path}.${req.nextUrl.host}/${path}`));
     }
- 
   if (subdomain) {
     // Subdomain available, rewriting
     console.log(`>>> Rewriting: ${url.pathname} to /${subdomain}${url.pathname}`);
     url.pathname = `/${subdomain}${url.pathname}`;
   }
-  console.log(url.pathname);
+//set the current path as 
+currentPath= url.pathname
+
   return NextResponse.rewrite(url);
+}
+
+
+
+const getCookie=(cookies)=>{
+    if(cookies===undefined)return undefined
+   return cookies.value
+}
+const isAuth=async()=>{
+    try {
+        const result = await axios.get(API_URL(),{withCredentials:true})
+        console.log(result);
+        return true
+    } catch (error) {
+        console.log(error);
+        return false
+    }
 }
 
 export const getFirstPathName = (path)=>path.split('/')[1] 
@@ -47,5 +71,4 @@ export const getValidSubdomain = (host) => {
   
     return subdomain;
   };
-  
 export default middleware

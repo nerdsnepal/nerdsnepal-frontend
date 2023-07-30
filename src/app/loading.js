@@ -1,6 +1,6 @@
 
 const Loading = () => {
-    return <h1>Loading...</h1>
+    return <main className="w-full h-full bg-white"><h1 className="w-full h-full">Yooo...</h1></main>
 }
  
 export default Loading;
