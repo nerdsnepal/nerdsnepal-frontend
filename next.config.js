@@ -5,7 +5,8 @@ const nextConfig = {
     },
     
     experimental:{
-        forceSwcTransforms:false
+        forceSwcTransforms:false,
+        serverActions:true
     },
     crossOrigin:'use-credentials'
     

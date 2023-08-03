@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import dotenv from 'dotenv'
 import ReactReducerProvider from './ReactReducer'
 import QueryProvider from './QueryProvider'
-import AuthProvider from './components/AuthProvider'
+import AuthProvider from './lib/components/AuthProvider'
 
 
 dotenv.config()

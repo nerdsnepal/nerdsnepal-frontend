@@ -1,19 +1,22 @@
-'use-client'
+'use client'
 import Image from "next/image"
 import getIcon from "../getIcon"
 import feather from "feather-icons"
 import UserProfile from "./UserProfile"
+import { Badge } from "@mui/material"
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
-const AdminToolBar = () => {
+export default  function AdminToolBar  (req) {
+  //  const session =await getServerSession(authOptions)
+   // console.log(session);
     const storeInfo = {
-        store:"Xyz",
+        store:process.env.COMPANY_NAME||"",
         storeLogo:"/next.svg",
         name:"Safal Shrestha",
         profile:"https://www.freecodecamp.org/news/content/images/size/w2000/2022/09/jonatan-pie-3l3RwQdHRHg-unsplash.jpg"
     }
     const options = {width:24,height:24,"stroke-width":3.5}
     const searchIcon = getIcon(feather.icons.search,options)
-    const notificationIcon = getIcon(feather.icons.bell)
     return <div className="grid w-full justify-center items-center overflow-hidden fixed grid-cols-2 mobile:grid-cols-3 mobile:h-[90px] h-[60px] top-0 left-0 border-b border-gray-50  mobile:px-6">
         <span className="flex justify-self-start fill-current">
             <a href="#" >
@@ -26,13 +29,15 @@ const AdminToolBar = () => {
         <div className="flex space-x-4 w-full h-full mobile:justify-center items-center justify-start ">
         <span>{searchIcon}</span>
         <span className="cursor-pointer relative shrink-0">
-            <a href="#">{notificationIcon}
+            <Badge badgeContent={400} className="m-2" max={99} color="primary">
+            <NotificationsIcon  sx={{fontSize:"60"}} />
+            </Badge>
+            {/*<a href="#">{notificationIcon}
             <span className="absolute top-[-4px] text-center right-[-9px] p-[3px] w-fit h-fit text-[12px] bg-red-500  text-white rounded-full">9+</span>
-            </a>
+            </a>*/}
         </span>
         <span className="shrink-0"><UserProfile name={storeInfo.name} profileUrl={storeInfo.profile} /></span>
         </div>
     </div>
 }
  
-export default AdminToolBar;

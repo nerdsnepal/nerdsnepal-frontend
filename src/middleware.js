@@ -41,16 +41,7 @@ const getCookie=(cookies)=>{
     if(cookies===undefined)return undefined
    return cookies.value
 }
-const isAuth=async()=>{
-    try {
-        const result = await axios.get(API_URL(),{withCredentials:true})
-        console.log(result);
-        return true
-    } catch (error) {
-        console.log(error);
-        return false
-    }
-}
+
 
 export const getFirstPathName = (path)=>path.split('/')[1] 
 export const getValidSubdomain = (host) => {
