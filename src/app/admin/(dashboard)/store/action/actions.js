@@ -1,10 +1,12 @@
 "use server";
 
 import { API_URL } from "@/app/lib/utils/utils";
+import { revalidateTag } from "next/cache";
 
 
 export default async function fetchStores({accessToken}){
   const res = await fetch(API_URL("store"),{credentials:"include",
+        cache:"no-cache",
         headers:{
             'Authorization':`Bearer ${accessToken}`
         },
@@ -37,6 +39,8 @@ export  async function _createStore({merchantId,name,accessToken}){
     } catch (error) {
         console.log(error);
         return error
+    }finally{
+        revalidateTag("stores")
     }
 
 }
