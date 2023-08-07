@@ -4,21 +4,28 @@ import AdminToolBar from "../components/toolbar"
 import { Suspense, useEffect, useState } from "react"
 import Loading from "@/app/loading"
 import { useSession } from "next-auth/react"
+import { useDispatch } from "react-redux"
+import { setAccessToken, setInit, setRole } from "@/app/state/reducer/authSlice"
 
 const Layout = ({children})=>{  
     const {status,data} = useSession()
+    const dispatch = useDispatch()
     const [isLoading,setLoading] = useState(true)
     useEffect(()=>{
         if(status === "unauthenticated"){
             setLoading(false)
+            dispatch(setInit())
            // redirect('/login')
         }
         if(status==="authenticated"){
-            const {role,isVerified} = data.user
+            const {role,isVerified,accessToken} = data.user
             setLoading(false)
+            dispatch(setRole(role))
+            dispatch(setAccessToken(accessToken))
             if(role==="user"){
               //  redirect("/requeststore")
             }
+            
             
         }
        

@@ -3,6 +3,8 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import { useCallback, useState } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import { compareDateToC } from '@/app/lib/utils/utils';
+import { TrendingUpOutlined } from '@mui/icons-material';
 function EditToolbar(props){
     console.log(props);
     return <>
@@ -61,9 +63,23 @@ function StoreList({stores}){
             valueGetter:({row})=>{
                 const len = row.subscriptionDetails?.length
                 const isExpire = row.subscriptionDetails[len-1].isExpire
+                const currentDate = Date.now()
+
                 if(!isExpire)return "Never Expire"
                 return row.subscriptionDetails[len-1].expire_on
             }
+        },{
+            field:'expire_status',headerName:"Expire Status",
+            minWidth :120,resizeable:true,
+            renderCell:({row})=>{
+                const len = row.subscriptionDetails?.length
+                const isExpire = row.subscriptionDetails[len-1].isExpire
+                let status = true
+                //compareDateToC(row.subscriptionDetails[len-1].expire_on)
+                if(!isExpire)status= false
+                return <div key={row._id+"expire"} className={`w-3 h-3 rounded-full m-auto ${status?'bg-green-800':'bg-red-800'}`}></div>
+            },
+            
         },
         {
             field:'paymentMethod',headerName:'Payment method',
@@ -91,7 +107,6 @@ function StoreList({stores}){
         }
        
     ]
-    
 
     const processRowUpdate = useCallback(
         async(newRow)=>{

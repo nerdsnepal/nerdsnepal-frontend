@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images:{
-        domains:["www.freecodecamp.org"]
+        domains:["www.freecodecamp.org","localhost"]
     },
     
     experimental:{

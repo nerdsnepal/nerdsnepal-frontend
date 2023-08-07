@@ -10,7 +10,7 @@ export const metadata={
 }
 const StorePage = () => {
     const {data,status} = useSession();
-    const [isPending,startTransition] = useTransition()
+
     const [stores,setStores] = useState(null)
     useEffect(()=>{
         async function fetch(accessToken){

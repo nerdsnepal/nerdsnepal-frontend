@@ -9,6 +9,7 @@ import Loading from "@/app/loading";
 import { removeQueryPart } from "@/app/lib/utils/utils";
 import StoreIcon from '@mui/icons-material/Store';
 import { Backdrop } from "@mui/material";
+import CategoryIcon from '@mui/icons-material/Category';
 
 const  Navbar = ()=>{
     let path = usePathname()
@@ -30,7 +31,11 @@ const  Navbar = ()=>{
             { 
              key:"navProduct2Child1",
              name:"Inventory",icon:getIcon(feather.icons.layers,options),url:'/inventory'
-             }
+             },
+             { 
+                key:"navProduct2Child2",
+                name:"Category",icon:<CategoryIcon/>,url:'/category'
+                }
          ]
          },
          {
