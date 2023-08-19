@@ -35,7 +35,6 @@ export const authOptions = {
           })
       ],
       callbacks: {
-       
         async session({ session, token }) {
             const user = token
           return {...session,user}
@@ -45,10 +44,12 @@ export const authOptions = {
                 const role = user.role 
                 const _id = user._id 
                 const isVerified = user.isVerified
+                const profile = user.profile
+                const username = user.username 
                 const accessToken = user.accessToken
                 const fullName = `${user.firstname} ${user.middlename} ${user.lastname}`
                 const email = user.email
-                user = {fullName,role,_id,isVerified,accessToken,email}
+                user = {fullName,role,_id,isVerified,accessToken,email,profile,username}
                return {...token,...user}
             }
           return token

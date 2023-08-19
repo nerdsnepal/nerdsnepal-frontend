@@ -5,7 +5,8 @@ import { Suspense, useEffect, useState } from "react"
 import Loading from "@/app/loading"
 import { useSession } from "next-auth/react"
 import { useDispatch } from "react-redux"
-import { setAccessToken, setInit, setRole } from "@/app/state/reducer/authSlice"
+import { setAccessToken, setInit, setRole, setUser } from "@/app/state/reducer/authSlice"
+import { redirect } from "next/navigation"
 
 const Layout = ({children})=>{  
     const {status,data} = useSession()
@@ -15,15 +16,16 @@ const Layout = ({children})=>{
         if(status === "unauthenticated"){
             setLoading(false)
             dispatch(setInit())
-           // redirect('/login')
+            redirect('/login')
         }
         if(status==="authenticated"){
-            const {role,isVerified,accessToken} = data.user
+            const {role,isVerified,accessToken,email,fullname,username,profile} = data.user
             setLoading(false)
             dispatch(setRole(role))
+            dispatch(setUser({isVerified,email,fullname,username,profile}))
             dispatch(setAccessToken(accessToken))
             if(role==="user"){
-              //  redirect("/requeststore")
+                redirect("/requeststore")
             }
             
             
@@ -33,7 +35,8 @@ const Layout = ({children})=>{
     if(isLoading) return<Suspense fallback={<Loading/>}/>
     return <><Suspense fallback={<Loading/>}>
     <AdminToolBar/>
-    <div className="grid basis-full mobile:my-[90px] my-[65px] grid-cols-1 mobile:grid-cols-[208px,auto] fixed w-full">
+    {/*  */}
+    <div className="grid fixed basis-full mobile:mt-[90px] mt-[65px] grid-cols-1 mobile:grid-cols-[208px,auto]  w-full">
     <Navbar/>
     {children}
     </div>

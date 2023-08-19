@@ -1,7 +1,66 @@
+'use client'
+
+import ProductPageNavbar from "@/app/admin/components/product-navbar";
+import {   useSearchParams } from "next/navigation"
+import { Suspense, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { getAllStoreRelatedProduct } from "./actions/action";
+import { Stack } from "@mui/material";
+import Loading from "@/app/loading";
+import { StoreProductList } from "./components/product-list";
 
 export default function ProductPage (){
+    const storeId = useSelector((state)=>state.auth.storeId)
+    const accessToken = useSelector((state)=>state.auth.accessToken)
+    const searchParams = useSearchParams()
+    const [selectedView,setSelectedView]= useState('all')
+    const [products,setProducts] = useState([])
+    const [isLoading,setLoading] = useState(true)
+    const [error,setError] = useState({
+        hasError:false,
+        message:''
+    })
+    //get all the query params 
+   useEffect(()=>{
+    for(let key of searchParams.keys()){
+        if(key==='selectedView'){
+            setSelectedView(searchParams.get(key))
+        }
+    }
+   },[searchParams])
 
-    return <>
-        <h1>This is a product page </h1>
-    </>
+
+    useEffect(()=>{
+        (async()=>{
+            try {
+                if(storeId===null||storeId===undefined)return
+                setLoading(true)
+               const result=await getAllStoreRelatedProduct({accessToken,storeId,selectedView})
+               
+               if(result&& result.success){
+                console.log(result);
+                    setProducts(result.products)
+               }
+            } catch (error) {
+                setError({
+                    hasError:true,
+                    message:"Something went wrong"
+                })
+                //error handling
+            }finally{
+                setLoading(false)
+            }
+
+        })()
+    },[storeId])
+
+   if(error.hasError){
+    return <>{JSON.stringify(error.message)}</>
+   }
+    return <Suspense fallback={<Loading/>}>
+        <Stack className="overflow-auto h-full">
+        <ProductPageNavbar />
+        <StoreProductList products={products} />
+        </Stack>
+    </Suspense>
 }

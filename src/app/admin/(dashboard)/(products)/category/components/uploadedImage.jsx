@@ -1,21 +1,21 @@
 import { API_URL } from "@/app/lib/utils/utils";
 import { CloseOutlined } from "@mui/icons-material";
 import Image from "next/image";
-import { removeImage } from "../action/removeImage";
 import { useSelector } from "react-redux";
+import { removeImage } from "../action/actions";
 
 const UploadedImage = ({url,onRemoved}) => {
     console.log(url);
     const originalUrl = API_URL(url)
     console.log(originalUrl);
-    const storeId = useSelector((state)=>state.auth.selectedStore)
+    const storeId = useSelector((state)=>state.auth.storeId)
     const accessToken = useSelector((state)=>state.auth.accessToken)
     const remove=async ()=>{
         onRemoved(url)
       try{
         await removeImage({accessToken,storeId,path:url})
       }catch(error){
-            console.log(error);
+            //error handling here
       }
     }
 
@@ -26,6 +26,8 @@ const UploadedImage = ({url,onRemoved}) => {
             <Image 
                 src={originalUrl}
                 alt=""
+                draggable={false}
+                className="h-[90px] w-[80px] object-cover cursor-pointer"
                 width={100}
                 height={125}
             

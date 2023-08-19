@@ -23,15 +23,13 @@ const StorePage = () => {
         }
         
     },[])
-    console.log(stores);
-    return (<section className="p-8">
+    return (<div className="p-8">
         <StoreMenu/>
-        <div className="h-[7vh]"></div>
        {
-        stores?.length>0? <StoreList stores={stores}/>:<p>No store</p>
+        stores?.length>0? <StoreList stores={stores}  />:<p>No store</p>
        }
 
-    </section>);
+    </div>);
 }
  
 export default StorePage;

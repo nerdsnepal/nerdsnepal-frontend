@@ -25,7 +25,7 @@ const  Navbar = ()=>{
         },
         {
          key:"navProducts2",
-         name:"Products",icon:getIcon(feather.icons.tag,options),url:'/products?selectedView=all',
+         name:"Products",icon:getIcon(feather.icons.tag,options),url:'/products?selectedView=all&role=merchant',
          isOpen:true,
          subNavs:[
             { 
@@ -91,6 +91,7 @@ const  Navbar = ()=>{
     useEffect(()=>{
         setNav(false)
         const genNavs=  navs.map(({key,name,icon,url,subNavs,isOpen})=>{
+            let originalUrl = url 
             url = removeQueryPart(url)
             const genSubNavs = subNavs.map(({key,name,icon,url}) => {
                 url = removeQueryPart(url);
@@ -98,7 +99,7 @@ const  Navbar = ()=>{
                 <Link  href={url.toString()} className="p-2 h-8 w-full">{icon}{name}</Link></li>
         });
             return <div key={key} className="w-48" ><li className={`${path===url.toString()?style:'bg-transparent'}  w-auto dark:hover:bg-neutral-900 p-2 hover:bg-neutral-200 hover:cursor-pointer`}>
-                    <Link  href={url.toString()} className="p-2 w-full">{icon}{name}</Link>
+                    <Link  href={originalUrl.toString()} className="p-2 w-full">{icon}{name}</Link>
                 </li>  { subNavs.length>0? <ul className={`${isOpen?'visible':'hidden'} list-none p-4 py-4 space-y-6`}>{genSubNavs}</ul>:<></>
                     }
                 </div>

@@ -6,15 +6,19 @@ const AuthSlice =  createSlice({
     name:'auth',
     initialState:{
        isSuperAdmin:false,
+       user:null,
        role:"user",
        status:"unauthenticated",
        accessToken:"",
-       storesId:[],
-       selectedStore:""
+       stores:[],
+       selectedStore:null,
+       storeId:null
     },
     reducers:{
+        setUser:(state,action)=>{
+            state.user = action.payload 
+        },
        setRole:(state,action)=>{
-        console.log(action.payload);
         state.role= action.payload
         if(state.role==="superuser")
             state.isSuperAdmin= true
@@ -25,21 +29,23 @@ const AuthSlice =  createSlice({
         state.accessToken= action.payload
        },
        setStores:(state,action)=>{
-            state.storesId = action.payload
+            state.stores = action.payload
        },
        setSelectedStore:(state,action)=>{
-            state.selectedStore = action.state
+            state.selectedStore = action.payload
+            state.storeId = action.payload._id
        },
        setInit:(state)=>{
         state.role="user"
         state.isSuperAdmin=false
         state.status="unauthenticated"
         state.accessToken= ""
+        state.user =null
        }
         
     }
 })
 
-export const {setRole,setInit,setAccessToken,setSelectedStore,setStores} = AuthSlice.actions 
+export const {setUser,setRole,setInit,setAccessToken,setSelectedStore,setStores} = AuthSlice.actions 
 
 export default AuthSlice.reducer 

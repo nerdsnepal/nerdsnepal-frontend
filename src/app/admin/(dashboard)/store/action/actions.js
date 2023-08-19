@@ -15,10 +15,8 @@ export default async function fetchStores({accessToken}){
         }
     })
     if(!res.ok){
-        
         throw new Error("Unable to fetch data")
     }
-    console.log(res);
     return await res.json()
 }
 

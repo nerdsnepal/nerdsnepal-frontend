@@ -1,17 +1,15 @@
-import { Avatar } from '@mui/material';
+import { Avatar, Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 import { useCallback, useState } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import { compareDateToC } from '@/app/lib/utils/utils';
-import { TrendingUpOutlined } from '@mui/icons-material';
+
 function EditToolbar(props){
-    console.log(props);
+   // console.log(props);
     return <>
     <h1>This is a toolbar</h1>
     </>
 }
-
 
 function StoreList({stores}){
     let columns = [
@@ -53,8 +51,10 @@ function StoreList({stores}){
             field:'subscribed_date',headerName:"Subscribed Date",
             minWidth :200,resizeable:true,
             valueGetter:({row})=>{
-                const len = row.subscriptionDetails?.length
-                return new Date(row.subscriptionDetails[len-1].subscribed_date)
+                const len = row?.subscriptionDetails?.length
+                if(len>0)
+                return new Date(row?.subscriptionDetails[len-1]?.subscribed_date)
+                return ""
             }
         },
         {
@@ -110,13 +110,14 @@ function StoreList({stores}){
 
     const processRowUpdate = useCallback(
         async(newRow)=>{
-            console.log(newRow);
+            //console.log(newRow);
         }
     )
-
+   
     if(stores===undefined)
     return <></>
-    return <div className='h-[75vh] w-[80vw] dark:text-white'>
+    return <div className="flex items-center mt-12" >
+    <Box className="dark:bg-gray-900 rounded-lg w-[100%] mobile:w-[50%]" sx={{ height: 520}}>
     <DataGrid
         columns={columns}
         rows={stores}
@@ -125,8 +126,6 @@ function StoreList({stores}){
                 padding: 10,
               },
               border:'none',
-            //  alignItems:'center',
-
         }}
         useResizeContainer
         scrollable={true}
@@ -150,9 +149,8 @@ function StoreList({stores}){
 
         }}
       />
-    
-
-    </div>
+   </Box>
+   </div>
 
 }
 
