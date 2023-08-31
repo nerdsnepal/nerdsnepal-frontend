@@ -1,7 +1,8 @@
-import { API_URL } from '@/app/lib/utils/utils';
+import { API_URL, SICHU_API_KEY } from '@/app/lib/utils/utils';
 import axios from 'axios';
 import NextAuth from 'next-auth'
 import CredentialsProvider from "next-auth/providers/credentials";
+import { headers } from 'next/dist/client/components/headers';
 
 
 export const authOptions = {
@@ -22,7 +23,12 @@ export const authOptions = {
                 let current_credentails = {}
                 if(isEmail==='false') current_credentails={username,password}
                 else current_credentails = {email:username,password}
-                const {data} = await axios.post(API_URL('auth/email-login'),current_credentails)
+                const {data} = await axios.post(API_URL('auth/email-login'),current_credentails,
+               {
+                headers:{
+                    ...SICHU_API_KEY
+                }
+               })
                 if(data.success){
                     const {user} =data 
                     console.log(user);

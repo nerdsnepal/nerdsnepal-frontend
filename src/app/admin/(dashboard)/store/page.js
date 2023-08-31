@@ -1,34 +1,42 @@
 "use client";
 import { useSession } from "next-auth/react";
 import fetchStores from "./action/actions";
-import { useEffect, useState, useTransition } from "react";
+import { Suspense, useEffect, useState, useTransition } from "react";
 import StoreList from "./components/store-list";
 import StoreMenu from "./components/store-menu";
+import { Stack } from "@mui/material";
+import { NoStore } from "./components/no-store";
+import Loading from "@/app/loading";
+import { useSelector } from "react-redux";
 
-export const metadata={
-    title:"Store"
-}
+
 const StorePage = () => {
-    const {data,status} = useSession();
-
+   const accessToken = useSelector((state)=>state.auth.accessToken)
+    const [isLoading,setLoading] = useState(true)
     const [stores,setStores] = useState(null)
     useEffect(()=>{
-        async function fetch(accessToken){
-            const result = await fetchStores({accessToken})
-            setStores(result.stores)
+        try{
+            async function requestStore(){
+                const result = await fetchStores({accessToken})
+                setStores(result.stores)
+                setLoading(false)
+            }
+           requestStore()
+        }catch(error){
+            console.log(error);
+            setLoading(false)
+            //handle error 
         }
-        if(status==="authenticated"){
-            const accessToken = data.user.accessToken
-            fetch(accessToken)
-        }
+      
         
-    },[])
-    return (<div className="p-8">
+    },[accessToken])
+    return (<div className="block p-8">
         <StoreMenu/>
-       {
-        stores?.length>0? <StoreList stores={stores}  />:<p>No store</p>
-       }
-
+       <Stack className="overflow-auto h-full">
+        {
+           isLoading?<h1>Loading...</h1>:stores?.length>0?<StoreList stores={stores}  />:<NoStore/>
+        }
+        </Stack>
     </div>);
 }
  

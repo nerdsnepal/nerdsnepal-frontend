@@ -13,3 +13,6 @@ export const compareDateToC= (date)=>{
     const res = currentDate>= compareDate
     //console.log(res);
 }
+export const SICHU_API_KEY= {
+    'sichu-api-key':process.env.NEXT_PUBLIC_SICHU_API_KEY
+}

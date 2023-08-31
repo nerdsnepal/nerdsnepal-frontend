@@ -4,16 +4,19 @@ import Link from "next/link"
 import getIcon from "../getIcon";
 import React, {  Suspense, useEffect, useState,lazy } from "react";
 const feather = require('feather-icons')
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import Loading from "@/app/loading";
 import { removeQueryPart } from "@/app/lib/utils/utils";
 import StoreIcon from '@mui/icons-material/Store';
-import { Backdrop } from "@mui/material";
+import { Backdrop, Box, Button, Stack } from "@mui/material";
 import CategoryIcon from '@mui/icons-material/Category';
-
+import { useDispatch, useSelector } from "react-redux";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { signOut } from "next-auth/react";
 const  Navbar = ()=>{
     let path = usePathname()
-  
+    const dispatch = useDispatch()
+    const isSuperUser = useSelector((state)=>state.auth.isSuperAdmin)
     // Options for feather icons 
     const options = {width:22,height:22,"stroke-width":3.5}
     const navs = [
@@ -23,7 +26,7 @@ const  Navbar = ()=>{
              isOpen:false,
              subNavs:[]
         },
-        {
+      !isSuperUser?  {
          key:"navProducts2",
          name:"Products",icon:getIcon(feather.icons.tag,options),url:'/products?selectedView=all&role=merchant',
          isOpen:true,
@@ -37,7 +40,11 @@ const  Navbar = ()=>{
                 name:"Category",icon:<CategoryIcon/>,url:'/category'
                 }
          ]
-         },
+         }:{ 
+            key:"navProduct2Child2",
+            name:"Category",icon:<CategoryIcon/>,url:'/category',
+            subNavs:[]
+            },
          {
              key:"navOrder3",
              name:"Orders",icon:getIcon(feather.icons.truck,options),url:'/orders',
@@ -107,13 +114,29 @@ const  Navbar = ()=>{
         setCurrentNavs(genNavs)
     },[path])
 
+    const logout = ()=>{
+        signOut().then((res)=>{
+            if(res){
+                dispatch(logout())
+                redirect('/login')
+            }
+        }).catch((error)=>{})
+    }
+
+    const bottomNav = <Box  className="absolute h-[27vh] overflow-auto w-full bottom-0 border-t-[0.5px] border-gray-500">
+        <Stack direction={"column"} gap={1}>
+        <Button onClick={logout} startIcon={<LogoutIcon/>} className="capitalize"> Logout</Button>
+        </Stack>
+    </Box>
+
     return <>
     {/* Except Mobile View */}
-    <Suspense fallback={<Loading/>}>
-    <nav className="z-[9999] hidden mobile:flex relative flex-row border-r dark:text-white h-screen w-fit select-none">
-        <ul  className="list-none px-2 py-4 w-full space-y-2">
+    <Suspense fallback={<h1>Loading...</h1>}>
+    <nav className="z-[9999] hidden mobile:flex relative flex-col border-r dark:text-white h-screen w-fit select-none">
+        <ul  className="list-none h-[73vh] overflow-auto px-2 py-4 w-full space-y-2">
         {currentNavs}
         </ul>
+        {bottomNav}
     </nav>
     </Suspense>
 
@@ -122,13 +145,14 @@ const  Navbar = ()=>{
     
     {/* For mobile navbar */}
     <div className={
-        nav?"block mobile:hidden absolute my-3 backdrop-blur-md right-0 w-full border-l h-screen duration-500 transition-all ease-in":
+        nav?"block mobile:hidden z-[99999] absolute my-3 backdrop-blur-md right-0 w-full border-l h-screen duration-500 transition-all ease-in":
         "block mobile:hidden absolute backdrop-blur-3xl  h-screen right-[-1000px] duration-500 transition-all ease-in"
     } style={{top:"-10px"}}>
     <nav className={'mobile:hidden flex flex-row dark:text-white h-screen select-none justify-start'}>
-        <ul  className="list-none px-2 py-4 space-y-2">
+        <ul  className="list-none h-[73vh] overflow-auto px-2 py-4 space-y-2">
         {currentNavs}
         </ul>
+        {bottomNav}
     </nav>
     </div>
     </>

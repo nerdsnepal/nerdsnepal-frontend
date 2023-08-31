@@ -12,6 +12,7 @@ import { setSelectedStore } from "@/app/state/reducer/authSlice"
 import Loading from "@/app/loading"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { redirect } from "next/navigation"
+import { API_URL } from "@/app/lib/utils/utils"
 
 const SelectStore = ({stores,selected})=>{
     const dispatch = useDispatch()
@@ -35,6 +36,7 @@ const SelectStore = ({stores,selected})=>{
     value={selected.name}
     sx={styles.select}
     color="primary"
+    className="dark:text-white"
     onChange={({target})=>{
         const store = stores.filter((value)=>value.name===target.value)
         dispatch(setSelectedStore(store[0]))
@@ -59,7 +61,6 @@ export default  function AdminToolBar  () {
   const [isLoading,setIsLoading] = useState(true)
   const [stores,setStore] = useState([])
   const user = useSelector((state)=>state.auth.user)
-  console.log(user);
   const dispatch = useDispatch()
   const selectedStore = useSelector((state)=>state.auth.selectedStore)
   useEffect(()=>{
@@ -79,18 +80,15 @@ export default  function AdminToolBar  () {
         setIsLoading(false)
        }
     })()
-
-
   },[accessToken])
   if(isLoading)return <Loading/>
   if(!isSuperUser)
   if(selectedStore===null){
     redirect("/requeststore")
   }
-  console.log(selectedStore);
     const storeInfo = {
         store:isSuperUser?process.env.NEXT_PUBLIC_APP_NAME:selectedStore?.name,
-        storeLogo:isSuperUser?process.env.NEXT_PUBLIC_APP_LOGO:selectedStore?.logo!=null?selectedStore.logo:process.env.NEXT_PUBLIC_APP_STORE_LOGO,
+        storeLogo:isSuperUser?process.env.NEXT_PUBLIC_APP_LOGO:selectedStore?.logo!=null?API_URL(selectedStore.logo):process.env.NEXT_PUBLIC_APP_STORE_LOGO,
         name:user!==null?user?.username:"unknown",
         profile:user!=null?user?.profile:"https://www.freecodecamp.org/news/content/images/size/w2000/2022/09/jonatan-pie-3l3RwQdHRHg-unsplash.jpg"
     }
@@ -99,7 +97,7 @@ export default  function AdminToolBar  () {
     return <div className="grid w-full justify-center items-center overflow-hidden fixed grid-cols-2 mobile:grid-cols-3 mobile:h-[90px] h-[60px] top-0 left-0 border-b border-gray-50  mobile:px-6">
         <span className="flex justify-self-start items-center fill-current">
            <a href="#" >
-            <Image width={80} placeholder="empty" height={80} alt={storeInfo.store.toString()} src={storeInfo.storeLogo}  draggable={false} className="dark:invert overflow-hidden w-12 h-12 mx-6"/>
+            <Image width={80} placeholder="empty" height={80} alt={storeInfo.store.toString()} src={storeInfo.storeLogo}  draggable={false} className="overflow-hidden w-12 h-12 mx-6"/>
             </a>
             <span className="overflow-ellipsis">{storeInfo.store}</span> 
         </span>

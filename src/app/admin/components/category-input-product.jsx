@@ -4,7 +4,7 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
-import { fetchCategories, fetchCategoriesWithStatus } from '../(dashboard)/(products)/category/action/actions';
+import { fetchCategories, fetchCategoriesWithStatus } from '../(dashboard)/(products)/category/actions/action';
 import { useSelector } from 'react-redux';
 import { Stack } from '@mui/material';
 
@@ -34,8 +34,13 @@ export default function CategoryForProduct({onSelect,onSelectSubCategory,value})
     setLoading(false)
    }
   })()
-  }, [loading,storeId]);
+  }, [loading,storeId,accessToken]);
 
+  React.useEffect(()=>{
+    if(value){
+        setSelectedSubCategory([])
+    }
+  },[value])
   return (
     <Stack direction={"column"} gap={1}>
     <Autocomplete

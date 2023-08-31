@@ -1,12 +1,73 @@
+'use client'
 import { API_URL } from "@/app/lib/utils/utils";
-import { Box } from "@mui/material";
+import { Alert, Box, Button,  Snackbar, Stack } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid"
 import Image from "next/image";
 import ImageIcon from '@mui/icons-material/Image';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Link from "next/link";
+import { useState } from "react";
+import { deleteProductById } from "../actions/action";
+import { useSelector } from "react-redux";
+import ShowDeleteAlert from "@/app/admin/components/delete-dialog";
 
-export const StoreProductList = ({products})=>{
+
+const ProductAction = ({product,onActionPerform})=>{
+    const [showDialog,setDialog] = useState(false)
+    const handleEdit = ()=>{
+        alert("Clicked Edit")
+        if(onActionPerform)
+        onActionPerform("Edit",product)
+    }
+    const handleDelete = ()=>{
+        setDialog(true)
+    }
+    const style = 'hover:cursor-pointer hover:text-blue-800 transition-all'
+    return <Stack direction={"row"} gap={1}>
+        <ShowDeleteAlert title="Do you want to delete this product?" open={showDialog} onClose={()=>setDialog(false)} onDelete={()=>{
+                setDialog(false)
+              if(onActionPerform)
+              onActionPerform("Delete",product)
+        }}  />
+       <Link target="_blank" href={`/products/view/${product._id}/${product.storeId}`}> <VisibilityIcon className={style}  /></Link>
+        <EditIcon className={style} onClick={handleEdit}/>
+        <DeleteIcon className={style} onClick={handleDelete}/>
+    </Stack>
+}
+
+
+export const StoreProductList = ({products,onDelete})=>{
+    const accessToken = useSelector((state)=>state.auth.accessToken)
+    const [response,setResponse] = useState({
+        hasResponse:false,
+        servity:"info",
+        message:""
+    })
+    const handleActionPerform =async (type,product)=>{
+        if(type==="Delete"){
+            const {storeId,_id} = product 
+         try {
+            let {data}  = await  deleteProductById({accessToken:accessToken,storeId,productId:_id})
+            if(data.success){
+                setResponse({hasResponse:true,servity:"success",message:data.message})
+                if(onDelete)
+                onDelete(product)
+            }else{
+                setResponse({hasResponse:true,servity:"error",message:data.message})
+            }
+         } catch (error) {
+            setResponse({hasResponse:true,servity:"error",message:error})
+         }finally{
+            setTimeout(()=>{
+                setResponse({hasResponse:false,servity:"info",message:""})
+            },3000)
+         }
+        }
+    }
     const cols = [
-        {field:'_id',headerName:'ID',minWidth:200},
+        //{field:'_id',headerName:'ID',minWidth:200},
         {field:'name',headerName:'Name',minWidth:200},
         {field:'description',headerName:'Description',minWidth:200,
         renderCell:({row})=>{
@@ -50,14 +111,26 @@ export const StoreProductList = ({products})=>{
                // return <div key={_id} className={`w-3 h-3 rounded-full m-auto ${status?'bg-green-800':'bg-red-800'}`}></div>
             }, autoWidth:true
         },
+        {
+            field:"totalQuantity",headerName:"Quantity"
+        },
 
-
+        { field: '_id', headerName: 'Action',resizeable:true,pinned:true,
+            className:"dark:text-white",
+            renderCell:({row})=>{
+                return <ProductAction  onActionPerform={handleActionPerform} product={row}/>
+            }
+        },
+       
     ]
 
    return (
     <div className="flex justify-center items-center mt-14" >
-        <Box className="dark:bg-gray-900 rounded-lg w-[100%] mobile:w-[80%]" sx={{ height: 520}}>
-        <DataGrid
+        <Snackbar open={response.hasResponse} autoHideDuration={300}>
+            <Alert severity={response.servity} >{response.message}</Alert>
+        </Snackbar>
+    <Box className="dark:bg-gray-900 rounded-lg  w-[100%] mobile:w-[80%]" sx={{ height: 520}}>
+    <DataGrid
         columns={cols}
         rows={products}
         style={{

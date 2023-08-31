@@ -18,7 +18,7 @@ const StoreMenu = () => {
     
          );
     }
-    return <h1>Merchant View</h1>
+    return <></>
 }
  
 export default StoreMenu;

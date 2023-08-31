@@ -1,4 +1,4 @@
-import { API_URL } from "@/app/lib/utils/utils"
+import { API_URL, SICHU_API_KEY } from "@/app/lib/utils/utils"
 import axios from "axios"
 
 
@@ -7,7 +7,8 @@ export const addProduct =async({accessToken,product})=>{
         withCredentials:true,
         headers:{
             'authorization':`Bearer ${accessToken}`,
-            'Content-Type':'application/x-www-form-urlencoded'
+            'Content-Type':'application/x-www-form-urlencoded',
+            ...SICHU_API_KEY
         }
     })
   
@@ -20,6 +21,7 @@ export const getAllStoreRelatedProduct = async ({accessToken,storeId,selectedVie
             method:"GET",
             headers:{
                 'authorization':`Bearer ${accessToken}`,
+                ...SICHU_API_KEY
             }
         })
         if(!result.ok){
@@ -28,5 +30,34 @@ export const getAllStoreRelatedProduct = async ({accessToken,storeId,selectedVie
     return (await result).json()
 }
 
+export const getProductDetailsById = async ({accessToken,storeId,productId})=>{
+    const result = await fetch(API_URL(`product/id?storeId=${storeId}&_id=${productId}`),{
+        method:"GET",
+        headers:{
+            'authorization':`Bearer ${accessToken}`,
+            ...SICHU_API_KEY
+        }
+    })
+    if(!result.ok){
+        throw new Error("Something went wrong")
+    }
+return (await result).json()
+
+
+}
+
+export const deleteProductById = async ({accessToken,storeId,productId})=>{
+  
+    const result = await axios.delete(API_URL('product'),{
+        data:{storeId,_id:productId},
+        withCredentials:true,
+        headers:{
+            'authorization':`Bearer ${accessToken}`,
+            'Content-Type':'application/x-www-form-urlencoded',
+            ...SICHU_API_KEY
+        }
+    })
+    return result
+}
 
 

@@ -1,9 +1,9 @@
 import { Box, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { fetchCategories } from "../action/actions";
+import { fetchCategories } from "../actions/action";
 import { useSelector } from "react-redux";
 
-const GridDataCategoryToolbar = (props) => {
+const GridDataCategoryToolbar = () => {
     const accessToken = useSelector((state)=>state.auth.accessToken)
     const [categories,setCategories] = useState([])
     useEffect(()=>{

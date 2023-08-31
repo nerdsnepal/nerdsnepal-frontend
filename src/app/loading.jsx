@@ -1,6 +1,11 @@
+import { CircularProgress, Stack } from "@mui/material";
 
 const Loading = () => {
-    return <main className="w-full h-full bg-white"><h1 className="w-full h-full">Yooo...</h1></main>
+    return <div className="relative">
+        <Stack className="absolute h-[100vh] w-[100vw] flex justify-center items-center">
+          <CircularProgress/>
+      </Stack>
+    </div>
 }
  
 export default Loading;

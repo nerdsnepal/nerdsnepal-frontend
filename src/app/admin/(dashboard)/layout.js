@@ -8,6 +8,12 @@ import { useDispatch } from "react-redux"
 import { setAccessToken, setInit, setRole, setUser } from "@/app/state/reducer/authSlice"
 import { redirect } from "next/navigation"
 
+
+export const metadata = {
+    title: 'Admin-Dashboard'
+}
+ 
+
 const Layout = ({children})=>{  
     const {status,data} = useSession()
     const dispatch = useDispatch()
@@ -32,15 +38,14 @@ const Layout = ({children})=>{
         }
        
     },[status])
-    if(isLoading) return<Suspense fallback={<Loading/>}/>
-    return <><Suspense fallback={<Loading/>}>
+    if(isLoading) return <Loading/>
+    return <>
     <AdminToolBar/>
     {/*  */}
     <div className="grid fixed basis-full mobile:mt-[90px] mt-[65px] grid-cols-1 mobile:grid-cols-[208px,auto]  w-full">
     <Navbar/>
     {children}
     </div>
-    </Suspense>
     </>
 }
 

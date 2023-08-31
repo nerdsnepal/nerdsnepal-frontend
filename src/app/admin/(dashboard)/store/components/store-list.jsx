@@ -1,20 +1,27 @@
 import { Avatar, Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-
-import { useCallback, useState } from 'react';
+import EditIcon from '@mui/icons-material/Edit';
+import { useCallback } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import Link from 'next/link';
+import { API_URL } from '@/app/lib/utils/utils';
 
-function EditToolbar(props){
-   // console.log(props);
-    return <>
-    <h1>This is a toolbar</h1>
-    </>
+
+export const metadata = {
+    title:"Store",
+    description:"Store List"
 }
 
+const StoreAction = ({store})=>{
+    return <>
+        <Link href={`store/edit/${store._id}`} target='_blank'><EditIcon/></Link>
+    </>
+}
 function StoreList({stores}){
     let columns = [
-        { field: '_id', headerName: 'ID', minWidth: 200, resizeable:true,pinned:true,
-            className:"dark:text-white"
+        {
+            field:'name',headerName:'Store name',
+            minWidth :200,resizeable:true,
         },
         {
             field:'logo',headerName:'Logo',
@@ -24,12 +31,8 @@ function StoreList({stores}){
                 const row = params.row 
                 const {logo,name} = row 
                 if(logo===null) return <LocalMallIcon/>
-                return <Avatar src={logo} alt={name} />;
+                return <Avatar src={API_URL(logo)} alt={name} />;
             }
-        },
-        {
-            field:'name',headerName:'Store name',
-            minWidth :200,resizeable:true,
         },
         {
             field:'status',headerName:"Status",
@@ -68,7 +71,8 @@ function StoreList({stores}){
                 if(!isExpire)return "Never Expire"
                 return row.subscriptionDetails[len-1].expire_on
             }
-        },{
+        },
+        {
             field:'expire_status',headerName:"Expire Status",
             minWidth :120,resizeable:true,
             renderCell:({row})=>{
@@ -104,8 +108,14 @@ function StoreList({stores}){
                 const len = row.subscriptionDetails?.length
                 return row.subscriptionDetails[len-1].subscriptionLevel
             }
+        },
+        { field: '_id', headerName: 'Action', minWidth: 200, resizeable:true,pinned:true,
+        className:"dark:text-white",
+        renderCell:({row})=>{
+            return <StoreAction store={row} key={row._id} />
         }
-       
+         
+    },
     ]
 
     const processRowUpdate = useCallback(
@@ -114,10 +124,8 @@ function StoreList({stores}){
         }
     )
    
-    if(stores===undefined)
-    return <></>
-    return <div className="flex items-center mt-12" >
-    <Box className="dark:bg-gray-900 rounded-lg w-[100%] mobile:w-[50%]" sx={{ height: 520}}>
+    return <div className="flex justify-center items-center mt-14" >
+    <Box className="dark:bg-gray-900 rounded-lg w-[100%] mobile:w-[72vw]" sx={{ height: 520}}>
     <DataGrid
         columns={columns}
         rows={stores}
@@ -144,7 +152,7 @@ function StoreList({stores}){
         pageSizeOptions={[7, 20]}
         //checkboxSelection
         slots={{
-            toolbar: EditToolbar,
+            //toolbar: EditToolbar,
             //columnMenu:EditToolbar
 
         }}

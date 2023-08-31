@@ -7,7 +7,7 @@ const Status = ({onChange,value}) => {
         {value:true,text:"Active"},
         {value:false,text:"Draft"}
     ] 
-    const [selectedOption,setOption] = useState(true)
+    const [selectedOption,setOption] = useState(value)
     useEffect(()=>{
         if(value)
         setOption(value)
@@ -29,6 +29,7 @@ const Status = ({onChange,value}) => {
      {
          statusOptions.map(({value,text})=>{
              const status = value ===selectedOption
+             console.log(value,selectedOption,status);
              if(status){
                 return <MenuItem  key={text} value={value} selected>{text}</MenuItem>
              }

@@ -41,11 +41,21 @@ const AuthSlice =  createSlice({
         state.status="unauthenticated"
         state.accessToken= ""
         state.user =null
+       },
+       logout:(state)=>{
+        state.isSuperAdmin=false,
+        state.user=null,
+        state.role="user",
+        state.status="unauthenticated",
+        state.accessToken="",
+        state.stores=[],
+        state.selectedStore=null,
+        state.storeId=null
        }
         
     }
 })
 
-export const {setUser,setRole,setInit,setAccessToken,setSelectedStore,setStores} = AuthSlice.actions 
+export const {logout,setUser,setRole,setInit,setAccessToken,setSelectedStore,setStores} = AuthSlice.actions 
 
 export default AuthSlice.reducer 

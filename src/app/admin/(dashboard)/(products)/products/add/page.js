@@ -28,6 +28,7 @@ const ProductAddPage = () => {
         percentage:'---',
         loss:false
     })
+    const [state,setState] = useState(false)
     let [product,setProduct]= useState({
         name:"", //Product Name 
         description:"",
@@ -79,6 +80,7 @@ const ProductAddPage = () => {
     // uploading state handle 
     const stateOfUploading = (state)=>{
         if(state==="idel")return
+        setState(false)
        }
        const onUploadSuccessfully = ({urls})=>{
         if(urls===undefined)return
@@ -104,6 +106,7 @@ const ProductAddPage = () => {
             setTimeout(()=>{
                 setResponse({...response,isShow:false})
                 if(response.servity==="error")return
+                setState(true)
                 setProduct({
                     name:"", //Product Name 
                     description:"",
@@ -138,7 +141,7 @@ const ProductAddPage = () => {
         </Snackbar>
         
         <AddProductPageToolbar product={product}  onCancel={()=>alert("Hello")} onSave={save}/>
-        <form className="flex flex-row justify-center">
+      <form className="flex flex-row justify-center">
          <div className="laptop:grid block  w-[100%] mobile:w-[90%] gap-3 laptop:grid-cols-2">
            <div className="space-y-3 gap-6">
            <Card className="p-4 space-y-2">
@@ -160,7 +163,7 @@ const ProductAddPage = () => {
                 <h2>Media</h2>
                 <div className="flex justify-center items-center">
                 <UploadMedia 
-                clearState={product.mediaUrls===0?true:false}
+                clearState={state}
                 onUploadedMedialUrl={onUploadSuccessfully}
                 state={stateOfUploading}
                  btnName={"Add media"}
@@ -171,7 +174,7 @@ const ProductAddPage = () => {
 
            <Card className="mobile:space-y-5 space-x-5 p-4 ">
                 <h2>Pricing</h2>
-                {/* Selling Price */}
+                
                 <div className="inline-block  mobile:space-x-2">
                     <TextField value={product.price.mrp}
                      inputProps={{min:0}} type="number" inputMode="number"

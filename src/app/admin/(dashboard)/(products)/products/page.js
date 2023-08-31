@@ -2,13 +2,17 @@
 
 import ProductPageNavbar from "@/app/admin/components/product-navbar";
 import {   useSearchParams } from "next/navigation"
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getAllStoreRelatedProduct } from "./actions/action";
 import { Stack } from "@mui/material";
-import Loading from "@/app/loading";
 import { StoreProductList } from "./components/product-list";
+import MetaData from "./components/meta";
 
+export const metadata = {
+    title: 'Product',
+}
+ 
 export default function ProductPage (){
     const storeId = useSelector((state)=>state.auth.storeId)
     const accessToken = useSelector((state)=>state.auth.accessToken)
@@ -28,8 +32,6 @@ export default function ProductPage (){
         }
     }
    },[searchParams])
-
-
     useEffect(()=>{
         (async()=>{
             try {
@@ -53,14 +55,17 @@ export default function ProductPage (){
 
         })()
     },[storeId])
-
+    const handleDelete= (product)=>{
+        let newProducts = products.filter((_product)=>_product!==product)
+        setProducts(newProducts)
+    }
    if(error.hasError){
     return <>{JSON.stringify(error.message)}</>
    }
-    return <Suspense fallback={<Loading/>}>
+    return <Suspense fallback={<h1>Loading...</h1>}>
         <Stack className="overflow-auto h-full">
         <ProductPageNavbar />
-        <StoreProductList products={products} />
+        <StoreProductList products={products} onDelete={handleDelete} />
         </Stack>
     </Suspense>
 }

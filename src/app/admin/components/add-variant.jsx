@@ -125,7 +125,7 @@ const AddProductOptionEditor = ({selected="Size",onSubmit,index,name,values, opt
         }
         </FormControl>
         {
-            !isEmpty(optionsValue[0])?<Button onClick={handleDone} variant='contained' color='success' >Done</Button>:<></>
+            !isEmpty(optionsValue[0])?<Button onClick={handleDone} variant='outlined' color='primary' >Done</Button>:<></>
         }
 
     </div>

@@ -1,22 +1,22 @@
 'use client'
 
 import { Editor } from "@tinymce/tinymce-react";
-import { useRef, useState } from "react";
-
-
-
+import { useEffect, useState } from "react";
 const TextEditor = ({onChange,content}) => {
-    const editorRef = useRef(content) 
+    const [currentContent,setCurrentContent] = useState('') 
+    useEffect(()=>{
+        setCurrentContent(content)
+    },[content])
     const handleOnChange = (a,e)=>{
-        if(onChange && e)
-        onChange(editorRef.current.getContent());
+       setCurrentContent(a)
+       if(onChange)
+       onChange(currentContent)      
     }
     return (<div className="h-[250px]">
         <Editor
         apiKey={process.env.NEXT_PUBLIC_TINY_MCE_API_KEY}
         onEditorChange={handleOnChange}
-        onInit={(evt, editor) => editorRef.current = editor}
-        initialValue={content}
+        initialValue={currentContent}
         init={{
             height: 250,
             branding:false,

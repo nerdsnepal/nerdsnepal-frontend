@@ -5,7 +5,7 @@ import { Image, Try } from "@mui/icons-material";
 import React,{  useEffect, useState } from "react";
 import UploadMedia from "@/app/lib/components/UploadMedia";
 import UploadedImage from "../components/uploadedImage";
-import { save_category } from "../action/actions";
+import { save_category } from "../actions/action";
 import { useSelector } from "react-redux";
 import Status from "@/app/admin/components/status";
 import SubCategory from "@/app/admin/components/subcategory";
@@ -65,13 +65,14 @@ const CategoryAddPage = () => {
 
    //to clear the form 
    const clearForm=()=>{
-        setCategory({name:"",status:false,imageUrl:[],hasDuplicate:false,subCategory:['']})
+        setCategory({name:"",status:true,imageUrl:[],hasDuplicate:false,subCategory:['']})
         setUploadState(true)
    }
    const resetResponse = ()=>{
     validator()//calling for recheck the state of the button 
     setTimeout(()=>{
         setResponse({servity:"success",message:"",hasResponse:false})
+        setUploadState(true)
     },3500)
    }
    // save the category
@@ -99,6 +100,7 @@ const CategoryAddPage = () => {
    }
 // uploading state handle 
    const stateOfUploading = (state)=>{
+    setUploadState(false)
     return
    }
 
@@ -117,7 +119,7 @@ const CategoryAddPage = () => {
             <Card sx={{minHeight:"150px"}} className="p-5 dark:bg-gray-900 dark:text-white" elevation={elevation}>
                 <h1 className="p-2 font-bold">Category</h1>
                <FormControl className="dark:text-white w-[80%]">
-               <TextField value={category.name} className=" mx-2 my-2" sx={{
+               <TextField value={category.name} required className=" mx-2 my-2" sx={{
                     input:{
                     color:prefersMode?'white':'black',
                     }}} 
