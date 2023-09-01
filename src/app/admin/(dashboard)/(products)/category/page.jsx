@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Loading from "@/app/loading";
 import CategoryList from "./components/category-list";
 import { fetchCategories } from "./actions/action";
+import StoreLoadingSkeleton from "../../store/components/store-loading-skeleton";
 const CategoryPage = () => {
     const storeId = useSelector((state)=>state.auth.storeId)
     const accessToken = useSelector((state)=>state.auth.accessToken)
@@ -16,9 +17,9 @@ const CategoryPage = () => {
                 try {
                     const {categories} = await  fetchCategories({storeId,accessToken})
                     setCategories(categories)
-                    console.log(categories);
                   } catch (error) {
-                    console.log(error);
+                    //setCategories(null)
+                    //console.log(error);
                   }finally{
                       setLoading(false)
                   }
@@ -30,9 +31,9 @@ const CategoryPage = () => {
     }
     return (<div className="m-2">
           <CategoryToolbar/>
-            <Suspense fallback={<h1>Loading...</h1>}>
-            <CategoryList onDelete={handleDeleteCategory} accessToken={accessToken} categories={categories}/>
-            </Suspense>
+           {
+            isLoading?<StoreLoadingSkeleton/>: <CategoryList onDelete={handleDeleteCategory} accessToken={accessToken} categories={categories}/>
+           }
     </div>);
 }
  

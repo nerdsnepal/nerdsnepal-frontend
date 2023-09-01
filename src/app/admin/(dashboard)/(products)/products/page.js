@@ -8,6 +8,7 @@ import { getAllStoreRelatedProduct } from "./actions/action";
 import { Stack } from "@mui/material";
 import { StoreProductList } from "./components/product-list";
 import MetaData from "./components/meta";
+import StoreLoadingSkeleton from "../../store/components/store-loading-skeleton";
 
 export const metadata = {
     title: 'Product',
@@ -38,9 +39,7 @@ export default function ProductPage (){
                 if(storeId===null||storeId===undefined)return
                 setLoading(true)
                const result=await getAllStoreRelatedProduct({accessToken,storeId,selectedView})
-               
                if(result&& result.success){
-                console.log(result);
                     setProducts(result.products)
                }
             } catch (error) {
@@ -62,10 +61,9 @@ export default function ProductPage (){
    if(error.hasError){
     return <>{JSON.stringify(error.message)}</>
    }
-    return <Suspense fallback={<h1>Loading...</h1>}>
-        <Stack className="overflow-auto h-full">
+    return <Stack className="overflow-auto h-full">
         <ProductPageNavbar />
-        <StoreProductList products={products} onDelete={handleDelete} />
+        { isLoading?<StoreLoadingSkeleton/>: <StoreProductList products={products} onDelete={handleDelete} />}
         </Stack>
-    </Suspense>
+    
 }

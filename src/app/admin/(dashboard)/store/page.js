@@ -8,6 +8,7 @@ import { Stack } from "@mui/material";
 import { NoStore } from "./components/no-store";
 import Loading from "@/app/loading";
 import { useSelector } from "react-redux";
+import StoreLoadingSkeleton from "./components/store-loading-skeleton";
 
 
 const StorePage = () => {
@@ -23,7 +24,6 @@ const StorePage = () => {
             }
            requestStore()
         }catch(error){
-            console.log(error);
             setLoading(false)
             //handle error 
         }
@@ -34,7 +34,7 @@ const StorePage = () => {
         <StoreMenu/>
        <Stack className="overflow-auto h-full">
         {
-           isLoading?<h1>Loading...</h1>:stores?.length>0?<StoreList stores={stores}  />:<NoStore/>
+           isLoading?<StoreLoadingSkeleton/>:stores?.length>0?<StoreList stores={stores}  />:<NoStore/>
         }
         </Stack>
     </div>);

@@ -3,16 +3,15 @@ import Image from "next/image"
 import getIcon from "../getIcon"
 import feather from "feather-icons"
 import UserProfile from "./UserProfile"
-import { Badge, FormControl, MenuItem, Select, Stack } from "@mui/material"
+import { Avatar, Badge, FormControl, MenuItem, Select, Skeleton, Stack } from "@mui/material"
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useDispatch, useSelector, useStore } from "react-redux"
 import { useEffect, useState } from "react"
 import fetchStores from "../(dashboard)/store/action/actions"
 import { setSelectedStore } from "@/app/state/reducer/authSlice"
-import Loading from "@/app/loading"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { redirect } from "next/navigation"
-import { API_URL } from "@/app/lib/utils/utils"
+import { API_URL, skeletonSX } from "@/app/lib/utils/utils"
 
 const SelectStore = ({stores,selected})=>{
     const dispatch = useDispatch()
@@ -74,16 +73,15 @@ export default  function AdminToolBar  () {
         setStore(stores)
         if(selectedStore===null)
         dispatch(setSelectedStore(stores[0]))
-       } catch (error) {
-        //handle error
-       }finally{
         setIsLoading(false)
+       } catch (error) {
+        setIsLoading(false)
+        //handle error
        }
     })()
   },[accessToken])
-  if(isLoading)return <Loading/>
   if(!isSuperUser)
-  if(selectedStore===null){
+  if(!isLoading&&selectedStore===null){
     redirect("/requeststore")
   }
     const storeInfo = {
@@ -97,13 +95,19 @@ export default  function AdminToolBar  () {
     return <div className="grid w-full justify-center items-center overflow-hidden fixed grid-cols-2 mobile:grid-cols-3 mobile:h-[90px] h-[60px] top-0 left-0 border-b border-gray-50  mobile:px-6">
         <span className="flex justify-self-start items-center fill-current">
            <a href="#" >
-            <Image width={80} placeholder="empty" height={80} alt={storeInfo.store.toString()} src={storeInfo.storeLogo}  draggable={false} className="overflow-hidden w-12 h-12 mx-6"/>
+            {
+                isLoading?<Skeleton sx={skeletonSX} variant="rectangular" animation="wave"  width={48} height={48} />
+                : <Image width={80} placeholder="empty" height={80} alt={storeInfo.store.toString()} src={storeInfo.storeLogo}  draggable={false} className="overflow-hidden aspect-square w-12 h-12 mx-6"/>
+              
+
+
+            }
             </a>
-            <span className="overflow-ellipsis">{storeInfo.store}</span> 
+           {isLoading?<Skeleton sx={skeletonSX} className="m-3" variant="rectangular" width={220} height={"1.5em"} />: <span className="w-[220px] overflow-ellipsis">{storeInfo.store}</span> }
         </span>
         <div className="justify-self-start hidden mobile:block laptop:relative laptop:left-[-120px]">
         {
-           !isSuperUser? stores.length>1?<SelectStore selected={selectedStore} stores={stores} />:<></>:<></>
+         isLoading?<Skeleton sx={skeletonSX} className="m-3" variant="rectangular" width={220} height={"1.5em"} />:  !isSuperUser? stores.length>1?<SelectStore selected={selectedStore} stores={stores} />:<></>:<></>
         }
         </div>
         <div className="flex space-x-4 w-full h-full mobile:justify-center items-center justify-start ">
@@ -116,7 +120,10 @@ export default  function AdminToolBar  () {
             <span className="absolute top-[-4px] text-center right-[-9px] p-[3px] w-fit h-fit text-[12px] bg-red-500  text-white rounded-full">9+</span>
             </a>*/}
         </span>
-        <span className="shrink-0"><UserProfile name={storeInfo.name} profileUrl={storeInfo.profile} /></span>
+        <span className="shrink-0">{isLoading?<Stack direction={"row"}>
+            <Avatar alt="" defaultValue={""} />
+            <Skeleton sx={skeletonSX} className="m-3" variant="rectangular" width={150} height={"1.5em"} />
+        </Stack>:<UserProfile name={storeInfo.name} profileUrl={storeInfo.profile} />}</span>
         </div>
     </div>
 }

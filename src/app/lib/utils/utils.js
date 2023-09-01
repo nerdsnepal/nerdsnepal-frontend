@@ -1,3 +1,5 @@
+import { grey } from "@mui/material/colors"
+
 export const API_URL =(name)=> `http://localhost:8000/${name}`
 export const ADMIN_URL = 'http://admin.localhost:3000'
 export const COOKIE_NAME = 'token'
@@ -16,3 +18,4 @@ export const compareDateToC= (date)=>{
 export const SICHU_API_KEY= {
     'sichu-api-key':process.env.NEXT_PUBLIC_SICHU_API_KEY
 }
+export const skeletonSX={bgcolor:grey[400]} 

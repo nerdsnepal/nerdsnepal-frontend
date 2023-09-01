@@ -2,7 +2,7 @@
 import { fetchUserInfoById } from "@/app/actions/actions";
 import { API_URL, isEmpty } from "@/app/lib/utils/utils";
 import CategoryIcon from '@mui/icons-material/Category';
-import { Alert, Box, Snackbar, Stack } from "@mui/material";
+import { Alert, Box, Skeleton, Snackbar, Stack } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -139,8 +139,7 @@ const CategoryList = ({categories,accessToken,onDelete}) => {
         //},
         renderCell:({row})=>{
             const user = users?.find(({_id})=>_id===row.created_by)
-            if(!user) return <h1>Unknown</h1>
-            return <ExpandableViewForUser user={user}/>
+            return isLoading?<Skeleton width={100} />:user===null?<span>Unknown</span>:<ExpandableViewForUser user={user}/>
         }
     },
     { field: '_id', headerName: 'Action',resizeable:true,pinned:true,
@@ -150,15 +149,12 @@ const CategoryList = ({categories,accessToken,onDelete}) => {
     }}
     ]
     if(categories===null)return <></>
-    if(isLoading)   return <>Loading....</>
     return (
         <div>
              <Snackbar open={response.hasResponse} autoHideDuration={300}>
             <Alert severity={response.servity} >{response.message}</Alert>
         </Snackbar>
-    
-    <div className="flex justify-center  items-center mt-14" >
-        
+    <div className="flex justify-center  items-center mt-14" > 
         <Box className="dark:bg-gray-900  rounded-lg w-[100%] mobile:w-[80%]" sx={{ height: 520}}>
         <DataGrid
         columns={cols}

@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {  fetchStoreById, storeAPI } from "../../action/actions";
-import { Alert, Avatar, Box, Button, Card, Stack, TextField } from "@mui/material";
-import { API_URL, isEmpty } from "@/app/lib/utils/utils";
+import { Alert, Avatar, Box, Button, Card, Skeleton, Stack, TextField } from "@mui/material";
+import { API_URL, isEmpty, skeletonSX } from "@/app/lib/utils/utils";
 import {  LocalMallRounded } from "@mui/icons-material";
 import Status from "@/app/admin/components/status";
 import { uploadMedia } from "@/app/lib/action/mediaUpload";
@@ -121,6 +121,7 @@ const StoreLogo = ({store,accessToken})=>{
 
 const StoreInformationEditPage = ({storeId}) => {
     const accessToken = useSelector((state)=>state.auth.accessToken)
+    const [isLoading,setLoading] = useState(true)
     const [response,setResponse] = useState({
         hasError:false,
         isLoading:true,
@@ -136,6 +137,8 @@ const StoreInformationEditPage = ({storeId}) => {
             }
            }catch(error){
             setResponse({...response,isLoading:false,hasError:true,error:error})
+           }finally{
+            setLoading(false)
            }
         })()
     },[accessToken,storeId])
@@ -148,26 +151,24 @@ const StoreInformationEditPage = ({storeId}) => {
                 //handle error
             }
     }
-
-    if(response.isLoading)return <h1>Loading....</h1>
     return ( <Box  className="m-4 overflow-auto h-[100vh]">
         <Stack direction={{ xs: 'column', md: 'row' }} gap={3}  >
        <Stack direction={"column"} overflow={"auto"} gap={3} className="w-full mobile:w-[50%]">
-       <StoreName store={response.data} accessToken={accessToken}/>
-        <StoreLogo store={response.data} accessToken={accessToken}/>
+       {isLoading?<Skeleton variant="rounded" sx={skeletonSX} height={80} className={'p-0'}  />:<StoreName store={response.data} accessToken={accessToken}/>}
+       {isLoading?<Skeleton variant="rounded" sx={skeletonSX} height={125} className={'p-0'}  />:<StoreLogo store={response.data} accessToken={accessToken}/>}
    
-       <Card>
+        {isLoading?<Skeleton variant="rounded" sx={skeletonSX} height={125} className={'p-0'}  />: <Card>
        <div className="m-4 space-y-3">
         <h1 className="font-bold">Store Status</h1>
         <Status value={response.data.status	} onChange={handleOnChangeStaus} />
         <Alert severity="info">It indicate whether your store is live or not</Alert>
         </div>
         </Card>
-      
+        }      
       </Stack>
        <Stack direction={'column'} className="w-full mobile:w-[50%]" gap={3}>
-       <StockLocation store={response.data} accessToken={accessToken} />
-        <StoreEmail accessToken={accessToken} store={response.data} />
+       {isLoading?<Skeleton variant="rounded" sx={skeletonSX} height={200} className={'p-0'}  />:<StockLocation store={response.data} accessToken={accessToken} />}
+       {isLoading?<Skeleton variant="rounded" sx={skeletonSX} height={200} className={'p-0'}  />:<StoreEmail accessToken={accessToken} store={response.data} />}
        </Stack>
        </Stack>
        <Box height={120}></Box>

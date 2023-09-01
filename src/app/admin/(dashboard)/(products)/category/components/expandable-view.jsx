@@ -7,7 +7,7 @@ const ExpandableViewForUser = ({user}) => {
     const [isExpanded,setExpanded] = useState(false)
     const toggler = ()=>setExpanded(!isExpanded)
     let bg_color = "border-red-500"
-    switch(user.role){
+    switch(user?.role){
         case "user":
             bg_color="bg-green-500"
             break;
@@ -23,13 +23,13 @@ const ExpandableViewForUser = ({user}) => {
             <ExpandLessIcon onClick={toggler}/>
             <span>{user.username}</span>
             <div className='ml-5'>
-            <h1 className={`${bg_color} text-xs rounded-xl px-2 py-[2px] text-white`}>{user.role}</h1>
+            <h1 className={`${bg_color} text-xs rounded-xl px-2 py-[2px] text-white`}>{user?.role}</h1>
             {/*<h1>{user.email}</h1>*/}
             </div>
         </div>;
     }
     return <div className='inline-block cursor-pointer'>
-            <ExpandMoreIcon onClick={toggler} /> <span>{user.username}</span>
+            <ExpandMoreIcon onClick={toggler} /> <span>{user?.username}</span>
         </div>
     
 }
