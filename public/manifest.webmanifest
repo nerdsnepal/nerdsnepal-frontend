@@ -1,9 +1,9 @@
 {
-    "short_name":"Nerds",
-    "name":"Nerdsnepal",
+    "short_name":"Sichu",
+    "name":"Sichu",
     "icons":[
         {
-            "src":"next.svg",
+            "src":"./logo.svg",
             "type":"image/svg+xml",
             "sizes":"512x512"
         }
@@ -20,19 +20,19 @@
             "short_name":"Admin",
             "description":"For Admin",
             "url":"/admin",
-            "icons":[{"src":"next.svg"}]
+            "icons":[{"src":"logo.svg",  "type":"image/svg+xml"}]
         }
     ],
-    "description":"NerdsNepal an ecommerce platform",
+    "description":"Sichu is an ecommerce platform",
     "screenshots":[
         {
-            "src":"next.svg",
+            "src":"./logo.svg",
             "type":"image/svg+xml",
             "sizes":"512x512",
             "display":"wide"
         },
         {
-            "src":"next.svg",
+            "src":"/logo.svg",
             "type":"image/svg+xml",
             "sizes":"512x512",
             "display":"narrow"

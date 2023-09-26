@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images:{
-        domains:["www.freecodecamp.org","localhost"]
+        domains:["www.freecodecamp.org","localhost",'www.api.sichunepal.com','api.sichunepal.com']
     },
-    
+    serverRuntimeConfig:{
+        
+    },
     experimental:{
         forceSwcTransforms:false,
         serverActions:true

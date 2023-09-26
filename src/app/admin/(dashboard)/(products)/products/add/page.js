@@ -13,7 +13,6 @@ import Status from "@/app/admin/components/status";
 import AddInventoryForProduct from "@/app/admin/components/add-inventory";
 import { isEmpty } from "@/app/lib/utils/utils";
 import { addProduct } from "../actions/action";
-import { useRouter } from "next/navigation";
 
 const ProductAddPage = () => {
     const accessToken = useSelector((state)=>state.auth.accessToken)

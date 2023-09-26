@@ -11,7 +11,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
     title: process.env.NEXT_PUBLIC_APP_NAME,
-    manifest:"/manifest.json"
+    manifest:"/manifest.webmanifest",
+    icon:"logo.svg"
 }
   
 

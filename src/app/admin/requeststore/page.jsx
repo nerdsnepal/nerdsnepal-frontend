@@ -1,4 +1,4 @@
-import Loading from "@/app/loading";
+
 import { Button } from "@mui/material";
 
 export const metadata= {

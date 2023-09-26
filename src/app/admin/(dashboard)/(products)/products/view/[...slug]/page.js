@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { getProductDetailsById } from "../../actions/action"
-import { Stack, Typography } from "@mui/material"
-import { API_URL, isEmpty } from "@/app/lib/utils/utils"
+import { Skeleton, Stack, Typography } from "@mui/material"
+import { API_URL, currency_code, isEmpty, skeletonSX } from "@/app/lib/utils/utils"
 import Image from "next/image"
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
@@ -18,52 +18,97 @@ import fetchUserById from "@/app/lib/action/fetchUserById"
 import { ArrowBackIos } from "@mui/icons-material"
 import Link from "next/link"
 import { NextSeo } from "next-seo"
+import ProductViewLoading from "../../components/product-view-loading"
 
 export const metadata= {
     title:"Product",
     description:"Product page"
 }
+const findUser = ({users,userId})=>{
+    let user = null 
+    console.log(users);
+    for(const __user of users){
+        if(__user._id===userId){
+           user = __user 
+           break
+        }
+      }
+      return user 
+}
+
+const UpdateHistoryItem = ({update,user})=>{
+    const {updated_by,updated_at,remarks}= update
+    const currentUser = findUser({users:user,userId:updated_by})
+    console.log(currentUser);
+    const days = Math.ceil((new Date().getTime() - new Date(updated_at).getTime()) / 86400000)
+    const date = new Date(updated_at).toDateString()
+    return <div  className='border rounded-lg p-2 border-gray-600 w-full mobile:w-fit mobile:max-w-[25%] h-[70%] space-y-2' >
+        <UserProfile name={currentUser.username} profileUrl={currentUser?.profile} />
+        <Typography variant="body2" className="overflow-hidden" >{remarks}</Typography>
+        <Stack direction={'row'} gap={2} className="items-center">
+        <Typography variant="body2">{date}</Typography>
+        <i className="text-[11px]">{days==1?'1 day ago':`${days} days ago`}</i>
+        </Stack>
+ 
+  </div>
+}
+
 
 export default function Page  ({params}){
   
     const accessToken = useSelector((state)=>state.auth.accessToken)
     const [product,setProduct]= useState(null)
-    const [user,setUser] = useState({isLoading:true,currentUser:null})
+    const [user,setUser] = useState({isLoading:true,users:[]})
+    const [currentUser,setCurrentUser]=useState(null)
     const {slug} = params 
     const [productId,storeId] = [...slug]
-
+    const [loading,setLoading] = useState(true)
     useEffect(()=>{
         (async()=>{
-          let result = await  getProductDetailsById({accessToken,storeId,productId})
-          if(result.success){
-            setProduct(result.product)
-            console.log(product);
-          }
+            try {
+                let result = await  getProductDetailsById({accessToken,storeId,productId})
+                if(result.success){
+                  setProduct(result.product)
+                }
+                
+            } catch (error) {
+                //error
+            }finally{
+                setLoading(false)
+            }
         })()
-    },[accessToken,slug])
+    },[accessToken,productId,storeId])
     useEffect(()=>{
         if(product!==null){
             (async()=>{
                try{
-                const result =await fetchUserById({_id:product.created_by})
+                let _users = [product.created_by]
+                product?.updated.map(({updated_by})=>{
+                    _users.push(updated_by) 
+                })
+                _users = Array.from(new Set(_users))
+                const result =await fetchUserById({_id:_users})
                 if(result.success){
-                   const currentUser = result?.users[0]
-                    setUser({...user,currentUser})
+                   const users = result?.users
+                    setUser({...user,users,isLoading:false})
+                    setCurrentUser(findUser({users:users,userId:_users[0]}))
+                }else{
+                    setUser({...user,isLoading:false})
                 }
+              
                }catch(error){
-                console.log(error);
-                    //handle error
-               }finally{
-                //setUser({...user,isLoading:false})
+                setUser({...user,isLoading:false})
                }
             })()
         }
 
     },[product])
 
+
     if(slug.length<2){
         return <h1>Something went wrong</h1>
     }
+    if(loading) return <ProductViewLoading/>
     return <>
     <NextSeo 
         title={`Product - ${isEmpty(product?.seo?.title) ? product?.name : product?.seo?.title}`}
@@ -80,7 +125,7 @@ export default function Page  ({params}){
                 {
                     product?.mediaUrls.map((url,index)=>{
                         return <SwiperSlide key={index} className="shadow-md z-0" >
-                        <Image width={1024} height={1024} objectFit="fit" src={API_URL(url)} alt=" " className="w-full z-0 mobile:w-[45vw] h-[40vh] mobile:h-[60vh]"/>
+                        <Image placeholder="blur" blurDataURL={API_URL(url)} loading="lazy" width={1024} height={1024} objectFit="fit" src={API_URL(url)} alt=" " className="w-full z-0 mobile:w-[45vw] h-[40vh] mobile:h-[60vh]"/>
                       </SwiperSlide>
                     })
                 }
@@ -88,17 +133,17 @@ export default function Page  ({params}){
           <div className=' w-[40vw] relative text-left font-semibold' >
           
             <h2 className='text-2xl mt-20 mb-5 font-bold'>{product?.name}</h2>
-            <h2 className='mb-2 inline text-sm'>Rs.{product?.price?.mrp}</h2>
+            <h2 className='mb-2 inline text-sm'>{currency_code}{product?.price?.mrp}</h2>
                 {
-                    product?.price?.compare_at!==""?<del className="ml-4 text-red-600">Rs.{product?.price?.compare_at}</del>:<></>
+                    product?.price?.compare_at!==""?<del className="ml-4 text-red-600">{currency_code}{product?.price?.compare_at}</del>:<></>
                 }
             <h2 className={product?.isAvailable?'text-green-700 font-bold':'text-red-600 font-semibold'}>{product?.isAvailable?"Available":"Out of Stock"}</h2>
           {
           product?.inventory!=null?!isEmpty(product.inventory.sku)?<h2 className='mb-2 text-xs'>SKU:{product.inventory.sku}</h2>:<></>:<></>}
            {
-            user.isLoading &&user.currentUser===null?<h2>Loading...</h2>:
+            user.isLoading &&user.users===null?<Skeleton sx={skeletonSX}  width={70} />:
             <div className="h-[100px] w-fit relative">
-                <UserProfile name={user.currentUser.username} profileUrl={user.currentUser.profile} />
+                <UserProfile name={currentUser?.username} profileUrl={currentUser?.profile} />
             </div>
            } 
             <div dangerouslySetInnerHTML={{__html:product?.description}}></div>
@@ -140,18 +185,19 @@ export default function Page  ({params}){
         </Stack>
         {
             product?.updated?.length>0?<Stack direction={{ xs: 'column', md: 'row' }} >
-            <div className='border rounded-lg border-gray-600 p-4 mr-4 h-[250px] w-full'>
+            <div className='border rounded-lg border-gray-600 p-4 mr-4 h-auto max-h-[75vh] space-y-2 overflow-auto w-full'>
              <div className="text-xl font-bold">Update history</div>
-              <div className='border rounded-lg border-gray-600 w-[25%] h-[70%] py-5 my-5' >
-                <div className='px-5'>
-                <Avatar alt="Remy Sharp" src="A" /> 
-              </div>
-              <div className='font-semibold text-xl  ml-5'>
-              <h2>Safal</h2>
-              <b className='inline mr-10 '> 26 aug,2023</b>
-              <i  className='inline'> 3 days ago</i>
-              </div>
-              </div>
+             <Stack flexDirection={'row'} flexWrap={'wrap'} gap={2}>
+                {
+                    product?.updated.map((_update,index)=>{
+                        if(user.isLoading){
+                            return <Skeleton key={index} width={100} height={50} />
+                        }
+                        return   <UpdateHistoryItem key={index} update={_update} user={user.users} />
+                      
+                    })
+                }
+                </Stack>
               <div>
               </div>
             </div>

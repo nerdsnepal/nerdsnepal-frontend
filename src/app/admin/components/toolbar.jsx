@@ -35,7 +35,7 @@ const SelectStore = ({stores,selected})=>{
     value={selected.name}
     sx={styles.select}
     color="primary"
-    className="dark:text-white"
+    className="dark:text-blue-800 font-bold"
     onChange={({target})=>{
         const store = stores.filter((value)=>value.name===target.value)
         dispatch(setSelectedStore(store[0]))
@@ -90,38 +90,35 @@ export default  function AdminToolBar  () {
         name:user!==null?user?.username:"unknown",
         profile:user!=null?user?.profile:"https://www.freecodecamp.org/news/content/images/size/w2000/2022/09/jonatan-pie-3l3RwQdHRHg-unsplash.jpg"
     }
-    const options = {width:24,height:24,"stroke-width":3.5}
-    const searchIcon = getIcon(feather.icons.search,options)
-    return <div className="grid w-full justify-center items-center overflow-hidden fixed grid-cols-2 mobile:grid-cols-3 mobile:h-[90px] h-[60px] top-0 left-0 border-b border-gray-50  mobile:px-6">
-        <span className="flex justify-self-start items-center fill-current">
-           <a href="#" >
-            {
-                isLoading?<Skeleton sx={skeletonSX} variant="rectangular" animation="wave"  width={48} height={48} />
-                : <Image width={80} placeholder="empty" height={80} alt={storeInfo.store.toString()} src={storeInfo.storeLogo}  draggable={false} className="overflow-hidden aspect-square w-12 h-12 mx-6"/>
-              
-
-
-            }
-            </a>
-           {isLoading?<Skeleton sx={skeletonSX} className="m-3" variant="rectangular" width={220} height={"1.5em"} />: <span className="w-[220px] overflow-ellipsis">{storeInfo.store}</span> }
-        </span>
+    return <div className="grid drop-shadow-xl  w-full justify-center items-center overflow-hidden fixed grid-cols-2 mobile:grid-cols-3 mobile:h-[90px] h-[60px] top-0 left-0 border-b border-gray-300  mobile:px-6">
+      <a href="#">
+        {isLoading?<Stack direction={'row'} alignItems={'center'}  height={80} gap={1} justifyContent={'start'}>
+            <Skeleton sx={skeletonSX} className="m-3" variant="rectangular" width={80} height={80} />
+        <Skeleton sx={skeletonSX} className="m-3" variant="rectangular" width={220} height={"1.5em"} />
+        </Stack>
+        :<Stack height={80} justifyContent={'start'} alignItems={'center'} direction={'row'} gap={1}>
+            <Image height={80}  width={80} alt={storeInfo.store.toString()} src={storeInfo.storeLogo}  draggable={false} className="overflow-hidden object-cover"/>
+        <span className="max-w-[220px] w-fit h-fit overflow-ellipsis">{storeInfo.store}</span>
+        </Stack>
+        }
+        </a>
         <div className="justify-self-start hidden mobile:block laptop:relative laptop:left-[-120px]">
         {
          isLoading?<Skeleton sx={skeletonSX} className="m-3" variant="rectangular" width={220} height={"1.5em"} />:  !isSuperUser? stores.length>1?<SelectStore selected={selectedStore} stores={stores} />:<></>:<></>
         }
         </div>
-        <div className="flex space-x-4 w-full h-full mobile:justify-center items-center justify-start ">
-        <span>{searchIcon}</span>
+        <div className="flex space-x-4 w-full h-full mobile:justify-center items-center justify-start collapse mobile:visible">
+        {/*<span>{searchIcon}</span>
         <span className="cursor-pointer relative shrink-0">
             <Badge badgeContent={400} className="m-2" max={99} color="primary">
             <NotificationsIcon  sx={{fontSize:"60"}} />
-            </Badge>
+            </Badge>*/}
             {/*<a href="#">{notificationIcon}
             <span className="absolute top-[-4px] text-center right-[-9px] p-[3px] w-fit h-fit text-[12px] bg-red-500  text-white rounded-full">9+</span>
             </a>*/}
-        </span>
-        <span className="shrink-0">{isLoading?<Stack direction={"row"}>
-            <Avatar alt="" defaultValue={""} />
+        {/*</span>*/}
+        <span className="shrink-0 collapse mobile:visible">{isLoading?<Stack direction={"row"} gap={2}>
+            <Skeleton sx={skeletonSX} height={50} width={50} variant="circular" />
             <Skeleton sx={skeletonSX} className="m-3" variant="rectangular" width={150} height={"1.5em"} />
         </Stack>:<UserProfile name={storeInfo.name} profileUrl={storeInfo.profile} />}</span>
         </div>

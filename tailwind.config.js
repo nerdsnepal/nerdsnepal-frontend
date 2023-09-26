@@ -1,12 +1,16 @@
+const { colors } = require('@mui/material')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     important:true,
+ 
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+
     screens:{
         'tablet': '640px',
         'laptop': '1024px',
@@ -19,6 +23,8 @@ module.exports = {
         'mobile_tablet':{'min':'480px','max':'640px'},
         'above_laptop':{'min':'1024px'}
     },
+
+  
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

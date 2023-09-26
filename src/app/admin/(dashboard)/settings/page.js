@@ -1,10 +1,11 @@
+import UnderDevelopment from "@/app/under_dev"
 
 export const metadata = {
     title:"Settings"
 }
 export default function SettingPage(){
     return <>
-        <h1>This is a SettingPage</h1>
+       <UnderDevelopment/>
     </>
 
 

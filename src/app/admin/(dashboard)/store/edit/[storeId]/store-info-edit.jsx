@@ -109,7 +109,7 @@ const StoreLogo = ({store,accessToken})=>{
     }
     return <Card className="space-y-4 p-3">
     <h2><b>Logo </b></h2>
-        <label htmlFor="logo" className="cursor-pointer">
+        <label className="cursor-pointer" htmlFor="logo">
             {logo===null?<LocalMallRounded  fontSize="large" />:null}
             {logo!==null?<Avatar className="w-[75px] h-[75px]" src={API_URL(logo)} alt={store.name} />:null}
         </label>

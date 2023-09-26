@@ -3,6 +3,9 @@ import {  configureStore } from "@reduxjs/toolkit";
 import authReducer from "./reducer/authSlice";
 import createStoreReducer from './reducer/createStoreSlice'
 import userSelectReducer from './reducer/userSelectSlice'
+
+
+
 //const persistAuthConfig  = {
 //    key:'auth',
 //    storage
@@ -25,8 +28,9 @@ let store  = configureStore({
     reducer:{
         auth:authReducer,
         createStore: createStoreReducer,
-        userSelect: userSelectReducer
-    }
+        userSelect: userSelectReducer,
+     
+    },
 })
 //const persistor = persistStore(persitor_store)
 

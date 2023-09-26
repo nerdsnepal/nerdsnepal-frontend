@@ -1,6 +1,6 @@
 'use client'
 import { API_URL } from "@/app/lib/utils/utils";
-import { Alert, Box, Button,  Snackbar, Stack } from "@mui/material";
+import { Alert, Box,  Snackbar, Stack } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid"
 import Image from "next/image";
 import ImageIcon from '@mui/icons-material/Image';
@@ -16,11 +16,6 @@ import ShowDeleteAlert from "@/app/admin/components/delete-dialog";
 
 const ProductAction = ({product,onActionPerform})=>{
     const [showDialog,setDialog] = useState(false)
-    const handleEdit = ()=>{
-        alert("Clicked Edit")
-        if(onActionPerform)
-        onActionPerform("Edit",product)
-    }
     const handleDelete = ()=>{
         setDialog(true)
     }
@@ -32,7 +27,7 @@ const ProductAction = ({product,onActionPerform})=>{
               onActionPerform("Delete",product)
         }}  />
        <Link target="_blank" href={`/products/view/${product._id}/${product.storeId}`}> <VisibilityIcon className={style}  /></Link>
-        <EditIcon className={style} onClick={handleEdit}/>
+        <Link target="_blank" href={`/products/edit/${product._id}/${product.storeId}`}><EditIcon className={style}/></Link>
         <DeleteIcon className={style} onClick={handleDelete}/>
     </Stack>
 }

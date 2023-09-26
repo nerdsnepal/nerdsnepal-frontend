@@ -60,4 +60,21 @@ export const deleteProductById = async ({accessToken,storeId,productId})=>{
     return result
 }
 
+export const productAPI = async({body,accessToken,api})=>{
+    const result = await fetch(API_URL(`product/${api}`),{
+        method:"PATCH",
+        body:JSON.stringify(body),
+        cache:'no-store',
+        headers:{
+            'authorization':`Bearer ${accessToken}`,
+            'Content-type': 'application/json; charset=UTF-8',
+            ...SICHU_API_KEY
+        }
+    })
+    if(!result.ok){
+        throw new Error("Something went wrong")
+    }
+    return (await result).json()
+}
+
 

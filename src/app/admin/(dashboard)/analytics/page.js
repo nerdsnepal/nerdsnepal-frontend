@@ -1,3 +1,4 @@
+import UnderDevelopment from "@/app/under_dev"
 
 
 export const metadata = {
@@ -6,7 +7,7 @@ export const metadata = {
 
 export default function AnalyticsPage() {
     return <>
-        <h1>This is a AnalyticsPage</h1>
+      <UnderDevelopment/>
     </>
 
 

@@ -1,3 +1,4 @@
+import UnderDevelopment from "@/app/under_dev"
 
 export const metadata= {
     title:"Dashboard"
@@ -5,7 +6,7 @@ export const metadata= {
 
 export default function AdminPage (){
     return <>
-    This is a page 
+   <UnderDevelopment/>
     </>
 }
 

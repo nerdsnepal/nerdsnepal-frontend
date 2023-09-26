@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { uploadMedia } from "../action/mediaUpload";
 import { useSelector } from "react-redux";
-import { Cropper } from "react-cropper";
 import UploadedImage from "@/app/admin/(dashboard)/(products)/category/components/uploadedImage";
 import { Alert, Snackbar } from "@mui/material";
 
@@ -96,8 +95,8 @@ const UploadMedia = ({clearState=false,btnName,onUploadedMedialUrl,number_of_fil
        }
 
     return (
-        <div className="space-y-8">
-            <form>
+        <div className="space-y-8 h-fit relative w-full">
+            <form className="flex justify-center items-center">
                 <label className="px-6 py-3 cursor-pointer drop-shadow-md border-2 border-dashed  rounded-md text-black" htmlFor="media">{btnName!==undefined?btnName:'Browse'}</label>
                 <input type="file"  onChange={onChangeHandle} multiple={true} hidden accept="image/*" id="media" name="media" />
             </form>

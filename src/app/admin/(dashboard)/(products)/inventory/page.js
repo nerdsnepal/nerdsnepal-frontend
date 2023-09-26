@@ -1,5 +1,7 @@
+import UnderDevelopment from "@/app/under_dev";
+
 const InventoryPage = () => {
-    return <>This is a Inventory Page</>
+    return <UnderDevelopment/>
 }
  
 export default InventoryPage;

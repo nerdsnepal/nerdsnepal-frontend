@@ -5,7 +5,6 @@ import getIcon from "../getIcon";
 import React, {  Suspense, useEffect, useState,lazy } from "react";
 const feather = require('feather-icons')
 import { redirect, usePathname } from "next/navigation";
-import Loading from "@/app/loading";
 import { removeQueryPart } from "@/app/lib/utils/utils";
 import StoreIcon from '@mui/icons-material/Store';
 import { Backdrop, Box, Button, Stack } from "@mui/material";

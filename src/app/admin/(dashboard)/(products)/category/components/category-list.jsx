@@ -38,8 +38,8 @@ const CategoryAction = ({category,onActionPerform})=>{
               if(onActionPerform)
               onActionPerform("Delete",category)
         }}  />
-       <Link target="_blank" href={`/products/view/${category._id}/${category.storeId}`}> <VisibilityIcon className={style}  /></Link>
-        <EditIcon className={style} onClick={handleEdit}/>
+       {/*<Link target="_blank" href={`/view/${category._id}/${category.storeId}`}> <VisibilityIcon className={style}  /></Link>*/}
+        {/*<EditIcon className={style} onClick={handleEdit}/>*/}
         <DeleteIcon className={style} onClick={handleDelete}/>
     </Stack>
 }

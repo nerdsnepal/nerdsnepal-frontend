@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { ADMIN_URL, API_URL, COOKIE_NAME } from './app/lib/utils/utils';
 
+import {  COOKIE_NAME, DOMAIN } from './app/lib/utils/utils';
 
 const { NextResponse } = require('next/server');
 
@@ -22,7 +21,7 @@ async function middleware(req) {
     if(subdomain===undefined||subdomain===null||subdomain==="") subdomain="www";
     
     if(path==="www" || path==='admin'){
-       return NextResponse.redirect(new URL('/',`http://${path}.${req.nextUrl.host}/${path}`));
+       return NextResponse.redirect(new URL('/',`http://${path}.${DOMAIN}/${path}`));
     }
   if (subdomain) {
     // Subdomain available, rewriting
@@ -54,7 +53,7 @@ export const getValidSubdomain = (host) => {
   
     if (host && host.includes('.')) {
       const candidate = host.split('.')[0];
-      if (candidate && !candidate.includes('localhost')) {
+      if (candidate && !candidate.includes(DOMAIN)) {
         // Valid candidate
         subdomain = candidate;
       }
