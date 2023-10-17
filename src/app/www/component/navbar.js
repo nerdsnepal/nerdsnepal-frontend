@@ -1,11 +1,12 @@
 'use client'
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
-import {  Inbox, Mail, Menu, ShoppingCartOutlined } from "@mui/icons-material";
+import {  Inbox, Mail, Menu, SearchOutlined, ShoppingCartOutlined } from "@mui/icons-material";
 import { AppBar, Avatar, Box, Button, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Stack, SwipeableDrawer, Toolbar, Tooltip, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { Fragment} from "react";
 import { useSelector } from 'react-redux';
+import Link from 'next/link';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -15,22 +16,30 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
       padding: '0 4px',
     },
   }));
-const Logo = ()=>{
-    return <Image alt=""  src={'logo.svg'} height={100} width={100} />
+const Logo = ({scale=2.5})=>{
+    return <Image alt="" draggable={false} className={`h-[70px] w-[100px]  mobile:w-[150px] scale-[${scale}] `} src={'logo.svg'} height={65} width={100} />
 }
 const Cart = ()=>{
+    const items = useSelector((state)=>state.cart.items)
     return <IconButton aria-label="cart" color='default'>
-    <StyledBadge badgeContent={4} color="secondary">
+    <StyledBadge badgeContent={items?.length} color="secondary">
       <ShoppingCartOutlined className='text-white text-2xl' />
     </StyledBadge>
   </IconButton>
 }
+const Search = ()=>{
+    return <IconButton aria-label="cart" color='default'>
+      <SearchOutlined className='text-white text-2xl' />
+  </IconButton>
+}
 const pages = ['SHOP ALL', 'SHOP BY SERIES', 'SHOP BY BRAND','SALE'];
+const pagesUrl = ['/shop-all','/','/','/']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function SichuAppBar() {
   
     const user = useSelector((state)=>state.auth.user)
+  
     const [state, setState] = React.useState(false);
       const toggleDrawer =  (event) => {
             setState((prev)=>!prev);
@@ -42,8 +51,8 @@ function SichuAppBar() {
           onClick={toggleDrawer}
           onKeyDown={toggleDrawer}>
           <List>
-            {pages.map((text, index) => (
-              <ListItem key={text} disablePadding>
+            {pages.map((text, index) => (<Link key={text} href={pagesUrl[index]}>
+              <ListItem  disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
                     {index % 2 === 0 ? <Inbox /> : <Mail />}
@@ -51,6 +60,7 @@ function SichuAppBar() {
                   <ListItemText primary={text} />
                 </ListItemButton>
               </ListItem>
+              </Link>
             ))}
           </List>
         </Box>
@@ -58,14 +68,14 @@ function SichuAppBar() {
     
     return (
         <Fragment>
-        <AppBar position="static">
-        <Stack maxWidth="xl" height={60}>
+        <AppBar position="sticky" className='top-0'>
+        <Stack maxWidth="xl" className='h-[65px] mobile:h-[65px]'>
           <Toolbar disableGutters>
+            <Link  href="/"></Link>
             <Typography
               variant="h6"
               noWrap
               component="a"
-              href="/"
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
@@ -79,7 +89,7 @@ function SichuAppBar() {
             <Logo/>
             </Typography>
   
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }} alignItems={'center'} >
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -104,25 +114,37 @@ function SichuAppBar() {
                   display: { xs: 'block', md: 'none' },
                 }}>
               </Menu>
+              <Link href="/">
+              <Typography
+              variant="h6"
+              noWrap
+              >
+            <Logo scale={2.5} />
+            </Typography>
+            </Link>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
-                <Button
+              {pages.map((page,index) => (
+                <Link
                   key={page}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  {page}
-                </Button>
+                  href={pagesUrl[index]}
+                    style={{color:'white'}}
+                    className='p-2'
+                  >
+                    {page}
+                </Link>
               ))}
             </Box>
-            <Stack direction={'row'} gap={3} position={'absolute'} right={'24px'}>
+            <Stack direction={'row'} gap={1.5} position={'absolute'}  justifyContent={'center'} right={'24px'}>
           {user===null?null:  <Box sx={{ flexGrow: 0 }} >
-              <Tooltip title="Open settings">
-                <IconButton  sx={{ p: 0 }}>
-                  <Avatar alt="User profile" className="w-12 h-12 object-fill"  src={user.profile}/>
-                </IconButton>
-              </Tooltip>
+                 <Stack direction={'row'} gap={2} justifyContent={'center'} alignItems={'center'}>
+                 <Avatar alt="User profile" className="w-12 h-12 object-fill"  src={user.profile}/>
+                  <Typography sx={{display:{xs:'none',md:'block'}}}>{user.fullName}</Typography>
+                 </Stack>
             </Box>}
+           <Link href={'/search'} className='display:flex  items-center content-center' style={{color:'white'}}>
+             <Search/>
+           </Link>
             <Cart/>
             </Stack>
            

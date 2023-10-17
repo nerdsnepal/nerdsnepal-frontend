@@ -8,13 +8,6 @@ import { redirect } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { RedirectType } from "next/dist/client/components/redirect";
 
-
-export const metadata = {
-    title:"Admin login page",
-    description:"Login Page for the admin"
-}
-
-
 const getUser = (isEmail,password,username_email)=>{
     let user = {redirect:false}
     if(isEmail) user = {...user,email:username_email,password,isEmail}

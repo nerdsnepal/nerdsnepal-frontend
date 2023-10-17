@@ -7,13 +7,9 @@ import { useSelector } from "react-redux";
 import { getAllStoreRelatedProduct } from "./actions/action";
 import { Stack } from "@mui/material";
 import { StoreProductList } from "./components/product-list";
-import MetaData from "./components/meta";
 import StoreLoadingSkeleton from "../../store/components/store-loading-skeleton";
 
-export const metadata = {
-    title: 'Product',
-}
- 
+
 export default function ProductPage (){
     const storeId = useSelector((state)=>state.auth.storeId)
     const accessToken = useSelector((state)=>state.auth.accessToken)

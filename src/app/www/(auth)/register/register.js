@@ -5,6 +5,7 @@ import {   Alert, Button, Checkbox, Stack, TextField, Typography } from "@mui/ma
 import { useState } from "react";
 import { createUser } from "../../actions/user";
 import { PasswordField } from "../../component/password-field";
+import Image from "next/image";
 
 
 const Register = () => {
@@ -66,7 +67,9 @@ const Register = () => {
         setCreating(false)
         })
     }
-    return (<div className="dark:bg-white  dark:text-black tablet_md:w-[70vw] md_laptop:w-[50vw] above_laptop:w-[30vw] w-full p-3 space-y-2 rounded-xl transition-all">
+    return (<Stack direction={'row'} gap={2}>
+        <Image src={'/naruto-register.png'} className="h-[493px] object-cover  w-fit mobile:block hidden select-none" alt="naruto-register" height={380} width={380} />
+        <div className="dark:bg-white  dark:text-black tablet_md:w-[70vw] md_laptop:w-[50vw] above_laptop:w-[30vw] w-full p-3 space-y-2 rounded-xl transition-all">
         <Typography variant="h5">Register</Typography>
         <Typography variant="body1" color={"gray"}>Create your account</Typography>
         <form className="space-y-3" onSubmit={onSubmit}>
@@ -88,7 +91,7 @@ const Register = () => {
             <a href="/login">Log in</a>
         </Stack>
     
-    </div>);
+    </div></Stack>);
 }
  
 export default Register;

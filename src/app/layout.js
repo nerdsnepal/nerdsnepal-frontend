@@ -2,7 +2,6 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import dotenv from 'dotenv'
 import ReactReducerProvider from './ReactReducer'
-import QueryProvider from './QueryProvider'
 import AuthProvider from './lib/components/AuthProvider'
 
 
@@ -23,11 +22,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
 
       <AuthProvider>
-    <QueryProvider>
       <ReactReducerProvider>
             {children}
-            </ReactReducerProvider>
-        </QueryProvider>
+        </ReactReducerProvider>
     </AuthProvider>
       </body>
     </html>

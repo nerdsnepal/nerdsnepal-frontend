@@ -29,7 +29,7 @@ const Status = ({onChange,value}) => {
      {
          statusOptions.map(({value,text})=>{
              const status = value ===selectedOption
-             console.log(value,selectedOption,status);
+            // console.log(value,selectedOption,status);
              if(status){
                 return <MenuItem  key={text} value={value} selected>{text}</MenuItem>
              }

@@ -83,7 +83,6 @@ export const StoreProductList = ({products,onDelete})=>{
                 const len = mediaUrls?.length 
                 if(len>0){
                     const url = mediaUrls[0]
-                    console.log(API_URL(url));
                     return <Image src={API_URL(url)} className="cursor-pointer" alt={name} width={100} height={100} />;
                 }
               return <ImageIcon/>

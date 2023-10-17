@@ -29,6 +29,18 @@ export const isExpired = ({expires})=>{
     if(timestamp<currentTimestamp)return true
     return false;
 }
+export const getCompareAtPrice = ({compareAt,mrp})=>{
+    let compare_at = 0;
+    let discountPer = 0;
+        try {
+            compare_at = Number(compareAt)
+            discountPer = (compare_at - Number(mrp))*100/Number(compareAt);
+            discountPer = parseInt(discountPer)
+        } catch (error) {
+            //error
+        }
+        return {compare_at,discountPer}
+}
 
 export const SICHU_API_KEY= {
     'sichu-api-key':process.env.NEXT_PUBLIC_SICHU_API_KEY

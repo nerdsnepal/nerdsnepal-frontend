@@ -3,6 +3,8 @@ import {  configureStore } from "@reduxjs/toolkit";
 import authReducer from "./reducer/authSlice";
 import createStoreReducer from './reducer/createStoreSlice'
 import userSelectReducer from './reducer/userSelectSlice'
+import filter from "./reducer/filter";
+import cart from "./reducer/cart";
 
 
 
@@ -29,6 +31,8 @@ let store  = configureStore({
         auth:authReducer,
         createStore: createStoreReducer,
         userSelect: userSelectReducer,
+        proFilter:filter,
+        cart:cart
      
     },
 })

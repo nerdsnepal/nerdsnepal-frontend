@@ -6,7 +6,7 @@ export const metadata= {
 }
 
 const UnderDevelopment = (props) => {
-    console.log(props);
+   
     return (<Box className="h-[100%] w-[100%]">
   <Stack direction={'column'} gap={2} justifyContent={'center'} alignItems={'center'}>
   <img alt="fdsa" src="development.png"  className="object-fit"/>
@@ -14,11 +14,6 @@ const UnderDevelopment = (props) => {
   </Stack>
     </Box>);
 }
-export async function getServerSideProps(context) {
-    const data = {a:'a'}
-    console.log("HEY");
-    // Pass data to the page via props
-    return { props: { data } }
-  }
+
  
 export default UnderDevelopment;

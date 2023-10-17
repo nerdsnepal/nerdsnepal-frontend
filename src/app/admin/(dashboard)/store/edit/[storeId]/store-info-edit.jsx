@@ -97,14 +97,14 @@ const StoreLogo = ({store,accessToken})=>{
         formData.append("storeId",store._id)
         try {
             const result = await uploadMedia({formData:formData, accessToken:accessToken,api:'upload/logo'},(progress)=>{
-                console.log(progress);
+                //console.log(progress);
             })
             if(result.success){
                 
                 setLogo(result.logoUrl)
             }
         } catch (error) {
-            console.log(error);
+           // console.log(error);
         }
     }
     return <Card className="space-y-4 p-3">

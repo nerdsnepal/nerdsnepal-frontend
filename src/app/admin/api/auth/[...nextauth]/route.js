@@ -52,7 +52,7 @@ export const authOptions = {
                 const profile = user.profile
                 const username = user.username 
                 const accessToken = user.accessToken
-                const fullName = `${user.firstname} ${user.middlename} ${user.lastname}`
+                const fullName = user.name
                 const email = user.email
                 user = {fullName,role,_id,isVerified,accessToken,email,profile,username}
                return {...token,...user}

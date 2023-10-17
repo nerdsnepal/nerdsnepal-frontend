@@ -1,4 +1,4 @@
-
+'use server'
 const { API_URL, SICHU_API_KEY } = require("@/app/lib/utils/utils")
 
 

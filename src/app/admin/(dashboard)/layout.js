@@ -10,9 +10,6 @@ import { redirect } from "next/navigation"
 import { isExpired } from "@/app/lib/utils/utils"
 
 
-export const metadata = {
-    title: 'Admin-Dashboard'
-}
 const Layout = ({children})=>{  
     const {status,data} = useSession()
     const dispatch = useDispatch()
@@ -25,9 +22,9 @@ const Layout = ({children})=>{
         }
         if(status==="authenticated"){
            if( isExpired({expires:data.expires})){
-            console.log("Expired");
+           // console.log("Expired");
            }else{
-            console.log("Not Expire");
+           // console.log("Not Expire");
            }
             const {role,isVerified,accessToken,email,fullname,username,profile} = data.user
             setLoading(false)

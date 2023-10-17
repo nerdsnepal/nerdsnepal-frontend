@@ -38,7 +38,7 @@ export  async function _createStore({merchantId,name,accessToken}){
         }
         return await res.json()
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         return error
     }
 
@@ -55,7 +55,7 @@ export  async function fetchStoreById({_id,accessToken}){
         tags:['stores']
     }
     })
-    console.log(res);
+   // console.log(res);
 if(!res.ok){
     throw new Error("Unable to fetch data")
 }

@@ -9,7 +9,7 @@ import { usePathname,useRouter } from "next/navigation";
 import Loading from "../loading";
 
 
-const SessionProvider = (params) => {
+const SessionProvider = ({children}) => {
     const router = useRouter()
     const pathname = usePathname()
     const {status,data} = useSession()
@@ -31,15 +31,20 @@ const SessionProvider = (params) => {
                 router.replace('/')
             }
            }
-            const {role,isVerified,accessToken,email,fullname,username,profile} = data.user
+            const {role,isVerified,accessToken,email,fullName,username,profile} = data.user
             dispatch(setRole(role))
-            dispatch(setUser({isVerified,email,fullname,username,profile}))
+            dispatch(setUser({isVerified,email,fullName,username,profile}))
             dispatch(setAccessToken(accessToken)) 
         }
        
     },[status])
     if(isLoading)return <Loading/>
-    return null;
+    return <>
+        {
+            children
+        }
+    
+    </>;
 }
  
 export default SessionProvider;

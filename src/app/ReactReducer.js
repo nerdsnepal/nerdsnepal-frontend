@@ -7,12 +7,9 @@ import { PersistGate } from "redux-persist/integration/react";
 
 const ReactReducerProvider = ({children}) => {
     return ( 
-    //<Provider store={persitor_store}>
+   
         <Provider store={store}>
-        {/*<PersistGate loading={null} persistor={persistor} >*/}
-       {children}
-        {/*</PersistGate>*/}
-        {/*</Provider>*/}
+            {children}
         </Provider>);
 }
  

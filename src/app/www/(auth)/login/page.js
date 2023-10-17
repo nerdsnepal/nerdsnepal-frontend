@@ -11,7 +11,7 @@ export const metadata = {
 
 
 const LoginPage =(props) => {
-    console.log(props);
+    //console.log(props);
     return (<div className="flex justify-center items-center h-[80vh]">
           <Login props={props}/>
     </div>);

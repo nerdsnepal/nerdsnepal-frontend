@@ -116,13 +116,14 @@ const CategoryAddPage = () => {
         </Snackbar>
        <div className="mobile:grid grid-row-2  relative justify-center my-8 mobile:grid-cols-[60%,30%] mobile:gap-1 scroll-auto">
             <section className="order-2 mobile:w-[75%] justify-self-center">
-            <Card sx={{minHeight:"150px"}} className="p-5 dark:bg-gray-900 dark:text-white" elevation={elevation}>
+            <Card sx={{minHeight:"150px"}} className="p-5 dark:bg-white dark:text-black" elevation={elevation}>
                 <h1 className="p-2 font-bold">Category</h1>
-               <FormControl className="dark:text-white w-[80%]">
-               <TextField value={category.name} required className=" mx-2 my-2" sx={{
-                    input:{
-                    color:prefersMode?'white':'black',
-                    }}} 
+               <FormControl className="w-[80%]">
+               <TextField value={category.name} required className=" mx-2 my-2" 
+            //   sx={{
+            //        input:{
+            //        color:prefersMode?'white':'black',
+            //        }}} 
                 onChange={(e)=>handleChange(e,0)} focused type="text" variant="outlined" label="Category name"
                  about="Category Name" color="primary"  aria-label="Category name"
                  />
@@ -131,10 +132,10 @@ const CategoryAddPage = () => {
                </FormControl>
               
             </Card>
-            <Card sx={{minHeight:"200px"}} className="p-5 dark:bg-gray-900 dark:text-white my-8" elevation={elevation}>
+            <Card sx={{minHeight:"200px"}} className="p-5 dark:bg-white  my-8" elevation={elevation}>
                 <h1 className="p-2 font-bold">Media</h1>
                <div className="flex justify-center items-center">
-                <UploadMedia number_of_files={(len)=>console.log(len)}
+                <UploadMedia number_of_files={(len)=>{}}
                 clearState={uploadStateClear}
                 onUploadedMedialUrl={onUploadSuccessfully}
                 state={stateOfUploading}
@@ -145,7 +146,7 @@ const CategoryAddPage = () => {
             </Card>
             </section>
             <section className="order-1 mobile:order-2">
-            <Card className="p-5 h-[120px] flex justify-start items-center gap-4 dark:text-white dark:bg-gray-900" elevation={elevation}>
+            <Card className="p-5 h-[120px] flex justify-start items-center gap-4 dark:white" elevation={elevation}>
                 <div>
                 <h1 className="p-2 font-bold">Status</h1>
               <Status 

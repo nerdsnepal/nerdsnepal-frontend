@@ -29,7 +29,7 @@ export default function CategoryForProduct({onSelect,onSelectSubCategory,value})
    }catch(error){
     setOptions([])
     setSubCategory([])
-    console.log(error);
+    //console.log(error);
    }finally{
     setLoading(false)
    }

@@ -1,4 +1,5 @@
 
+import Footer from './component/footer';
 import SichuAppBar from './component/navbar';
 import './globals.css'
 import SessionProvider from './session-provider';
@@ -8,9 +9,11 @@ export const metadata= {
 
 const Layout = ({children}) => {
     return (<>
-    <SessionProvider/>
+    <SessionProvider>
     <SichuAppBar/>
         {children}
+    <Footer/>
+    </SessionProvider>
     </>);
 }
  

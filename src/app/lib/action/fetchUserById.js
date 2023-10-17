@@ -13,7 +13,7 @@ export default async function fetchUserById({_id}){
             tags:["users","searchUser"]
         }
     })
-    console.log(response);
+    //console.log(response);
     if(!response.ok){
         throw new Error("Unable to fetch user")
     }

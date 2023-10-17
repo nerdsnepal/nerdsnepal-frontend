@@ -7,9 +7,9 @@ const FetchAndSetUserProfile = ({userId}) => {
         (async()=>{
             try{
                 const result=await fetchUserById({_id:userId})
-                console.log(result);
+               // console.log(result);
             }catch(error){
-                console.log(error);
+               // console.log(error);
             }
         })()
     },[userId])

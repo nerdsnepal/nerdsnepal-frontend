@@ -1,6 +1,39 @@
 @tailwind base;
+@layer base {
+    h1 {
+      @apply text-4xl font-extrabold;
+    }
+    h2 {
+      @apply text-3xl font-extrabold;
+    }
+    h3 {
+      @apply text-2xl font-bold;
+    }
+    h4 {
+      @apply text-xl font-semibold;
+    }
+    h5 {
+      @apply text-lg font-semibold;
+    }
+    h6 {
+      @apply text-base font-semibold;
+    }
+    ul, ol {
+        @apply list-disc pl-5; /* Default list styles using a filled circle as the list marker */
+      }
+      
+      ul ul, ul ol, ol ul, ol ol {
+        @apply list-inside pl-5; /* Nested lists with indentation */
+      }
+      
+      ul ul ul, ul ol ul, ol ul ul, ol ol ul {
+        @apply pl-10; /* Adjust indentation for third-level nested lists */
+      }
+  }
+
 @tailwind components;
 @tailwind utilities;
+
 *{
     padding: 0;
     margin: 0;
@@ -27,3 +60,23 @@ body {
   color: rgb(var(--foreground-rgb));
   background: var(--background-color);
 }
+
+
+
+ .product-swiper .swiper-button-next, .product-swiper .swiper-button-prev{ 
+    color: white;font-weight: bold;
+    font-size: large;
+ }
+ .custom-swiper .swiper-button-next{
+    height: 50px;width: 50px;
+    border-color: black;
+    border-radius: 5px;
+ }
+
+ .custom-swiper .swiper-button-next::after{ 
+    content: url('/expand_circle_right.svg');
+ }
+ .custom-swiper .swiper-button-prev::after{
+    content: url('/expand_circle_left.svg');
+ }
+

@@ -39,7 +39,6 @@ export const removeImage = async({storeId,accessToken,path})=>{
         ...SICHU_API_KEY
     }
     const res = await axios.delete(API_URL('upload'),{storeId,path},{headers:headers})
-    console.log(res);
     return res.data
 }
 export const save_category = async({name,imageUrl,status,subCategory,accessToken,storeId})=>{

@@ -20,10 +20,7 @@ import Link from "next/link"
 import { NextSeo } from "next-seo"
 import ProductViewLoading from "../../components/product-view-loading"
 
-export const metadata= {
-    title:"Product",
-    description:"Product page"
-}
+
 const findUser = ({users,userId})=>{
     let user = null 
     console.log(users);
@@ -39,7 +36,7 @@ const findUser = ({users,userId})=>{
 const UpdateHistoryItem = ({update,user})=>{
     const {updated_by,updated_at,remarks}= update
     const currentUser = findUser({users:user,userId:updated_by})
-    console.log(currentUser);
+    //console.log(currentUser);
     const days = Math.ceil((new Date().getTime() - new Date(updated_at).getTime()) / 86400000)
     const date = new Date(updated_at).toDateString()
     return <div  className='border rounded-lg p-2 border-gray-600 w-full mobile:w-fit mobile:max-w-[25%] h-[70%] space-y-2' >
@@ -55,7 +52,6 @@ const UpdateHistoryItem = ({update,user})=>{
 
 
 export default function Page  ({params}){
-  
     const accessToken = useSelector((state)=>state.auth.accessToken)
     const [product,setProduct]= useState(null)
     const [user,setUser] = useState({isLoading:true,users:[]})

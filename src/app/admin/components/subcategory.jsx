@@ -56,7 +56,7 @@ const SubCategory = ({subCategory,parent,onSaved,onChangeSubCategory}) => {
           <Stack  className="overflow-auto max-h-[220px]" direction={"column"} gap={1}>
         {
             category.subcategory.map((value,index)=>{
-                console.log(value);
+                //console.log(value);
                 return <TextField
                     value={value}
                     size="small"

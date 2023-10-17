@@ -155,6 +155,7 @@ const ProductAddPage = () => {
                 />
                 <h2>Description</h2>
                 <TextEditor  content={product.description} onChange={(value)=>{
+                    console.log(value);
                     setProduct({...product,description:value})
                 }}/>
            </Card>

@@ -81,10 +81,10 @@ const CategoryList = ({categories,accessToken,onDelete}) => {
                 if(onDelete)
                 onDelete(category)
             }else{
-                setResponse({hasResponse:true,servity:"error",message:data.message})
+                setResponse({hasResponse:true,servity:"error",message:"Something went wrong"})
             }
          } catch (error) {
-            setResponse({hasResponse:true,servity:"error",message:error})
+            setResponse({hasResponse:true,servity:"error",message:"Something went wrong"})
          }finally{
             setTimeout(()=>{
                 setResponse({hasResponse:false,servity:"info",message:""})
