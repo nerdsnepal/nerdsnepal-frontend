@@ -74,7 +74,7 @@ const Login = (props) => {
             {response.msg}
         </Alert>:null}
         <Stack direction={'row'} gap={1} justifyContent={'center'} alignItems={'center'} >
-            <Typography  variant="body1">Don&and;t have an account?</Typography>
+            <Typography  variant="body1">{`Don't have an account?`}</Typography>
             <a href="/register">Register</a>
         </Stack>
        </div>

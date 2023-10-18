@@ -14,7 +14,11 @@ const nextConfig = {
     
 }
 module.exports = {
-    middleware:['middleware/default']
+    middleware:['middleware/default'],
+    compress: false,
+    env: {
+        NODE_ENV: 'production',
+    },
 }
 
 module.exports = nextConfig

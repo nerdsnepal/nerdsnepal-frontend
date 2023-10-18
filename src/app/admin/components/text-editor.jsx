@@ -4,7 +4,7 @@ import { isEmpty } from "@/app/lib/utils/utils";
 import { Editor } from "@tinymce/tinymce-react";
 import { useEffect, useState } from "react";
 const TextEditor = ({onChange,content}) => {
-    const [currentContent,setCurrentContent] = useState('') 
+    const [currentContent,setCurrentContent] = useState(content) 
     useEffect(()=>{
         if(isEmpty(content))
         setCurrentContent(content)

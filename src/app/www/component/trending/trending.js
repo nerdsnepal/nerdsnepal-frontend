@@ -9,7 +9,7 @@ const TrendingProducts = () => {
     const {data,isLoading} = useSichuFetch({endPoint:"trending/",revalidate:25})
     if(isLoading)return <Loading/>
     if(data?.length===0)return null;
-    return (<Stack  direction={'column'} gap={2}  padding={2} className="w-full"  justifyContent={'center'} alignItems={'center'} >
+    return (<Stack  direction={'column'} gap={2}  padding={1} className="w-full"  justifyContent={'center'} alignItems={'center'} >
     <Typography className="text-[#0F172A] dark:text-white font-bold">TRENDING NOW</Typography>
    <Box>
    <Stack direction={"row"}  flexWrap={'wrap'} padding={1}  justifyContent={'center'} gap={1.2}>

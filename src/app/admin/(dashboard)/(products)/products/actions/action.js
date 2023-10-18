@@ -60,11 +60,11 @@ export const deleteProductById = async ({accessToken,storeId,productId})=>{
     return result
 }
 
-export const productAPI = async({body,accessToken,api})=>{
+export const productAPI = async({body,accessToken,api,method="GET",cache="no-store"})=>{
     const result = await fetch(API_URL(`product/${api}`),{
-        method:"PATCH",
+        method:method,
         body:JSON.stringify(body),
-        cache:'no-store',
+        cache:cache,
         headers:{
             'authorization':`Bearer ${accessToken}`,
             'Content-type': 'application/json; charset=UTF-8',

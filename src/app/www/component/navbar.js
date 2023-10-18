@@ -1,12 +1,14 @@
 'use client'
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
-import {  Inbox, Mail, Menu, SearchOutlined, ShoppingCartOutlined } from "@mui/icons-material";
-import { AppBar, Avatar, Box, Button, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Stack, SwipeableDrawer, Toolbar, Tooltip, Typography } from "@mui/material";
+import {  Inbox, Mail, Menu, Person, PersonOutline, SearchOutlined, ShoppingCartOutlined } from "@mui/icons-material";
+import { AppBar,  Box,  IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText,  Stack, SwipeableDrawer, Toolbar } from "@mui/material";
 import Image from "next/image";
-import React, { Fragment} from "react";
+import React, { Fragment, useState} from "react";
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
+import SliderCart from './cart';
+import UserMenu from './user.menu';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -16,12 +18,12 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
       padding: '0 4px',
     },
   }));
-const Logo = ({scale=2.5})=>{
-    return <Image alt="" draggable={false} className={`h-[70px] w-[100px]  mobile:w-[150px] scale-[${scale}] `} src={'logo.svg'} height={65} width={100} />
+const Logo = ()=>{
+    return <Image alt="" draggable={false} className={`ml-2 h-8 w-24 object-fit overflow-hidden`} src={'/logo.png'} height={65} width={100} />
 }
-const Cart = ()=>{
+const Cart = ({onClick})=>{
     const items = useSelector((state)=>state.cart.items)
-    return <IconButton aria-label="cart" color='default'>
+    return <IconButton onClick={onClick} aria-label="cart" color='default'>
     <StyledBadge badgeContent={items?.length} color="secondary">
       <ShoppingCartOutlined className='text-white text-2xl' />
     </StyledBadge>
@@ -34,13 +36,15 @@ const Search = ()=>{
 }
 const pages = ['SHOP ALL', 'SHOP BY SERIES', 'SHOP BY BRAND','SALE'];
 const pagesUrl = ['/shop-all','/','/','/']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Manage My Account', 'My Orders', 'Logout'];
 
 function SichuAppBar() {
-  
     const user = useSelector((state)=>state.auth.user)
-  
     const [state, setState] = React.useState(false);
+    const [cartState,setCartState] = useState(false);
+    const togglerCartState = ()=>{
+        setCartState((prev)=>!prev);
+    }
       const toggleDrawer =  (event) => {
             setState((prev)=>!prev);
       };
@@ -65,30 +69,22 @@ function SichuAppBar() {
           </List>
         </Box>
       );
+
+    
+    
     
     return (
         <Fragment>
         <AppBar position="sticky" className='top-0'>
         <Stack maxWidth="xl" className='h-[65px] mobile:h-[65px]'>
-          <Toolbar disableGutters>
-            <Link  href="/"></Link>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
+          <Toolbar  disableGutters>
+            <Link
+            href={'/'}
+            className='hidden md:block'
             >
             <Logo/>
-            </Typography>
-  
+            </Link>
+           
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }} alignItems={'center'} >
               <IconButton
                 size="large"
@@ -97,7 +93,6 @@ function SichuAppBar() {
                 aria-haspopup="true"
                 onClick={toggleDrawer}
                 color="inherit">
-            
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -115,37 +110,29 @@ function SichuAppBar() {
                 }}>
               </Menu>
               <Link href="/">
-              <Typography
-              variant="h6"
-              noWrap
-              >
-            <Logo scale={2.5} />
-            </Typography>
+            <Logo/>
             </Link>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }  }} className="ml-4">
               {pages.map((page,index) => (
                 <Link
                   key={page}
                   href={pagesUrl[index]}
                     style={{color:'white'}}
-                    className='p-2'
-                  >
+                    className='p-2'>
                     {page}
                 </Link>
               ))}
             </Box>
-            <Stack direction={'row'} gap={1.5} position={'absolute'}  justifyContent={'center'} right={'24px'}>
-          {user===null?null:  <Box sx={{ flexGrow: 0 }} >
-                 <Stack direction={'row'} gap={2} justifyContent={'center'} alignItems={'center'}>
-                 <Avatar alt="User profile" className="w-12 h-12 object-fill"  src={user.profile}/>
-                  <Typography sx={{display:{xs:'none',md:'block'}}}>{user.fullName}</Typography>
-                 </Stack>
-            </Box>}
+            <Stack sx={{ flexGrow: 0 }} direction={'row'} gap={1} position={'absolute'}  justifyContent={'center'} right={'24px'}>
+                {user===null?<Link className='flex justify-center items-center' href={'/login'} style={{color:'white'}}>
+                    <PersonOutline/>
+                    </Link>:  
+            <UserMenu user= {user}/>}
            <Link href={'/search'} className='display:flex  items-center content-center' style={{color:'white'}}>
-             <Search/>
+            <Search/>
            </Link>
-            <Cart/>
+            <Cart onClick={togglerCartState} />
             </Stack>
            
           </Toolbar>
@@ -160,7 +147,16 @@ function SichuAppBar() {
             {list('left')}
           </SwipeableDrawer>
         </React.Fragment>
-
+     
+        <React.Fragment key={'right'}>
+             <SwipeableDrawer
+               anchor={'right'}
+               open={cartState}
+               onClose={togglerCartState}
+               onOpen={togglerCartState}>
+               <SliderCart onClose={togglerCartState} anchor={'right'}/>
+             </SwipeableDrawer>
+        </React.Fragment>
         </Fragment>
     );
   }

@@ -1,6 +1,6 @@
 'use client'
 import { TextField } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 
 
 const ProductSearchEngineListing = ({onChangeTitle,onChangeDescription,value}) => {
