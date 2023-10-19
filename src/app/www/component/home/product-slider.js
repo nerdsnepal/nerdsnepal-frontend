@@ -15,7 +15,7 @@ const ProductSlider = ({products}) => {
     return (<>
            <Swiper 
            navigation={true}
-            className="product-swiper w-full relative h-[400px] mobile:h-[800px]"
+            className="product-swiper w-full relative h-[400px] mobile:h-[650px]"
            modules={[Navigation, Pagination, A11y]}
            pagination={{ clickable: true }}>
                 {
@@ -35,7 +35,6 @@ const ProductSlider = ({products}) => {
                                 </Stack>
                                 </div>
                             </div>
-                     
                       </SwiperSlide>
                     })
                 }
