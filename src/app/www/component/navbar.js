@@ -39,7 +39,7 @@ const Search = ()=>{
   </IconButton>
 }
 const pages = ['SHOP ALL', 'SHOP BY SERIES', 'SHOP BY BRAND','SALE'];
-const pagesUrl = ['/shop-all','/','/','/']
+const pagesUrl = ['/shop-all','/shop-by-series','/','/']
 
 function SichuAppBar() {
     const user = useSelector((state)=>state.auth.user)
