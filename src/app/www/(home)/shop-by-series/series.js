@@ -1,9 +1,8 @@
 'use client'
 
-import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import CategoryImage from "../../component/category.image";
 import { useSichuFetch } from "../../hooks/use-fetch";
-import Link from "next/link";
 import SichuBreadCrumbs from "../../component/breadcrumbs";
 
 const Series = () => {
@@ -12,14 +11,13 @@ const Series = () => {
         {value:'SHOP BY SERIES',url:"#"}
     ]
     const {data,isLoading} = useSichuFetch({endPoint:'v2/category',revalidate:90})
-    console.log(data);
     if(isLoading)return <h1>Loading...</h1>
     if(!data)return <h1>No series found</h1>
-    return (<>
+    return (<Box className="h-full">
         <Box padding={3}>
         <SichuBreadCrumbs breadcrumbs={breadcrumbs} />
         </Box>
-       <Stack padding={1} className="h-screen" direction={'row'} justifyContent={'center'} flexWrap={'wrap'} gap={1}>
+       <Stack padding={1} direction={'row'}  className="h-fit" justifyContent={'center'} flexWrap={'wrap'} gap={1}>
        {
             data.map((category,index)=>{
                 const url = category?.images[0]?.url
@@ -28,7 +26,7 @@ const Series = () => {
         }
        </Stack>
     
-    </>);
+    </Box>);
 }
  
 export default Series;

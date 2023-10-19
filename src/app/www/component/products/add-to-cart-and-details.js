@@ -27,7 +27,7 @@ const AddToCartAndDetails = ({product}) => {
       <Rating name="read-only-rating" value={rating} readOnly />
       <Typography variant="body1" >12 reviews</Typography>
       </Stack>
-        <Typography className="p-1">{currency_code+product.price.mrp}</Typography>
+        <Typography className="p-1">{currency_code+product?.price?.mrp}</Typography>
         {
             compare_at>0?
                 <Stack direction={'row'} gap={2}>

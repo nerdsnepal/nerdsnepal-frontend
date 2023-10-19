@@ -12,7 +12,7 @@ export const useSichuFetch = ({endPoint="",revalidate=60})=>{
     useEffect(()=>{
      (async()=>{
        try {
-        const result =await fetchSichu({accessToken,endPoint,revalidate});
+        const result =await fetchSichu({accessToken:accessToken,endPoint,revalidate});
         if(result.success){
             setData(result.data)
         }
