@@ -7,7 +7,7 @@ import Image from "next/image";
 import React, { Fragment, useState} from "react";
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
-import SliderCart from './cart';
+import SliderCart from './cart/cart';
 import UserMenu from './user.menu';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -23,8 +23,12 @@ const Logo = ()=>{
 }
 const Cart = ({onClick})=>{
     const items = useSelector((state)=>state.cart.items)
+    let totalQ =0;
+    items.map(({quantity})=>{
+        totalQ+=Number(quantity)
+    })
     return <IconButton onClick={onClick} aria-label="cart" color='default'>
-    <StyledBadge badgeContent={items?.length} color="secondary">
+    <StyledBadge badgeContent={totalQ} color="secondary">
       <ShoppingCartOutlined className='text-white text-2xl' />
     </StyledBadge>
   </IconButton>
@@ -36,7 +40,6 @@ const Search = ()=>{
 }
 const pages = ['SHOP ALL', 'SHOP BY SERIES', 'SHOP BY BRAND','SALE'];
 const pagesUrl = ['/shop-all','/','/','/']
-const settings = ['Manage My Account', 'My Orders', 'Logout'];
 
 function SichuAppBar() {
     const user = useSelector((state)=>state.auth.user)

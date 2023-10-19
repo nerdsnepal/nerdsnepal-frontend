@@ -22,9 +22,23 @@ const cartSlice = createSlice({
     // Add an item to the cart
     addItem: (state, action) => {
       const newItem = action.payload;
-      state.items.push(newItem);
+     const existingItem = state.items.find(item => item._id === newItem._id);
+  if (existingItem) {
+    existingItem.quantity += newItem.quantity; // Adjust the property you use to represent quantity
+  } else {
+    // If the product is not in the cart, add it as a new entry
+    state.items.push(newItem);
+    }
       updateLocalStorageCart(state.items)
     },
+    updateQuantity:(state,action)=>{
+        const newItem = action.payload;
+        const itemToUpdate = state.items.find(item => item._id === newItem._id);
+        if (itemToUpdate) {
+          itemToUpdate.quantity = newItem.quantity;
+        }
+    },
+
     // Remove an item from the cart
     removeItem: (state, action) => {
       const removedItem = action.payload;
@@ -44,6 +58,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, clearCart } = cartSlice.actions;
+export const { addItem, removeItem, clearCart,updateQuantity} = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -1,5 +1,5 @@
 import { Box, Rating, Stack, Typography } from "@mui/material";
-import AddToCart from "../add-to-cart";
+import AddToCart from "../cart/add-to-cart";
 import { currency_code, getCompareAtPrice } from "@/app/lib/utils/utils";
 import Quantity from "./quantity";
 import { useDispatch } from "react-redux";
@@ -19,6 +19,7 @@ const AddToCartAndDetails = ({product}) => {
                 quantity:quantity,name,_id,storeId,price,mediaUrls,totalQuantity,isAvailable 
             }
         dispatch(addItem(item))
+        quantity=1;
     }
     return (<Box gap={2.5} margin={{xs:1,md:0}}>
         <Typography variant="h1" fontSize={'1.5em'} className="font-bold p-1 ">{product?.name}</Typography>
@@ -37,7 +38,7 @@ const AddToCartAndDetails = ({product}) => {
         }
         <Quantity  onChange={onChange} />
         <Box height={25}></Box>
-            <AddToCart onClick={addToCart} />
+            <AddToCart onClick={addToCart}  />
 
         </Box>);
 }

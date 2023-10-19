@@ -3,26 +3,27 @@ import { useEffect, useState } from "react";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useSelector } from "react-redux";
-const Quantity = ({onChange}) => {
-    const [quantity,setQuantity]= useState(1)
+const Quantity = ({onChange,value=1,hideLabel=false,gap=4,padding=1}) => {
+    const [quantity,setQuantity]= useState(value)
     const items = useSelector((state)=>state.cart.items)
     useEffect(()=>{
-       setQuantity(1)
+       setQuantity(value)
     },[items])
     const increment = ()=>{
-        setQuantity((value)=>++value);
-        if(onChange)onChange(quantity)
+        setQuantity(quantity+1);
+        if(onChange)onChange(quantity+1)
     }
     const decrement = ()=>{
         if(quantity>1){
             setQuantity((value)=>--value);
+            if(onChange)onChange(quantity-1)
         }
-        if(onChange)onChange(quantity)
+       
     }
-    return (<Box className='w-fit'>
-        <Typography variant="body1" padding={1}>Quantity:</Typography>
+    return (<Box className='w-fit h-fit'>
+     {hideLabel?null:<Typography variant="body1" padding={1}>Quantity:</Typography>}
         <Box className="border-[1px]" >
-        <Stack direction={'row'} padding={1} justifyContent={'space-between'} gap={4} alignItems={'center'}>
+        <Stack direction={'row'} padding={padding} justifyContent={'space-between'} gap={gap} alignItems={'center'}>
         <RemoveIcon onClick={decrement} className="cursor-pointer" />
         <Typography>{quantity}</Typography>
         <AddIcon  onClick={increment} className="cursor-pointer hover:text-gray"/>

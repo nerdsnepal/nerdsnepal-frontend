@@ -1,5 +1,5 @@
 import { LogoutOutlined, Person } from "@mui/icons-material";
-import { Avatar, Box, IconButton, Menu, MenuItem, Stack, Typography } from "@mui/material";
+import { Avatar, Box,  Menu, MenuItem, Stack, Typography } from "@mui/material";
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { useState } from "react";
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
