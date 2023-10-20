@@ -41,7 +41,7 @@ const ShopAll = ({props}) => {
     data= filter({data,searchParams:props.searchParams})
 
     return (<Stack direction={{xs:'column',md:'row'}}> 
-        <Box padding={4} gap={2} >
+        <Box padding={4} gap={2} className="w-full mobile:w-[350px]" >
         <Typography variant="body1" className="font-bold">Filters</Typography>
         <Divider className="m-1"/>
         <SelectedCategoryForFilter props={props} />
