@@ -9,7 +9,7 @@ export const APPNAME = process.env.NEXT_PUBLIC_APP_NAME||'Sichu'
 export const getQueryPart = (path) => path.split('?')[1]
 export const emailValidator= (email)=>email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
 export const validateUserName  = (username)=>username.match( /^[a-zA-Z0-9_]{5,29}$/)
-export const isEmpty = (value) => value===""||value===""||value===undefined
+export const isEmpty = (value) => value===null||value===""||value===undefined
 export const compareDateToC= (date)=>{
     const currentDate = new Date().getTime()
     const compareDate = new Date(date).getTime()

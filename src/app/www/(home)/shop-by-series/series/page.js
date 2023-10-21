@@ -1,19 +1,19 @@
 import Notfound from "@/app/not-found";
 import SpecificSeries from "./specific.series";
+import { isEmpty } from "@/app/lib/utils/utils";
 
 
 const CurrentSeries = (params) => {
    let _id = null;
     try {
-        console.log(params);
          _id = params.searchParams._id 
     } catch (error) {
-        
+        _id=null
     }
-  
+  console.log(_id);
     return (<>
     {
-        _id===null?<Notfound/>: <SpecificSeries id={_id} />
+        isEmpty(_id)?<Notfound/>: <SpecificSeries id={_id} />
     }
     </>);
 }

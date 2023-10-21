@@ -4,6 +4,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import { useSichuFetch } from "../../hooks/use-fetch";
 import ProductItem from "../products/product-item";
 import Loading from "./trending.skeleton";
+import Link from "next/link";
 
 const TrendingProducts = () => {
     const {data,isLoading} = useSichuFetch({endPoint:"trending/",revalidate:25})
@@ -18,7 +19,7 @@ const TrendingProducts = () => {
          }
         </Stack>
    </Box>
-   <Button size="small" className="bg-[#0F172A] text-white p-2 px-6" href="/trending">Show all</Button>
+   <Link href="/shop-all"><Button size="small" className="bg-[#0F172A] text-white p-2 px-6" >Shop all</Button></Link>
 </Stack>);
 }
 

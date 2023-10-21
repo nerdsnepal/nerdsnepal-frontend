@@ -5,7 +5,6 @@ import CheckboxTree from "react-checkbox-tree";
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useDispatch, useSelector } from "react-redux";
@@ -36,7 +35,6 @@ const CategoryList = ({categories}) => {
   
     if(nodes.length===0)return
     return (<CheckboxTree
-   
         nodes={nodes}
         checked={checked}
         showExpandAll

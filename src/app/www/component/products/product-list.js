@@ -2,7 +2,7 @@ import { Box, Pagination, Stack } from "@mui/material";
 import ProductItem from "./product-item";
 import { useState } from "react";
 
-const ProductList = ({products,justifyContent='center',itemsPerPage=5}) => {
+const ProductList = ({products,justifyContent='center',itemsPerPage=24}) => {
     const totalItems = products?.length
     const [page,setPage] = useState(1)
    const handleChange = (e,value)=>{
@@ -13,7 +13,7 @@ const ProductList = ({products,justifyContent='center',itemsPerPage=5}) => {
         return <h1 className="p-4">No product found</h1>
     }
     return (<Box gap={2} role="presentation">
-    {totalItems==0?<NoProductFound/>:null}
+    {totalItems==0?<NoProductFound />:null}
         <Stack display={'flex'} direction={'row'} flexWrap={'wrap'} padding={2} justifyContent={justifyContent} gap={1.2}>
             {
                 products?.slice((page-1)*itemsPerPage,page*itemsPerPage).map((product,index)=>{
