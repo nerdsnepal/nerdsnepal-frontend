@@ -1,4 +1,3 @@
-import { API_URL,SICHU_API_KEY } from "./lib/utils/utils"
 import { fetchSichu } from "./www/actions/action"
 
 export default async function  sitemap() {

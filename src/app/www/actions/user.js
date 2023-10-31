@@ -37,11 +37,12 @@ export const verifyResetToken = ({token})=>{
     return getRequest({apiUrl:`account/verify-code?token=${token}`})
 }
 
-const postRequest = ({data,headers,apiTrigger,method="POST"})=>{
+const postRequest = ({data,headers,apiTrigger,method="POST",cache="default"})=>{
     return new Promise((resolve,reject)=>{
         fetch(API_URL(`account/${apiTrigger}`),{
             method:method,
             body:JSON.stringify(data),
+            cache:cache,
             credentials:"include",
             headers:{
                 ...SICHU_API_KEY,
@@ -53,6 +54,13 @@ const postRequest = ({data,headers,apiTrigger,method="POST"})=>{
             reject(err)
         })
        });
+}
+export const sendEmailVerificationCode = (body)=>{
+    return postRequest({data:body,headers:{'Content-Type':'application/json'},apiTrigger:'send-verification-code',method:"POST",cache:"no-store"})
+}
+//verify/email-code
+export const verifyEmailVerificationCode = (body)=>{
+    return postRequest({data:body,headers:{'Content-Type':'application/json'},apiTrigger:'verify/email-code',method:"POST",cache:"no-store"})
 }
 export const changeForgotPassword = (body)=>{
     return postRequest({data:body,headers:{'Content-Type':'application/json'},apiTrigger:'reset-password/change',method:"PATCH"})

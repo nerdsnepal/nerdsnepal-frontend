@@ -3,20 +3,23 @@
 import { API_URL, SICHU_API_KEY } from "@/app/lib/utils/utils";
 import { revalidatePath, revalidateTag } from "next/cache";
 export default async function fetchStores({accessToken}){
-  const res = await fetch(API_URL("store"),{credentials:"include",
-        cache:"no-store",
-        headers:{
-            'Authorization':`Bearer ${accessToken}`,
-            ...SICHU_API_KEY
-        },
-        next:{
-            tags:['stores']
-        }
-    })
-    if(!res.ok){
-        throw new Error("Unable to fetch data")
-    }
-    return await res.json()
+ 
+     const res = await fetch(API_URL("store"),{credentials:"include",
+           cache:"no-store",
+           headers:{
+               'Authorization':`Bearer ${accessToken}`,
+               ...SICHU_API_KEY
+           },
+           next:{
+               tags:['stores']
+           }
+       })
+       if(!res.ok){
+        //   throw new Error("Unable to fetch data")
+        return null
+       }
+       return await res.json()
+ 
 }
 
 export  async function _createStore({merchantId,name,accessToken}){
