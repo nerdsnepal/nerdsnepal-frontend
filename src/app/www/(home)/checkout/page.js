@@ -1,10 +1,13 @@
-'use client'
-import OrderSummary from "../../component/checkout/order.summary";
+import CheckoutPage from "./checkout";
+export const metadata= {
+    title:"Checkout",
+}
 
 const Page = () => {
-    return (<>
-    <OrderSummary/>
-    </>);
+    
+    return (
+       <CheckoutPage/>
+    );
 }
  
 export default Page;
