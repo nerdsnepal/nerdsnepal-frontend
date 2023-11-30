@@ -58,6 +58,7 @@ const postRequest = ({data,headers,apiTrigger,method="POST",cache="default"})=>{
 export const sendEmailVerificationCode = (body)=>{
     return postRequest({data:body,headers:{'Content-Type':'application/json'},apiTrigger:'send-verification-code',method:"POST",cache:"no-store"})
 }
+
 //verify/email-code
 export const verifyEmailVerificationCode = (body)=>{
     return postRequest({data:body,headers:{'Content-Type':'application/json'},apiTrigger:'verify/email-code',method:"POST",cache:"no-store"})

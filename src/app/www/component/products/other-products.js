@@ -14,10 +14,12 @@ const OtherProducts = ({product}) => {
     const StoreInfo = ()=>{
         return <Box className="bg-[#EEE] h-fit  text-black w-screen mobile:w-[20vw]  rounded-lg" padding={2}>
             <Typography variant="body1">Sold by</Typography>
-            <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
+           <Link href={`/store?id=${data?.store?._id}`}>
+           <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
             <Typography variant="body1" fontWeight={'bold'}>{data?.store?.name}</Typography>
             <Image draggable={false} src={API_URL(data?.store?.logo)} className="w-fit h-fit max-w-12 max-h-12 aspect-square" alt={data?.store?.name} width={1080} height={1080} />
             </Stack>
+            </Link>
         </Box>
     }
     const ProductListItem = ({product})=>{

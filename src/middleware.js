@@ -61,4 +61,4 @@ export const getValidSubdomain = (host) => {
   
     return subdomain;
   };
-export default middleware
+export default middleware;

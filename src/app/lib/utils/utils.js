@@ -1,7 +1,7 @@
 import { grey } from "@mui/material/colors"
 //export const DOMAIN = 'sichunepal.com'
 export const DOMAIN = 'localhost:3000'
-export const API_URL =(name)=> `http://localhost:8000/${name}`
+export const API_URL =(name)=> `https://d1xll3zf-8000.asse.devtunnels.ms/${name}`
 export const COOKIE_NAME = 'token'
 export const removeQueryPart = (path)=> path.split('?')[0]
 export const APPNAME = process.env.NEXT_PUBLIC_APP_NAME||'Sichu'

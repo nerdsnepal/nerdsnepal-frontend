@@ -1,3 +1,4 @@
+"use client";
 import { Box, Pagination, Stack } from "@mui/material";
 import ProductItem from "./product-item";
 import { useState } from "react";

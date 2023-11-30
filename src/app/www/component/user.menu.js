@@ -6,10 +6,13 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 import { signOut } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { logout } from "@/app/state/reducer/authSlice";
-const settings = [{label:'Manage My Account',icon:<Person/>},
+import Link from "next/link";
+const settings = [
+    {label:'Manage My Account',icon:<Person/>,url:'/account'},
  {label:'My Orders',
+ url:'/account/orders',
  icon:<ShoppingBagOutlinedIcon/>}, 
-{label:'Logout',icon:<LogoutOutlined/>}];
+{label:'Logout',icon:<LogoutOutlined/>,url:'/'}];
 const UserMenu = ({user}) => {
     const [anchorElUser, setAnchorElUser] = useState(null);    
     const dispatch = useDispatch()
@@ -55,11 +58,13 @@ const UserMenu = ({user}) => {
       }}
       open={Boolean(anchorElUser)}
       onClose={handleCloseUserMenu}>
-      {settings.map(({label,icon},index) => (
-        <MenuItem className="space-x-2" key={index} name={label} onClick={(e)=>handleClickMenu(label)}>
+      {settings.map(({label,icon,url},index) => (
+      <Link key={index} href={url}>
+        <MenuItem className="space-x-2"  name={label} onClick={(e)=>handleClickMenu(label)}>
             {icon}
           <Typography textAlign="center">{label}</Typography>
         </MenuItem>
+      </Link>
       ))}
     </Menu>
     </>);
