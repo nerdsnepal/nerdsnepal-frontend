@@ -37,6 +37,10 @@ const  Navbar = ()=>{
              { 
                 key:"navProduct2Child2",
                 name:"Category",icon:<CategoryIcon/>,url:'/category'
+                },
+                { 
+                    key:"navProduct2Child3",
+                    name:"Series",icon:<></>,url:'/series'
                 }
          ]
          }:{ 

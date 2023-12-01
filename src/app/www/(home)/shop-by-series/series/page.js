@@ -10,7 +10,6 @@ const CurrentSeries = (params) => {
     } catch (error) {
         _id=null
     }
-  console.log(_id);
     return (<>
     {
         isEmpty(_id)?<Notfound/>: <SpecificSeries id={_id} />

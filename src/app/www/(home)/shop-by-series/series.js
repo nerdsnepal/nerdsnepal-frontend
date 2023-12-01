@@ -16,7 +16,8 @@ const Series = ({itemsPerPage=16}) => {
         setPage(value)
    }
   
-    const {data,isLoading} = useSichuFetch({endPoint:'v2/category',revalidate:90})
+    const {data,isLoading} = useSichuFetch({endPoint:'admin/series/all',revalidate:90})
+    console.log(data);
     if(isLoading)return <h1>Loading...</h1>
     if(!data)return <h1>No series found</h1>
     const totalItems = data?.length

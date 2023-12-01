@@ -13,6 +13,7 @@ import Status from "@/app/admin/components/status";
 import AddInventoryForProduct from "@/app/admin/components/add-inventory";
 import { isEmpty } from "@/app/lib/utils/utils";
 import { addProduct } from "../actions/action";
+import SeriesForProduct from "@/app/admin/components/series-input-product";
 
 const ProductAddPage = () => {
     const accessToken = useSelector((state)=>state.auth.accessToken)
@@ -38,6 +39,7 @@ const ProductAddPage = () => {
         },
         tax:false, // indicate the charge tax on product or not 
         costPrice:'',
+        seriesId:'',
         mediaUrls : [],
         variants:[],
         seo:{
@@ -48,7 +50,8 @@ const ProductAddPage = () => {
             name:'',
             subcategory:[]
         },
-        inventory:null
+        inventory:null,
+        seriesId:null
     
     })
     useEffect(()=>{
@@ -117,6 +120,7 @@ const ProductAddPage = () => {
                     tax:false, // indicate the charge tax on product or not 
                     costPrice:'',
                     mediaUrls : [],
+                    seriesId:"",
                     variants:[],
                     seo:{
                         title:'',
@@ -126,7 +130,8 @@ const ProductAddPage = () => {
                         name:'',
                         subcategory:[]
                     },
-                    inventory:null
+                    inventory:null,
+                    seriesId:null
                 
                 })
             },3000)
@@ -256,6 +261,12 @@ const ProductAddPage = () => {
                     setProduct(newProduct)
                 }}
                 onSelect={(value)=>setProduct({...product,category:{name:value.name,subcategory:[]}})}
+                />
+           </Card>
+           <Card className=" p-4 space-y-4">
+                <h2>Series</h2>
+                <SeriesForProduct value={product.seriesId} multiple={true} 
+                onSelect={(value)=>setProduct({...product,seriesId:value._id})}
                 />
            </Card>
            <Card className="p-4 ">
