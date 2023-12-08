@@ -3,11 +3,15 @@ import Image from "next/image";
 import Quantity from "../products/quantity";
 import { API_URL, currency_code } from "@/app/lib/utils/utils";
 import { useDispatch } from "react-redux";
-import { updateQuantity } from "@/app/state/reducer/cart";
+import { removeItem, updateQuantity } from "@/app/state/reducer/cart";
 
 const CartItem = ({product}) => {
     const dispatch = useDispatch()
   const handleOnChange=(value)=>{
+    if(value===0){
+        dispatch(removeItem({...product}))
+        return;
+    }
      dispatch(updateQuantity({...product,quantity:value}))
   }
     return (
@@ -20,7 +24,7 @@ const CartItem = ({product}) => {
                     <Typography role="contentinfo" variant="body1">{product?.name}</Typography>
                     <Typography role="contentinfo" variant="body1" fontWeight={'bold'}>{currency_code+product?.price?.mrp}</Typography>
                    <Box width={125}>
-                   <Quantity onChange={handleOnChange} value={product?.quantity} hideLabel={true} gap={2} padding={0.3} />
+                   <Quantity hasZero={true} onChange={handleOnChange} value={product?.quantity} hideLabel={true} gap={2} padding={0.3} />
                    </Box>
                 </Box>
             </Stack>

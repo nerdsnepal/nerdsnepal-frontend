@@ -1,4 +1,4 @@
-import Series from "./series";
+import Collection from "./collection";
 
 export const metadata = {
     title:"Shop by series",
@@ -6,7 +6,7 @@ export const metadata = {
 }
 const ShopBySeries = () => {
     return (<>
-        <Series/>
+        <Collection/>
     </>);
 }
  

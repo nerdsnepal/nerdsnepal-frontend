@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const ShopByCategory = ({categories}) => {
     return (<Stack gap={3} padding={4} flex={'display'} justifyContent={'center'} alignItems={'center'} className="bg-gray-200">
-        <Typography className="text-[#0F172A] font-bold">SHOP BY SERIES</Typography>
+        <Typography className="text-[#0F172A] font-bold">SHOP BY COLLECTIONS</Typography>
        <Box className="w-[90%]">
        <Stack direction={"row"}  flexWrap={'wrap'} display={'flex'} gap={1.2}>
                 {
@@ -15,7 +15,7 @@ const ShopByCategory = ({categories}) => {
                 }
             </Stack>
        </Box>
-       <Link href={'/shop-by-series'}><Button size="small" className="bg-[#0F172A] text-white p-2 px-6">Show all</Button></Link>
+       <Link href={'/shop-by-collection'}><Button size="small" className="bg-[#0F172A] text-white p-2 px-6">Show all</Button></Link>
     </Stack>);
 }
  

@@ -1,13 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import Profile from "./profile";
-import TokenExpired from "@/app/www/component/user/token_expire";
 import { getServerSession } from "next-auth";
 import { fetchSichu } from "@/app/www/actions/action";
 import { authOptions } from "@/app/admin/api/auth/[...nextauth]/route";
 export const metadata={
     title:"Profile"
 }
-const Page = async() => {
+const Page = async(params) => {
     const session = await getServerSession(authOptions)
     const {accessToken} = session.user;
     let user;
@@ -21,7 +20,7 @@ const Page = async() => {
       }
     return  (<Box className='p-4 min-h-[50vh]'>
         <Typography variant="h6" pl={1}>Profile</Typography> 
-       <Profile user={user.user} />
+       <Profile props={params} accessToken={accessToken} user={user.user} />
     </Box>
     );
 }

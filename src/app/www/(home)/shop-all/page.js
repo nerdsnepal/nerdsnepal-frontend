@@ -1,12 +1,12 @@
 import { APPNAME } from "@/app/lib/utils/utils";
-import ShopAll from "./shop-all";
+import AllProduct from "./products-all";
 
 export const metadata = {
     title:APPNAME+' - Shop all'
 }
 
 const ShopAllPage = (props) => {
-    return ( <ShopAll props={props} />);
+    return ( <AllProduct props={props} />);
 }
  
 export default ShopAllPage;

@@ -1,10 +1,16 @@
 import { API_URL } from "@/app/lib/utils/utils";
 import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
+import UpdateProfile from "./update";
+import Link from "next/link";
 
 
-const Profile = ({user}) => {
-
-    return (<Box className='border border-slate-300 bg-gray-50 rounded-md p-4 mobile:m-1 m-0 w-full mobile:w-[40vw] space-y-4' >
+const Profile = ({user,props,accessToken}) => {
+    const {mode} = props.searchParams;
+    console.log(user);
+    if(mode==='edit'){
+        return <UpdateProfile user={user} accessToken={accessToken}  />
+    }
+    return (<Box className='border border-slate-300 bg-gray-50 rounded-md p-4 mobile:m-1 m-0 w-full mobile:w-[40vw] space-y-4' gap={1} >
         <Avatar src={API_URL(user.profile)} />
       <Stack direction={'row'} gap={4}>
         <div className="w-[50%] mobile:w-[35%]">
@@ -41,7 +47,8 @@ const Profile = ({user}) => {
         </div>
 
     </Stack>
-    <Button variant="text" className="bg-blue-500 text-white">Edit Profile</Button>
+    <Box height={25}></Box>
+    <Link variant="text" href={'?mode=edit'}  className="bg-blue-500 text-white p-2 mt-4">Edit Profile</Link>
 
     </Box>);
 }

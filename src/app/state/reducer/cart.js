@@ -42,12 +42,8 @@ const cartSlice = createSlice({
     // Remove an item from the cart
     removeItem: (state, action) => {
       const removedItem = action.payload;
-      const index = state.items.findIndex(item => item.id === removedItem.id);
-      if (index !== -1) {
-        state.items.splice(index, 1);
-        updateLocalStorageCart(state.items)
-      }
-
+      state.items = state.items.filter(item => item._id !== removedItem._id);
+      updateLocalStorageCart(state.items)
     },
     
     // Clear the entire cart

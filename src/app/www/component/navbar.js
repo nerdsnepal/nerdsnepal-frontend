@@ -38,8 +38,8 @@ const Search = ()=>{
       <SearchOutlined className='text-white text-2xl' />
   </IconButton>
 }
-const pages = ['SHOP ALL', 'SHOP BY SERIES', 'SHOP BY BRAND','SALE'];
-const pagesUrl = ['/shop-all','/shop-by-series','/','/']
+const pages = ['SHOP ALL', 'SHOP BY SERIES', 'SHOP BY COLLECTION'];
+const pagesUrl = ['/shop-all','/shop-by-series','/shop-by-collection']
 
 function SichuAppBar() {
     const user = useSelector((state)=>state.auth.user)
@@ -83,8 +83,7 @@ function SichuAppBar() {
           <Toolbar  disableGutters>
             <Link
             href={'/'}
-            className='hidden md:block'
-            >
+            className='hidden md:block'>
             <Logo/>
             </Link>
            

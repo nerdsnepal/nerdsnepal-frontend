@@ -1,10 +1,9 @@
 "use client"
 import { Box, Divider, Stack, Typography } from "@mui/material";
-import FilterProduct from "../../component/home/filter";
-import PriceFilter from "../../component/home/price-filter";
-import SelectedCategoryForFilter from "../../component/home/selected-category";
-import ProductList from "../../component/products/product-list";
-import { useSichuFetch } from "../../hooks/use-fetch";
+import FilterProduct from "./home/filter";
+import PriceFilter from "./home/price-filter";
+import SelectedCategoryForFilter from "./home/selected-category";
+import ProductList from "./products/product-list";
 
 const filter = ({searchParams,data})=>{
       const { category, min, max } = searchParams;
@@ -35,11 +34,9 @@ const filter = ({searchParams,data})=>{
     return data
 }
 
-const ShopAll = ({props}) => {
-    let {data,isLoading} = useSichuFetch({endPoint:""})
-    if(isLoading)return null
+const ShopAll = ({props,data}) => {
     data= filter({data,searchParams:props.searchParams})
-
+    console.log(props);
     return (<Stack direction={{xs:'column',md:'row'}}> 
         <Box padding={4} gap={2} className="w-full mobile:w-[350px]" >
         <Typography variant="body1" className="font-bold">Filters</Typography>

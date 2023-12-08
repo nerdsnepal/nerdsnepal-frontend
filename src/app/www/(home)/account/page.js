@@ -5,6 +5,7 @@ import Profile from "../../component/user/profile";
 import TokenExpired from "../../component/user/token_expire";
 import Address from "../../component/user/address";
 import { Box, Stack, Typography } from "@mui/material";
+import RecentOrder from "../../component/orders/recent-order";
 
 
 export const metadata = {
@@ -16,7 +17,7 @@ export default async function Page (){
   const {accessToken} = session.user;
   let user;
     try {
-         user =await fetchSichu({accessToken,endPoint:"account/user"})
+         user =await fetchSichu({accessToken,endPoint:"account/user",revalidate:5})
        
     } catch (error) {
         console.error(error);
@@ -32,6 +33,7 @@ export default async function Page (){
     <Profile user={user.user} />
      <Address user={user.user}/>
     </Stack>
+    <RecentOrder accessToken={accessToken} />
     </Box>
     )
   }
