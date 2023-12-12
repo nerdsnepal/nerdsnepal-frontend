@@ -1,10 +1,20 @@
 
 import { API_URL } from '@/app/lib/utils/utils';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 const OrderList = ({rows,columns,title="Recent Orders",hideStyle=false}) => {
+    if(rows.length===0){
+        return (<Box className={`bg-slate-50 p-4 border h-[70vh]  w-[60vw] overflow-auto`}>
+        <Typography  className='pt-4 pb-4 font-bold text-[#0F172A]'>{title}</Typography>
+           
+            <Stack className='h-[80%]' direction={'column'}  gap={1} justifyContent={'center'} alignItems={'center'}>
+                <Typography variant='body1'>No Orders Yet</Typography>
+              <Button className='bg-blue-500' variant='contained'><Link className='text-white capitalize' href={'/shop-all'}>Start Shopping Now</Link></Button>
+            </Stack>
 
+    </Box>);
+    }
     return (<Box className={`${hideStyle?'':'bg-slate-50'} p-4 ${hideStyle?'':'border'} mobile:w-auto w-[100vw] overflow-auto`}>
         <Typography  className='pt-4 pb-4 font-bold text-[#0F172A]'>{title}</Typography>
             <Stack direction={'row'} gap={3}>
@@ -33,10 +43,11 @@ const OrderList = ({rows,columns,title="Recent Orders",hideStyle=false}) => {
                                         return <Link key={index} href={`/account/orders/detail?orderId=${product['orginalId']}`}>{hideStyle?'Order details':'Manage'}</Link>
                                     }
                                     if(field==="status"){
-                                        const style = `w-[${width}] h-[32px] p-2 rounded-lg bg-green-500 text-center `;
-                                    
-                                      return  <Box  justifyContent={'center'} alignItems={'center'} alignContent={'center'} className={style} key={index}> <Typography>{product[field]}</Typography>
-                                  </Box>
+                                        let style = `rounded-lg  text-center `;
+                                        if(product[field]==='Pending'){
+                                            style+='text-orange-300 bg-orange-500'
+                                        }
+                                      return   <Typography bgcolor={'red'} padding={0.5} paddingLeft={1.5} paddingRight={1.5} className={style} key={index} variant='body1'>{product[field]}</Typography>
                                     }
                                     return <Box width={width}  key={index}>
                                         <Typography width={width}  className={`w-[${width}]`}>{product[field]}</Typography>

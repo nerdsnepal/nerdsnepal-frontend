@@ -7,8 +7,9 @@ import { addItem } from "@/app/state/reducer/cart";
 
 const AddToCartAndDetails = ({product}) => {
     const {compare_at,discountPer} = getCompareAtPrice({compareAt:product?.price.compare_at,mrp:product?.price.mrp});
-    const rating = 4;
+    const rating = product.rating;
     const dispatch = useDispatch()
+    const reivewCount = product.reviews.length;
     let quantity = 1;
     const onChange = (_quantity)=>{
         quantity= _quantity;
@@ -25,7 +26,7 @@ const AddToCartAndDetails = ({product}) => {
         <Typography variant="h1" fontSize={'1.5em'} className="font-bold p-1 ">{product?.name}</Typography>
       <Stack direction={'row'} gap={2} alignItems={'center'}>
       <Rating name="read-only-rating" value={rating} readOnly />
-      <Typography variant="body1" >12 reviews</Typography>
+      <Typography variant="body1" >{reivewCount<=1?`${reivewCount} review`:`${reivewCount} reviews`}</Typography>
       </Stack>
         <Typography className="p-1">{currency_code+product?.price?.mrp}</Typography>
         {

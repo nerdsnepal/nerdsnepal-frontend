@@ -10,7 +10,7 @@ const ShopByCategory = ({categories}) => {
                 {
                     categories?.slice(0,8).map((category,index)=>{
                         const url = category?.images[0]?.url
-                        return <CategoryImage key={index}  url={url} name={category.name} _id={category._id} />
+                        return <CategoryImage  href={`/shop-by-collection/collection?_id=${category._id}`} key={index}  url={url} name={category.name} _id={category._id} />
                     })
                 }
             </Stack>

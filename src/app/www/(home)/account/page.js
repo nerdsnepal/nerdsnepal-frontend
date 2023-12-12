@@ -27,7 +27,7 @@ export default async function Page (){
         return <TokenExpired/>
     }
     return ( 
-        <Box className='p-4 min-h-[50vh]'>
+    <Box className='p-4 min-h-[50vh] space-y-2' >
     <Typography variant="h6" pl={1}>My account</Typography> 
     <Stack direction={{xs:'column',md:'row'}} gap={2}>
     <Profile user={user.user} />

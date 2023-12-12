@@ -79,7 +79,7 @@ function SichuAppBar() {
     return (
         <Fragment>
         <AppBar position="sticky" className='top-0'>
-        <Stack maxWidth="xl" className='h-[65px] mobile:h-[65px]'>
+        <Stack className='h-[65px] mobile:h-[65px]'>
           <Toolbar  disableGutters>
             <Link
             href={'/'}

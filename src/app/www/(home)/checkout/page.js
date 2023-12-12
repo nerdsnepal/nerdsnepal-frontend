@@ -18,7 +18,7 @@ const Page =async (props) => {
     if(!session){
         return <Box className="min-h-[60vh]">
             <Auth/>
-            <CheckoutPage/>
+            <CheckoutPage props={props}/>
         </Box>
     }
     const {accessToken} = session.user;

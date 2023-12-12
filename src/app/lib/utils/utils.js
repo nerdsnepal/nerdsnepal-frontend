@@ -29,6 +29,21 @@ export const isExpired = ({expires})=>{
     if(timestamp<currentTimestamp)return true
     return false;
 }
+
+export function isDateTimeExpired(timestamp, expirationDuration) {
+    const createdDate = new Date(timestamp);
+    const currentTime = new Date();
+  
+    const differenceInMilliseconds = currentTime - createdDate;
+  
+    return differenceInMilliseconds > expirationDuration;
+  }
+  
+ export const getDefaultAddress = ({address})=>{
+    const defaultAddress = address.filter((_address)=>_address.default===true);
+    return defaultAddress;
+}
+  
 export const getCompareAtPrice = ({compareAt,mrp})=>{
     let compare_at = 0;
     let discountPer = 0;

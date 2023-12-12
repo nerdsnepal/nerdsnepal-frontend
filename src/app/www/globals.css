@@ -50,8 +50,8 @@ a{
 
 @media (prefers-color-scheme: dark) {
     :root {
-      --foreground-rgb: 255, 255, 255;
-      --background-color: rgba(37, 37, 37,1);
+      --foreground-rgb: 0, 0, 0;
+      --background-color: rgb(255, 255, 255);
       --background-end-rgb: 0, 0, 0;
     }
   }

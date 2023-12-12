@@ -5,15 +5,14 @@ import { isEmpty } from "@/app/lib/utils/utils";
 import Link from "next/link";
 
 export const ShippingDetails = ({address,user}) => {
-    if(!address){
+    if(address.length===0){
         return   <Box role="presentation"  className="border w-full rounded-md " padding={2} >
                 <Typography variant="h6" marginTop={2} fontWeight={'bold'} marginBottom={2}>Shipping Details Summary</Typography>
                 <Link className="text-blue-500" href={`/account/address?mode=add`}>Add address</Link>
         </Box>
     }
-  
-   const deliveryAddress = address.delivery;
-   const billingAddress = address.billing;
+   const deliveryAddress = address[0].delivery;
+   const billingAddress = address[0].billing;
     return (
         <Box role="presentation"  className="border w-full rounded-md bg-slate-50" padding={2} >
             <Typography variant="h6" marginTop={2} fontWeight={'bold'} marginBottom={2}>Shipping Details Summary</Typography>

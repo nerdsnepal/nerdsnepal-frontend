@@ -2,17 +2,14 @@
 import {  Box, Button, Stack, Typography } from "@mui/material";
 import { ShippingDetails } from "../../component/checkout/order.shipping";
 import OrderSummary from "../../component/checkout/order.summary";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import TotalPrice from "../../component/cart/cart_item.total";
-import { isEmpty, processCart } from "@/app/lib/utils/utils";
+import { getDefaultAddress, isEmpty, processCart } from "@/app/lib/utils/utils";
 import { postRequestSichu } from "../../actions/action";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PaymentMethod from "./paymentmethod";
-const getDefaultAddress = ({address})=>{
-    const defaultAddress = address.filter((_address)=>_address.default===true);
-    return defaultAddress;
-}
+
 const CheckoutPage = ({user,accessToken,props}) => {
     const router = useRouter()
     const {orderId} =props.searchParams;
@@ -23,11 +20,11 @@ const CheckoutPage = ({user,accessToken,props}) => {
     const total = totalPrice+shippingFee;
     let address = null;
     if(user && user.address){
-        getDefaultAddress({address:user.address})
+      address =  getDefaultAddress({address:user.address})
     }
     if(!address){
          if( user && user.address && user.address.length>1){
-            address=user.address[0];
+            address=user.address;
          }
     }
     const handleOrder = async(e)=>{
@@ -35,8 +32,8 @@ const CheckoutPage = ({user,accessToken,props}) => {
             return;
         }
         let products=[];
-        const billingAddress = address.billing;
-        const deliveryAddress = address.delivery;
+        const billingAddress = address[0].billing;
+        const deliveryAddress = address[0].delivery;
         items.map((item)=>{
          products.push({
             "name":item.name,

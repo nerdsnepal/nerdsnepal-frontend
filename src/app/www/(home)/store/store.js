@@ -18,7 +18,7 @@ const StoreProductInfo = ({data,tab,storeId,q}) => {
     const category =categories.map((category,index)=>{
         const url = category?.images[0]?.url;
         return <div key={index}>
-                <CategoryItem height="200px" _id={category._id}  name={category.name} url={url} />
+                <CategoryItem href={`/shop-by-collection/collection?_id=${category._id}`} height="200px" _id={category._id}  name={category.name} url={url} />
             </div>})
 
             return <Box>

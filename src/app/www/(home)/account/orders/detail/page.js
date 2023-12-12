@@ -12,9 +12,8 @@ const OderDetails = async(props) => {
     const {accessToken} = session.user;
     const {orderId} = props.searchParams;
     const data = await fetchSichu({accessToken,endPoint:`order/orderdetails?orderId=${orderId}`})
-   
-    return (  <>
-        <OrderDetail data={data.data} />
+    return (<>
+        <OrderDetail data={data.data} accessToken={accessToken} />
     </>);
 }
  

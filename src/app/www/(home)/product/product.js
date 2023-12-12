@@ -8,7 +8,7 @@ import OtherProducts from "../../component/products/other-products";
 
 
 const Product = ({props}) => {
-    const {data,isLoading,error} = useSichuFetch({ endPoint: `v2/product?_id=${props.searchParams?._id}` })
+    const {data,isLoading,error} = useSichuFetch({ endPoint: `v2/product?_id=${props.searchParams?._id}`,revalidate:20 })
     if(isLoading)return null
     if(!data)return <h1>Product not found</h1>
     const Description = ()=>{

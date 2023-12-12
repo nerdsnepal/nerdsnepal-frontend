@@ -21,7 +21,8 @@ async function middleware(req) {
     if(subdomain===undefined||subdomain===null||subdomain==="") subdomain="www";
     
     if(path==="www" || path==='admin'){
-       return NextResponse.redirect(new URL('/',`http://${path}.${DOMAIN}/${path}`));
+       return NextResponse.redirect(new URL('/',`http://${path}.${DOMAIN}/${path}`)); 
+    //  return NextResponse.redirect(new URL('/',`https://d1xll3zf-3000.asse.devtunnels.ms/${path}`)); 
     }
   if (subdomain) {
     // Subdomain available, rewriting

@@ -24,9 +24,9 @@ const OtherProducts = ({product}) => {
     }
     const ProductListItem = ({product})=>{
         const {compare_at,discountPer} = getCompareAtPrice({compareAt:product.price.compare_at,mrp:product.price.mrp});
-        return <Link  href={`/product?_id=${product._id}`}> <Box className="border-[1px] dark:text-white h-[250px] w-[160px] mobile:w-auto mobile:h-[95px] rounded-lg">
+        return <Link  href={`/product?_id=${product._id}`}> <Box className="border-[1px] text-black h-[250px] w-[160px] mobile:w-auto mobile:h-auto rounded-lg">
             <Stack direction={{xs:'column',md:'row'}} gap={2}> 
-             <Image draggable={false} src={API_URL(product.mediaUrls[0])} className="w-full mobile:w-[95px] overflow-hidden rounded-lg h-[140px] mobile:h-[95px] aspect-square" alt={data?.store?.name} width={1080} height={1080} />
+             <Image draggable={false} src={API_URL(product.mediaUrls[0])}  className="w-full mobile:w-[100px]  overflow-hidden rounded-lg max-h-[250px] h-auto mobile:h-[95px] aspect-square" alt={data?.store?.name} width={1080} height={1080} />
              <Stack direction={'column'} padding={1}>
                 <Typography variant="body1" className="text-ellipsis" fontWeight={'bold'}>{product.name}</Typography>
                 <Typography variant="body2">{currency_code+product.price.mrp}</Typography>
