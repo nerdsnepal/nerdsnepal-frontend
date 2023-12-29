@@ -16,18 +16,13 @@ const StorePage = () => {
     const [isLoading,setLoading] = useState(true)
     const [stores,setStores] = useState(null)
     useEffect(()=>{
-        try{
-            async function requestStore(){
-                const result = await fetchStores({accessToken})
-                setStores(result.stores)
+        fetchStores({accessToken}).then((val)=>{
+                setStores(val.stores)
                 setLoading(false)
-            }
-           requestStore()
-        }catch(error){
-            setLoading(false)
-            //handle error 
-        }
-      
+        }).catch((error)=>{
+            setLoading(false) 
+        })
+      return {};
         
     },[accessToken])
     return (<div className="block p-8">
