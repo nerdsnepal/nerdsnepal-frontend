@@ -32,7 +32,7 @@ const Layout = ({children})=>{
             dispatch(setUser({isVerified,email,fullname,username,profile}))
             dispatch(setAccessToken(accessToken))
             if(role==="user"){
-                redirect("/requeststore")
+               // redirect("/requeststore")
             }
         }
        
