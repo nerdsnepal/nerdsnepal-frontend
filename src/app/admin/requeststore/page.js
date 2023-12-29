@@ -1,8 +1,4 @@
-
-export const metadata= {
-    title:"Create your own store"
-}
-
+"use client"
 const UserInformationPage = () => {
    
     return <>
