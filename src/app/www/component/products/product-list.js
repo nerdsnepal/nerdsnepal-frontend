@@ -22,7 +22,7 @@ const ProductList = ({products,justifyContent='center',itemsPerPage=24}) => {
                 })
             }
         </Stack>
-        {totalItems>itemsPerPage?<div className="flex w-full justify-center mb-3"><Pagination  className={`pagination-label dark:text-white`} count={Math.ceil(totalItems/itemsPerPage)} onChange={handleChange}  page={page}  /></div>:null}    
+        {totalItems>itemsPerPage?<div className="flex w-full justify-center mb-3"><Pagination  className={`pagination-label text-black`} count={Math.ceil(totalItems/itemsPerPage)} onChange={handleChange}  page={page}  /></div>:null}    
     </Box>);
 }
  

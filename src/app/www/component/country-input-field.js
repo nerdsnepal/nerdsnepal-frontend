@@ -161,5 +161,5 @@ export  function CountryCodeSelect({countryCode="977",onChange}) {
 }
 
 export const CountryCode = (name)=>{
-   return  countries.filter(({label})=>label===name)[0].phone;
+   return  countries.filter(({label})=>label===name)[0]?.phone;
 }

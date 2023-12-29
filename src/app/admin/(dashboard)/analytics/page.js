@@ -1,4 +1,6 @@
 import UnderDevelopment from "@/app/under_dev"
+import { Box } from "@mui/material"
+import AdminAnalytics from "./analytics"
 
 
 export const metadata = {
@@ -6,9 +8,9 @@ export const metadata = {
 }
 
 export default function AnalyticsPage() {
-    return <>
-      <UnderDevelopment/>
-    </>
+    return <Box className="w-[100%] h-screen m-1 p-4" overflow={'auto'}>
+        <AdminAnalytics/>
+    </Box>
 
 
 }

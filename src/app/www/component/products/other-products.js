@@ -47,9 +47,9 @@ const OtherProducts = ({product}) => {
     return (
     <Stack direction={'column'} gap={2}>
         <StoreInfo/>
-        <Stack direction={{xs:'row',md:'column'}} className="overflow-x-auto mobile:overflow-hidden" gap={2}>
+        <Stack direction={{xs:'row',md:'column'}} className="overflow-x-auto mobile:overflow-hidden" gap={1}>
         {
-            products?.map((product,index)=><ProductListItem  product={product} key={index} />)
+            products?.splice(0,4).map((product,index)=><ProductListItem  product={product} key={index} />)
         }
           </Stack>
         </Stack>);

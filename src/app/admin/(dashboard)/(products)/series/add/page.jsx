@@ -103,7 +103,7 @@ const SeriesAddPage = () => {
         </Snackbar>
        <div className="mobile:grid grid-row-2  relative justify-center my-8 mobile:grid-cols-[60%,30%] mobile:gap-1 scroll-auto">
             <section className="order-2 mobile:w-[75%] justify-self-center">
-            <Card sx={{minHeight:"150px"}} className="p-5 dark:bg-white dark:text-black" elevation={elevation}>
+            <Card sx={{minHeight:"150px"}} className="p-5  dark:text-black" elevation={elevation}>
                 <h1 className="p-2 font-bold">Series</h1>
                <FormControl className="w-[80%]">
                <TextField value={series.name} required className=" mx-2 my-2" 
@@ -144,7 +144,7 @@ const SeriesAddPage = () => {
             </Card>
             </section>
         </div>
-       <div className="flex justify-center"><Button variant="outlined" onClick={saveSeries} disabled={!btnStatus} className={`dark:text-white  ${!btnStatus?'text-gray-800':'text-black font-semibold'}  capitalize`} size="large">Save</Button></div>
+       <div className="flex justify-center"><Button variant="outlined" onClick={saveSeries} disabled={!btnStatus} className={`text-black  ${!btnStatus?'text-gray-800':'text-black font-semibold'}  capitalize`} size="large">Save</Button></div>
             <div className="h-[20%]"></div>
     </div>);
 }

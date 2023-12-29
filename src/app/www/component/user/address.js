@@ -11,11 +11,10 @@ export const RenderAddress = ({address,type})=>{
     <Box height={10}/>
     <Typography variant="body2">{address.landmark}, {address.address1}</Typography>
     <Typography variant="body2">{address.state} - {address.city}</Typography>
-    <Typography variant="body2">+({CountryCode(address.country)}){address.phoneNumber}</Typography>
+    <Typography variant="body2">+({CountryCode(address.country)}) {address.phoneNumber}</Typography>
     </Box>
 }
 const Address = ({user}) => {
-    console.log(user.address);
     const NoAddress=()=>{
         return <>
             <Typography>No address</Typography>

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import MailIcon from '@mui/icons-material/Mail';
 import AddIcon from '@mui/icons-material/Add';
-import { Alert, Button, Card, Snackbar, Stack, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, Card, Snackbar, Stack, TextField, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Edit } from "@mui/icons-material";
 import { emailValidator } from "@/app/lib/utils/utils";
@@ -78,7 +78,7 @@ const StoreEmail = ({store,accessToken}) => {
         <Typography variant="h6" fontWeight={'semi-bold'} component="i">No any email address</Typography>
         </Stack>
     }
-    return ( <Card className="p-4 space-y-2 h-fit max-h-[40vh] overflow-auto">
+    return ( <Box className="p-4 border w-[96%] space-y-2 h-fit max-h-[40vh] overflow-auto">
             <Snackbar autoHideDuration={300} open={response.hasAlert}>
                 <Alert severity={response.servity}>{response.message}</Alert>
             </Snackbar>
@@ -97,7 +97,7 @@ const StoreEmail = ({store,accessToken}) => {
         <Button onClick={handleUpdate} disabled={!updating} type="button" variant="outlined">
             Update
         </Button>
-    </Card>);
+    </Box>);
 }
  
 export default StoreEmail;

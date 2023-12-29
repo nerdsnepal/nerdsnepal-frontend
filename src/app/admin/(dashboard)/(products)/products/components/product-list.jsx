@@ -89,7 +89,7 @@ export const StoreProductList = ({products,onDelete})=>{
             }, autoWidth:true
         },
         { field: 'price', headerName: 'Selling Price', minWidth: 80, resizeable:true,pinned:true,
-        className:"dark:text-white", autoWidth:true,
+        className:"text-black", autoWidth:true,
         valueGetter:({row})=>{
             const {mrp} = row.price 
            return `Rs. ${mrp}` 
@@ -110,7 +110,7 @@ export const StoreProductList = ({products,onDelete})=>{
         },
 
         { field: '_id', headerName: 'Action',resizeable:true,pinned:true,
-            className:"dark:text-white",
+            className:"text-black",
             renderCell:({row})=>{
                 return <ProductAction  onActionPerform={handleActionPerform} product={row}/>
             }
@@ -123,7 +123,7 @@ export const StoreProductList = ({products,onDelete})=>{
         <Snackbar open={response.hasResponse} autoHideDuration={300}>
             <Alert severity={response.servity} >{response.message}</Alert>
         </Snackbar>
-    <Box className="dark:bg-gray-900 rounded-lg  w-[100%] mobile:w-[80%]" sx={{ height: 520}}>
+    <Box className="rounded-lg  w-[100%] mobile:w-[80%]" sx={{ height: 520}}>
     <DataGrid
         columns={cols}
         rows={products}
@@ -145,7 +145,7 @@ export const StoreProductList = ({products,onDelete})=>{
             paginationModel: { page: 0, pageSize: 7 },
           },
         }}
-        className='dark:text-white'
+        className='text-black'
         editMode='row'
         pageSizeOptions={[7, 20]}
     /></Box>

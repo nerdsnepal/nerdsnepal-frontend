@@ -10,6 +10,7 @@ import Status from "@/app/admin/components/status";
 import { uploadMedia } from "@/app/lib/action/mediaUpload";
 import StockLocation from "../../components/stock_location";
 import StoreEmail from "../../components/store-email";
+import UpdateAboutStore from "../../components/update-about-store";
 
 
 const StoreName = ({store,accessToken})=>{
@@ -58,7 +59,7 @@ const StoreName = ({store,accessToken})=>{
             setError({message:"",hasError:false})
         }
     }
-    return <Card className="h-fit  p-4 space-y-2 w-full ">
+    return <Box  className="h-fit border p-4 space-y-2 w-full ">
         <Stack direction={"row"} gap={2}>
         <b>Store Name: {!isEditMode?name:null} </b> 
         {!isEditMode?<i onClick={()=>setEditMode(true)}>Edit</i>:null}
@@ -83,10 +84,8 @@ const StoreName = ({store,accessToken})=>{
                 {error.message}
             </Alert>:null 
         }
-    </Card>
+    </Box>
 }
-
-
 const StoreLogo = ({store,accessToken})=>{
     const [logo,setLogo] = useState(store.logo) 
     const handleChange = async(e)=>{
@@ -107,7 +106,7 @@ const StoreLogo = ({store,accessToken})=>{
            // console.log(error);
         }
     }
-    return <Card className="space-y-4 p-3">
+    return <Box className="space-y-4 p-3 border">
     <h2><b>Logo </b></h2>
         <label className="cursor-pointer" htmlFor="logo">
             {logo===null?<LocalMallRounded  fontSize="large" />:null}
@@ -115,7 +114,7 @@ const StoreLogo = ({store,accessToken})=>{
         </label>
         <input multiple={false} onChange={handleChange} accept="image/*" type="file" name="logo" id="logo" hidden />
     <Alert severity="info">Click logo to change it</Alert>
-    </Card>
+    </Box>
 
 }
 
@@ -151,20 +150,21 @@ const StoreInformationEditPage = ({storeId}) => {
                 //handle error
             }
     }
-    return ( <Box  className="m-4 overflow-auto h-[100vh]">
+    return ( <Box  className="m-4 overflow-auto h-[100vh] w-[100%]">
         <Stack direction={{ xs: 'column', md: 'row' }} gap={3}  >
        <Stack direction={"column"} overflow={"auto"} gap={3} className="w-full mobile:w-[50%]">
        {isLoading?<Skeleton variant="rounded" sx={skeletonSX} height={80} className={'p-0'}  />:<StoreName store={response.data} accessToken={accessToken}/>}
        {isLoading?<Skeleton variant="rounded" sx={skeletonSX} height={125} className={'p-0'}  />:<StoreLogo store={response.data} accessToken={accessToken}/>}
    
-        {isLoading?<Skeleton variant="rounded" sx={skeletonSX} height={125} className={'p-0'}  />: <Card>
+        {isLoading?<Skeleton variant="rounded" sx={skeletonSX} height={125} className={'p-0'}  />: <Box className="border">
        <div className="m-4 space-y-3">
         <h1 className="font-bold">Store Status</h1>
         <Status value={response.data.status	} onChange={handleOnChangeStaus} />
         <Alert severity="info">It indicate whether your store is live or not</Alert>
         </div>
-        </Card>
-        }      
+        </Box>
+        } 
+        {isLoading?<Skeleton variant="rounded" sx={skeletonSX} height={200} className={'p-0'}  />:<UpdateAboutStore accessToken={accessToken} store={response.data} />}     
       </Stack>
        <Stack direction={'column'} className="w-full mobile:w-[50%]" gap={3}>
        {isLoading?<Skeleton variant="rounded" sx={skeletonSX} height={200} className={'p-0'}  />:<StockLocation store={response.data} accessToken={accessToken} />}

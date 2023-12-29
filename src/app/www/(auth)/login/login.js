@@ -8,7 +8,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-const Login = (props) => {
+const Login = ({props}) => {
    const router = useRouter()
     const {status} = useSession()
     const [credentials,setCredentials] = useState(null)
@@ -45,7 +45,7 @@ const Login = (props) => {
           
          }
         } catch (error) {
-             //console.log(error);
+             console.log(error);
              setResponse({msg:"Something went wrong",severity:"error",hasResponse:true})
         }finally{
             setLogging(false)
@@ -59,7 +59,7 @@ const Login = (props) => {
     if(status==="loading")return null
     return (<Stack direction={'row'} gap={2}>
         <Image alt="deadpool-welcome-back"  src={'/deadpool-welcome-back.png'} loading="lazy" className="h-[35vh] object-cover  w-fit mobile:block hidden select-none" height={250} width={250} />
-       <div className="dark:bg-white  dark:text-black tablet_md:w-[70vw] md_laptop:w-[50vw] above_laptop:w-[30vw] w-full mobile:m-0 m-2 p-3 space-y-2 rounded-md transition-all">
+       <div className="dark:text-black tablet_md:w-[70vw] md_laptop:w-[50vw] above_laptop:w-[30vw] w-full mobile:m-0 m-2 p-3 space-y-2 rounded-md transition-all">
        <Typography variant="h5">Welcome Back!</Typography>
         <Typography variant="body1" color={"gray"}>Login to your account</Typography>
         <form className="space-y-3" onSubmit={onSubmit}>
@@ -75,7 +75,7 @@ const Login = (props) => {
         </Alert>:null}
         <Stack direction={'row'} gap={1} justifyContent={'center'} alignItems={'center'} >
             <Typography  variant="body1">{`Don't have an account?`}</Typography>
-            <a href="/register">Register</a>
+            <Link href="/register">Register</Link>
         </Stack>
        </div>
        </Stack>

@@ -72,13 +72,7 @@ const  Navbar = ()=>{
              name:"Analytics",icon:getIcon(feather.icons["bar-chart-2"],options),url:'/analytics',
              isOpen:false,
              subNavs:[]
-         },
-         {
-             key:"navSetting5",
-             name:"Settings",icon:getIcon(feather.icons.settings,options),url:'/settings',
-             isOpen:false,
-             subNavs:[]
-         },
+         }
  
      ]
     
@@ -90,7 +84,7 @@ const  Navbar = ()=>{
     }
    
     //Indicator for the currently selected nav menu 
-    const style = `font-bold text-blue-900 dark:text-white dark:bg-neutral-700 
+    const style = `font-bold text-blue-900 text-black  
    before:inline-block before:content[''] mobile:before:w-2 before:bg-red-400 before:h-6 
    before:absolute before:left-0  before:rounded-r-md
     `
@@ -105,10 +99,10 @@ const  Navbar = ()=>{
             url = removeQueryPart(url)
             const genSubNavs = subNavs.map(({key,name,icon,url}) => {
                 url = removeQueryPart(url);
-               return <li key={key}  className={`${path===url.toString()?style:'bg-transparent'}  w-fit dark:hover:bg-neutral-900 p-2 hover:bg-neutral-200 hover:cursor-pointer `}>
+               return <li key={key}  className={`${path===url.toString()?style:'bg-transparent'}  w-fit  p-2 hover:bg-neutral-200 hover:cursor-pointer `}>
                 <Link  href={url.toString()} className="p-2 h-8 w-full">{icon}{name}</Link></li>
         });
-            return <div key={key} className="w-48" ><li className={`${path===url.toString()?style:'bg-transparent'}  w-auto dark:hover:bg-neutral-900 p-2 hover:bg-neutral-200 hover:cursor-pointer`}>
+            return <div key={key} className="w-48" ><li className={`${path===url.toString()?style:'bg-transparent'}  w-auto  p-2 hover:bg-neutral-200 hover:cursor-pointer`}>
                     <Link  href={originalUrl.toString()} className="p-2 w-full">{icon}{name}</Link>
                 </li>  { subNavs.length>0? <ul className={`${isOpen?'visible':'hidden'} list-none p-4 py-4 space-y-6`}>{genSubNavs}</ul>:<></>
                     }
@@ -135,7 +129,7 @@ const  Navbar = ()=>{
     return <>
     {/* Except Mobile View */}
     <Suspense fallback={<h1>Loading...</h1>}>
-    <nav className="z-[9999] hidden mobile:flex relative flex-col border-r dark:text-white h-screen w-fit select-none">
+    <nav className="z-[9999] hidden mobile:flex relative flex-col border-r text-black h-screen w-fit select-none">
         <ul  className="list-none h-[73vh] overflow-auto px-2 py-4 w-full space-y-2">
         {currentNavs}
         </ul>
@@ -151,7 +145,7 @@ const  Navbar = ()=>{
         nav?"block mobile:hidden z-[99999] absolute my-3 backdrop-blur-md right-0 w-full border-l h-screen duration-500 transition-all ease-in":
         "block mobile:hidden absolute backdrop-blur-3xl  h-screen right-[-1000px] duration-500 transition-all ease-in"
     } style={{top:"-10px"}}>
-    <nav className={'mobile:hidden flex flex-row dark:text-white h-screen select-none justify-start'}>
+    <nav className={'mobile:hidden flex flex-row text-black h-screen select-none justify-start'}>
         <ul  className="list-none h-[73vh] overflow-auto px-2 py-4 space-y-2">
         {currentNavs}
         </ul>

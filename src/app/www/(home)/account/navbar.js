@@ -18,7 +18,7 @@ const AccountNavbar = (props) => {
             url:'/account/orders',
             label:'My Orders',
             subLinks:[
-                {url:'/account/orders/returns',label:'My Returns'},
+                // {url:'/account/orders/returns',label:'My Returns'},
                 {url:'/account/orders/cancellations',label:'My Cancellations'}
             ]
         }

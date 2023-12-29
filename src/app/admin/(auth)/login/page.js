@@ -84,7 +84,7 @@ const LoginPage = () => {
         }
 
     return <>
-        <div  className="w-screen dark:bg-[#d6dbdc] h-screen mobile:grid justify-center items-center mobile_tablet:grid-cols-1 tablet_laptop:grid-cols-2 above_laptop:grid-cols-3">
+        <div  className="w-screen  h-screen mobile:grid justify-center items-center mobile_tablet:grid-cols-1 tablet_laptop:grid-cols-2 above_laptop:grid-cols-3">
       <div className="h-[50%]  w-full hidden mobile:block tablet_md:h-[25%] mobile_tablet:hidden p-5">
       <h1 className="text-center text-3xl text-black">Manage your business from anywhere, at any time(Slogan Here)</h1>
       </div>

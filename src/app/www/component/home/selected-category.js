@@ -42,7 +42,7 @@ const SelectedCategoryForFilter = ({props}) => {
     <Stack display={'flex'} padding={2} direction={'row'} flexWrap={'wrap'} gap={0.5}>
         {
             categories?.map((name,index)=>{
-                return <Chip className="dark:text-white" onDelete={()=>onDelete(name)} key={index} label={name} />
+                return <Chip className="text-black" onDelete={()=>onDelete(name)} key={index} label={name} />
             })
         }
     </Stack>

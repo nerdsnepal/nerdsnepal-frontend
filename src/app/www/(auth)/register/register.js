@@ -6,6 +6,7 @@ import { useState } from "react";
 import { createUser } from "../../actions/user";
 import { PasswordField } from "../../component/password-field";
 import Image from "next/image";
+import Link from "next/link";
 
 
 const Register = () => {
@@ -21,6 +22,9 @@ const Register = () => {
         setUser((prev)=>{
             return {...prev,[e.target.name]:e.target.value}
         })
+    }
+    const clearForm = ()=>{
+        setUser(null)
     }
     const onSubmit = (e)=>{
         e.preventDefault();
@@ -56,6 +60,7 @@ const Register = () => {
                     msg:res.message,
                     severity:"success"
                 })
+                clearForm();
             }
             setCreating(false)
         }).catch((err)=>{
@@ -69,7 +74,7 @@ const Register = () => {
     }
     return (<Stack direction={'row'} gap={2}>
         <Image src={'/naruto-register.png'} className="h-[493px] object-cover  w-fit mobile:block hidden select-none" alt="naruto-register" height={380} width={380} />
-        <div className="dark:bg-white  dark:text-black tablet_md:w-[70vw] md_laptop:w-[50vw] above_laptop:w-[30vw] w-full p-3 space-y-2 rounded-xl transition-all">
+        <div className=" dark:text-black tablet_md:w-[70vw] md_laptop:w-[50vw] above_laptop:w-[30vw] w-full p-3 space-y-2 rounded-xl transition-all">
         <Typography variant="h5">Register</Typography>
         <Typography variant="body1" color={"gray"}>Create your account</Typography>
         <form className="space-y-3" onSubmit={onSubmit}>
@@ -88,7 +93,7 @@ const Register = () => {
         </Alert>:null}
         <Stack direction={'row'} gap={1} justifyContent={'center'} alignItems={'center'} >
             <Typography  variant="body1">Already have account?</Typography>
-            <a href="/login">Log in</a>
+            <Link href="/login">Log in</Link>
         </Stack>
     
     </div></Stack>);

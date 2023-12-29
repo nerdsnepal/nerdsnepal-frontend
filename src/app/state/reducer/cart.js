@@ -24,6 +24,10 @@ const cartSlice = createSlice({
       const newItem = action.payload;
      const existingItem = state.items.find(item => item._id === newItem._id);
   if (existingItem) {
+    if(existingItem.quantity>=existingItem.totalQuantity){
+      existingItem.quantity = existingItem.quantity;
+      return;
+    }
     existingItem.quantity += newItem.quantity; // Adjust the property you use to represent quantity
   } else {
     // If the product is not in the cart, add it as a new entry
@@ -34,9 +38,15 @@ const cartSlice = createSlice({
     updateQuantity:(state,action)=>{
         const newItem = action.payload;
         const itemToUpdate = state.items.find(item => item._id === newItem._id);
-        if (itemToUpdate) {
-          itemToUpdate.quantity = newItem.quantity;
+        if(newItem.quantity>itemToUpdate.totalQuantity){
+          return;
+        }else{
+          if (itemToUpdate) {
+            itemToUpdate.quantity = newItem.quantity;
+            updateLocalStorageCart(state.items)
+          }
         }
+        
     },
 
     // Remove an item from the cart

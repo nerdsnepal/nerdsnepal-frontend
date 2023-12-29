@@ -1,7 +1,7 @@
 
 import { APPNAME } from "@/app/lib/utils/utils";
 import Login from "./login";
-import { getServerSession } from "next-auth";
+
 
 
 export const metadata = {

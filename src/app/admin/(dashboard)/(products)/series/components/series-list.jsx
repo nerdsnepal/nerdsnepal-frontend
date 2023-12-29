@@ -90,7 +90,7 @@ const SeriesList = ({series,accessToken,onDelete}) => {
 
     const cols = [
         { field: 'name', headerName: 'Series name', minWidth: 250, resizeable:true,pinned:true,
-        className:"dark:text-white", autoWidth:true
+        className:"text-black", autoWidth:true
         },
         {
             field:'images',headerName:'Image',
@@ -119,7 +119,7 @@ const SeriesList = ({series,accessToken,onDelete}) => {
             }, autoWidth:true
         },
         { field: 'created_by', headerName: 'Created by', minWidth: 180, resizeable:true,pinned:true,
-        className:"dark:text-white", autoWidth:true,
+        className:"text-black", autoWidth:true,
         //valueGetter:({row})=>{
           
         //   if(!user)return {}
@@ -132,7 +132,7 @@ const SeriesList = ({series,accessToken,onDelete}) => {
         }
     },
     { field: '_id', headerName: 'Action',resizeable:true,pinned:true,
-        className:"dark:text-white",
+        className:"text-black",
     renderCell:({row})=>{
         return <SeriesAction  onActionPerform={handleActionPerform} series={row}/>
     }}
@@ -144,7 +144,7 @@ const SeriesList = ({series,accessToken,onDelete}) => {
             <Alert severity={response.servity} >{response.message}</Alert>
         </Snackbar>
     <div className="flex justify-center  items-center mt-14" > 
-        <Box className="dark:bg-gray-900  rounded-lg w-[100%] mobile:w-[80%]" sx={{ height: 520}}>
+        <Box className="rounded-lg w-[100%] mobile:w-[80%]" sx={{ height: 520}}>
         <DataGrid
         columns={cols}
         rows={series}
@@ -166,7 +166,7 @@ const SeriesList = ({series,accessToken,onDelete}) => {
             paginationModel: { page: 0, pageSize: 7 },
           },
         }}
-        className='dark:text-white'
+        className='text-black'
         editMode='row'
         pageSizeOptions={[7, 20]}
     /></Box>

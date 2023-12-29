@@ -4,7 +4,6 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import CountrySelect, { SelectCity, SelectState } from "@/app/www/component/country-input-field";
 import {  fetchSichu, postRequestSichu } from "@/app/www/actions/action";
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import LabelAddress from "./label-address";
 export default function AddAddress({user,accessToken})  {
@@ -13,7 +12,7 @@ export default function AddAddress({user,accessToken})  {
         fetchSichu({endPoint:"state_with_districts.json",revalidate:300}).then((value)=>{
            setData(value)
         }).catch((error)=>{
-            console.log(error);
+           // console.log(error);
         });
         return ()=>{};
     },[])
@@ -42,6 +41,18 @@ export default function AddAddress({user,accessToken})  {
             phoneNumber: "",
             label:"Home"
         }) 
+       const clearForm=()=>{
+            setDeliveryAddress({
+              country:"Nepal",
+              fullName: user!==undefined?user.name:"",
+              address1: "",
+              landmark:"",
+              city: "Kathmandu",
+              state: "Bagmati",
+              phoneNumber: "",
+              label:"Home"
+          })
+        }
         const handleChange =(e)=>{
             const { name, value } = e.target;
             if (name === 'phoneNumber') {
@@ -77,9 +88,10 @@ export default function AddAddress({user,accessToken})  {
                const response= await  postRequestSichu({accessToken:accessToken,endPoint:"account/address",body:deliveryAddress,method:"POST"});
                if(response.status){
                  setMessage("Added")
-                 revalidatePath("account/address")
+                 clearForm();
                }
             } catch (error) {
+              console.log(error);
                 setMessage("Something went wrong")
             }finally{
                 setOpen(true);

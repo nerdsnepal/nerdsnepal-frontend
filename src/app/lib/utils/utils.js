@@ -1,7 +1,7 @@
 import { grey } from "@mui/material/colors"
 //export const DOMAIN = 'sichunepal.com'
-export const DOMAIN = 'localhost:3000'
-export const API_URL =(name)=> `http://localhost:8000/${name}`
+export const DOMAIN = 'localhost:3001'
+export const API_URL =(name)=> `http://78.47.19.133:8000/${name}`
 export const COOKIE_NAME = 'token'
 export const removeQueryPart = (path)=> path.split('?')[0]
 export const APPNAME = process.env.NEXT_PUBLIC_APP_NAME||'Sichu'
@@ -17,10 +17,15 @@ export const compareDateToC= (date)=>{
     //console.log(res);
 }
 export const passwordStrengthChecker = (password)=>{
-    const strengthRegex = [/^(?=.*[a-z]).{6,}$/,/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/,/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{10,}$/]
-    let strength = -1
+    const strengthRegex = [
+        /^(?=.*[a-z]).{4,}$/,  
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/, 
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/ 
+    ];
+    let strength = 0
     for(let index=0;index<strengthRegex.length;index++)
         if(password.match(strengthRegex[index]))++strength
+    console.log(strength);
     return strength
 }
 export const isExpired = ({expires})=>{
@@ -90,6 +95,45 @@ export const equalAddress=(delivery,billing)=>{
    }
 export const SICHU_API_KEY= {
     'sichu-api-key':process.env.NEXT_PUBLIC_SICHU_API_KEY
+}
+export const orderStatusOptions = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
+ 
+export const orderStatusStyle = (value)=>{
+    let style = 'p-2 rounded-md  select-none cursor-pointer';
+    switch(value){
+        case orderStatusOptions[0]:
+            style += ' bg-blue-300 text-blue-800';
+            break;
+        case orderStatusOptions[1]:
+            style += ' bg-green-300 text-green-800';
+            break;
+        case orderStatusOptions[2]:
+            style += ' bg-yellow-300 text-yellow-800';
+            break;
+        case orderStatusOptions[3]:
+            style += ' bg-orange-300 text-orange-800';
+            break;
+        case orderStatusOptions[4]:
+            style += ' bg-red-300 text-red-800';
+            break;
+    }
+    return style;
+}
+export const paymentStatusOptions = ['Pending', 'Completed', 'Failed'];
+export const paymentStatusStyle = (value)=>{
+    let style = 'p-2 rounded-md  select-none cursor-pointer';
+    switch(value){
+        case paymentStatusOptions[0]:
+            style += ' bg-blue-300 text-blue-800';
+            break;
+        case paymentStatusOptions[1]:
+            style += ' bg-green-300 text-green-800';
+            break;
+        case paymentStatusOptions[2]:
+            style += ' bg-yellow-300 text-yellow-800';
+            break;
+    }
+    return style;
 }
 export const skeletonSX={bgcolor:grey[400]} 
 export let currency_code = "NPR."

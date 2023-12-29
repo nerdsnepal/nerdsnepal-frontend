@@ -1,4 +1,4 @@
-import { Alert, AppBar, Button, Card, Dialog, IconButton, Slide, Snackbar, Stack, TextField, Toolbar, Typography } from "@mui/material";
+import { Alert, AppBar, Box, Button, Card, Dialog, IconButton, Slide, Snackbar, Stack, TextField, Toolbar, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -163,7 +163,7 @@ const StockLocation = ({store,accessToken}) => {
       }
     }
 
-    return ( <Card className="h-fit max-h-[50vh] relative overflow-auto p-2 w-[100%]">
+    return ( <Box className="h-fit border max-h-[50vh] relative overflow-auto p-2 w-[96%]">
             <Snackbar autoHideDuration={300} open={response.hasAlert}>
                 <Alert severity={response.servity}>{response.message}</Alert>
             </Snackbar>
@@ -181,7 +181,7 @@ const StockLocation = ({store,accessToken}) => {
         }
     </Stack>
     <Button color="primary"  onClick={handleUpdate}  variant="outlined" className="m-4" type="button" disabled={!updating}>Update</Button>
-    </Card>);
+    </Box>);
 }
  
 export default StockLocation;

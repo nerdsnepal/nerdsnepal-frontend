@@ -155,7 +155,7 @@ export default function Page  ({params}){
                             <h3 className="text-xs font-bold">{name}</h3>
                             {value?.map((variant,index)=>{
                                 if(isEmpty(variant))return <span key={index}></span>
-                              return <Chip size="small" className="dark:text-white"  key={index} label={variant}/>
+                              return <Chip size="small" className="text-black"  key={index} label={variant}/>
                             })
                             }
                         </Stack>
@@ -170,7 +170,7 @@ export default function Page  ({params}){
                          product?.inventory?.quantities?.map(({location,quantity},index)=>{
                             return <Stack direction={"row"} gap={2} key={index}>
                                 <h3>{location}</h3>
-                                <Chip className="dark:text-white" 
+                                <Chip className="text-black" 
                                 size="small" label={quantity} />
                             </Stack>
                          })

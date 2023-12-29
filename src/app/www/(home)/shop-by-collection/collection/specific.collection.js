@@ -2,15 +2,16 @@
 import { API_URL } from "@/app/lib/utils/utils";
 import SichuBreadCrumbs from "@/app/www/component/breadcrumbs";
 import { useSichuFetch } from "@/app/www/hooks/use-fetch";
-import { Box } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import Image from "next/image";
-import SeriesProduct from "./collection.product";
 import CollectionProduct from "./collection.product";
 
 
 const SpecificCollection = ({id,props}) => {
     const {data,isLoading} = useSichuFetch({endPoint:'v2/category',revalidate:90})
-    if(isLoading)return <h1>Loading...</h1>
+    if(isLoading)return <Box padding={3}>
+        <Skeleton height={200} variant="rounded" />
+    </Box>
     if(!data)return <h1>Something went wrong</h1>
     const category = data.filter((_category)=>_category._id===id)
     const breadcrumbs =[

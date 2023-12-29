@@ -1,4 +1,5 @@
 import UnderDevelopment from "@/app/under_dev"
+import AdminHomePage from "./home"
 
 export const metadata= {
     title:"Dashboard"
@@ -6,7 +7,7 @@ export const metadata= {
 
 export default function AdminPage (){
     return <>
-   <UnderDevelopment/>
+   <AdminHomePage/>
     </>
 }
 

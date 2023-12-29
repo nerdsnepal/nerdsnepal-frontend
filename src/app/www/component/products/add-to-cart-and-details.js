@@ -5,7 +5,7 @@ import Quantity from "./quantity";
 import { useDispatch } from "react-redux";
 import { addItem } from "@/app/state/reducer/cart";
 
-const AddToCartAndDetails = ({product}) => {
+const AddToCartAndDetails = ({product,total}) => {
     const {compare_at,discountPer} = getCompareAtPrice({compareAt:product?.price.compare_at,mrp:product?.price.mrp});
     const rating = product.rating;
     const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const AddToCartAndDetails = ({product}) => {
     const addToCart = ()=>{
         const {name,_id,storeId,price,mediaUrls,totalQuantity,isAvailable} = product
             const item = {
-                quantity:quantity,name,_id,storeId,price,mediaUrls,totalQuantity,isAvailable 
+                quantity:quantity,name,_id,storeId,price,mediaUrls,totalQuantity,isAvailable
             }
         dispatch(addItem(item))
         quantity=1;
@@ -37,9 +37,12 @@ const AddToCartAndDetails = ({product}) => {
                 </Stack>
             :null
         }
-        <Quantity  onChange={onChange} />
+        <Quantity total={total}  onChange={onChange} />
         <Box height={25}></Box>
-            <AddToCart onClick={addToCart}  />
+            <AddToCart totalQuantity={total} onClick={()=>{
+                if(total<quantity)return;
+                addToCart()
+            }}  />
 
         </Box>);
 }

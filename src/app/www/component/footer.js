@@ -62,8 +62,10 @@ const Subscribe = ()=>{
 
 const Footer = () => {
     const quickLinks = [
-        {url:'/',name:'ABC'},
-        {url:'/abc',name:'Q'}
+        // {url:'/account',name:'My Account'},
+        {url:'/shop-by-series',name:'Shop By Series'},
+        {url:'/shop-by-collection',name:'Shop by Collection'},
+        {url:'/shop-all',name:'Shop all'},
     ]
     const customerServiceLinks = [
         {url:'/',name:'ABC'},
@@ -72,11 +74,11 @@ const Footer = () => {
     const socialMedia = [
         {
             icon:<Facebook/>,
-            url:"https://facebook.com"
+            url:"https://facebook.com/sichu.nepal"
         },  
         {
             icon:<Instagram/>,
-            url:"https://instagram.com"
+            url:"https://www.instagram.com/sichu.nepal"
         }
     ]
     const year = new Date().getFullYear()
@@ -91,7 +93,7 @@ const Footer = () => {
             <QuickLinks name={'CUSTOMER SERVICE'} links={customerServiceLinks} key={'Customer Service'} />
             <Stack gap={3}  direction={'column'}>
             <SocialMedia socialMedia={socialMedia}/>
-            <Subscribe/>
+            {/* <Subscribe/> */}
             </Stack>
         </Stack>
       <div className="ml-[8%] mr-[8%] space-y-2">

@@ -15,7 +15,7 @@ const ProductSlider = ({products}) => {
     return (<>
            <Swiper 
            navigation={true}
-            className="product-swiper w-full relative h-[400px] mobile:h-[650px]"
+            className="product-swiper w-full relative h-[400px] mobile:h-[560px]"
            modules={[Navigation, Pagination, A11y]}
            pagination={{ clickable: true }}>
                 {

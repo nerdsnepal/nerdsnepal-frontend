@@ -5,7 +5,7 @@ const { useState, useEffect } = require("react")
 
 export const useSichuFetch = ({endPoint="",revalidate=60})=>{
     const user = useSelector((state)=>state.auth.user);
-    const accessToken = user?.accessToken;
+    const accessToken = useSelector((state)=>state.auth.accessToken)||user?.accessToken;
     const [data,setData] = useState(null);
     const [error,setError] = useState(null);
     const [isLoading,setLoading] = useState(true);
@@ -17,7 +17,7 @@ export const useSichuFetch = ({endPoint="",revalidate=60})=>{
             setData(result.data)
         }
        } catch (error) {
-           setError(error)
+           setError(error.message)
        }finally{
         setLoading(false)
        }

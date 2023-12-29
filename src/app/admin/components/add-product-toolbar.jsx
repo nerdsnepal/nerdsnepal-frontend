@@ -26,7 +26,7 @@ const AddProductPageToolbar = ({product,onCancel,onSave}) => {
         </Stack>
         <Stack direction={"row-reverse"} gap={1}>
         {/*<Button onClick={(e)=>onCancel()} variant="contained"  className="bg-gray-500 capitalize">Cancel</Button>*/}
-        <Button  onClick={(e)=>{if(!btnStatus)onSave()}} disabled={btnStatus} variant="contained" className="capitalize dark:text-white" color="success">Save</Button>
+        <Button  onClick={(e)=>{if(!btnStatus)onSave()}} disabled={btnStatus} variant="contained" className="capitalize text-black" color="success">Save</Button>
         </Stack>
     </Box>
     );

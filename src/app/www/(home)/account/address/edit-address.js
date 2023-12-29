@@ -19,7 +19,7 @@ const EditAddress = ({props,address,accessToken}) => {
         fetchSichu({endPoint:"state_with_districts.json",revalidate:300}).then((value)=>{
            setData(value)
         }).catch((error)=>{
-            console.log(error);
+           // console.log(error);
         });
         return ()=>{};
     },[state])
@@ -67,7 +67,6 @@ const EditAddress = ({props,address,accessToken}) => {
             }).then((value)=>{
                 if(value.status){
                     handleSnackbar("Updated");
-                    revalidatePath("account/address")
                   }else{
                     handleSnackbar("Something went wrong")
                   }

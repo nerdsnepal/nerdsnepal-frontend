@@ -42,6 +42,7 @@ export const authOptions = {
         
         async session({ session, token }) {
             const user = token
+            console.log(session.expires);
           return {...session,user}
         },
         async jwt({ token, user, account, profile }) {

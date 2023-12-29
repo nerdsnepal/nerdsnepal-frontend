@@ -132,7 +132,7 @@ const CategoryAddPage = () => {
                </FormControl>
               
             </Card>
-            <Card sx={{minHeight:"200px"}} className="p-5 dark:bg-white  my-8" elevation={elevation}>
+            <Card sx={{minHeight:"200px"}} className="p-5   my-8" elevation={elevation}>
                 <h1 className="p-2 font-bold">Media</h1>
                <div className="flex justify-center items-center">
                 <UploadMedia number_of_files={(len)=>{}}
@@ -158,7 +158,7 @@ const CategoryAddPage = () => {
             </Card>
             </section>
         </div>
-       <div className="flex justify-center"><Button variant="outlined" onClick={saveCategory} disabled={!btnStatus} className={`dark:text-white  ${!btnStatus?'text-gray-800':'text-black font-semibold'}  capitalize`} size="large">Save</Button></div>
+       <div className="flex justify-center"><Button variant="outlined" onClick={saveCategory} disabled={!btnStatus} className={`text-black  ${!btnStatus?'text-gray-800':'text-black font-semibold'}  capitalize`} size="large">Save</Button></div>
             <div className="h-[20%]"></div>
     </div>);
 }

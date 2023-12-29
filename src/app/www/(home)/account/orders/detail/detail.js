@@ -1,11 +1,10 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
-import Link from "next/link";
 import OrderProductItem from './order-item'
 import { currency_code } from "@/app/lib/utils/utils";
 import { RenderAddress } from "@/app/www/component/user/address";
 const OrderDetail = ({data,accessToken}) => {
     const {storeId,deliveryAddress,billingAddress} = data;
-    
+    console.log(data);
     const OrderIdAndPlacedOn = ()=>{
         const id = parseInt(data._id,8)
         return <Box className='bg-slate-50 border p-2 pl-8 pr-8 rounded-md'>
@@ -17,11 +16,11 @@ const OrderDetail = ({data,accessToken}) => {
         if(!storeId)return null;
         return <Box className="bg-[#EEE] h-fit  text-black w-screen mobile:w-[20vw]  rounded-lg" padding={2}>
             <Typography variant="body1">Sold by</Typography>
-           <Link href={`/store?id=${storeId._id}`}>
+           {/* <Link href={`/store?id=${storeId._id}`}> */}
            <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
-            <Typography variant="body1" className="text-black" fontWeight={'bold'}>{storeId.name}</Typography>
+            <Typography variant="body1" className="text-black" fontWeight={'bold'}>Sichu Nepal</Typography>
             </Stack>
-            </Link>
+            {/* </Link> */}
         </Box>
     }
     const ShippingAddress =({deliveryAddress,billingAddress})=>{
@@ -60,7 +59,7 @@ const OrderDetail = ({data,accessToken}) => {
             <Typography>{currency_code}{totalAmount}</Typography>
             </Stack>
           <Stack padding={0.5} gap={1} direction={'row'}>
-          <Typography className="text-green-700 w-fit bg-green-300 p-1 pl-2 pr-2 rounded-lg">{data.paymentMethod}</Typography> 
+          <Typography className="text-green-700 text-center w-fit bg-green-300 p-1 pl-2 pr-2 rounded-lg">{data.paymentMethod}</Typography> 
           <Typography className="text-blue-700 w-fit bg-blue-300 p-1 pl-2 pr-2 rounded-lg">{data.paymentStatus}</Typography> 
           </Stack>
         </Box>
@@ -74,6 +73,10 @@ const OrderDetail = ({data,accessToken}) => {
         <StoreInfo/>
      </Stack>
        <Box className="p-4 bg-slate-50 border rounded-md overflow-auto">
+       <Stack direction={'row'} gap={2} p={1}> 
+       <Typography variant="body1" className="bg-green-500 p-2 rounded-md text-white">Order status</Typography>
+       <Typography variant="body1" className="bg-blue-500 p-2 rounded-md text-white">{data.status}</Typography>
+       </Stack>
        <OrderProductItem data={data} acccessToken={accessToken}/>
        </Box>
     <Stack direction={{xs:'column',md:'row'}} gap={2}>

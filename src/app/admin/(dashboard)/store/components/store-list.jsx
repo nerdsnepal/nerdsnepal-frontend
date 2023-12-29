@@ -110,7 +110,7 @@ function StoreList({stores}){
             }
         },
         { field: '_id', headerName: 'Action', minWidth: 200, resizeable:true,pinned:true,
-        className:"dark:text-white",
+        className:"text-black",
         renderCell:({row})=>{
             return <StoreAction store={row} key={row._id} />
         }
@@ -125,7 +125,7 @@ function StoreList({stores}){
     )
    
     return <div className="flex justify-center items-center mt-14" >
-    <Box className="dark:bg-gray-900 rounded-lg w-[100%] mobile:w-[72vw]" sx={{ height: 520}}>
+    <Box className=" rounded-lg w-[100%] mobile:w-[72vw]" sx={{ height: 520}}>
     <DataGrid
         columns={columns}
         rows={stores}
@@ -147,7 +147,7 @@ function StoreList({stores}){
             paginationModel: { page: 0, pageSize: 7 },
           },
         }}
-        className='dark:text-white'
+        className='text-black'
         editMode='row'
         pageSizeOptions={[7, 20]}
         //checkboxSelection

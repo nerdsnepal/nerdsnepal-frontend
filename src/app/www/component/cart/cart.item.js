@@ -24,7 +24,7 @@ const CartItem = ({product}) => {
                     <Typography role="contentinfo" variant="body1">{product?.name}</Typography>
                     <Typography role="contentinfo" variant="body1" fontWeight={'bold'}>{currency_code+product?.price?.mrp}</Typography>
                    <Box width={125}>
-                   <Quantity hasZero={true} onChange={handleOnChange} value={product?.quantity} hideLabel={true} gap={2} padding={0.3} />
+                   <Quantity total={product.totalQuantity} hasZero={true} onChange={handleOnChange} value={product?.quantity} hideLabel={true} gap={2} padding={0.3} />
                    </Box>
                 </Box>
             </Stack>

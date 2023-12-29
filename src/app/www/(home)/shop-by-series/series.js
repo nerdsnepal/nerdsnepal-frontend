@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Pagination, Stack } from "@mui/material";
+import { Box, Pagination, Skeleton, Stack } from "@mui/material";
 import { useState } from "react";
 import SichuBreadCrumbs from "@/app/www/component/breadcrumbs";
 import { useSichuFetch } from "@/app/www/hooks/use-fetch";
@@ -16,11 +16,15 @@ const Series = ({itemsPerPage=16}) => {
    }
   
     const {data,isLoading} = useSichuFetch({endPoint:'admin/series/all',revalidate:90})
-    console.log(data);
-    if(isLoading)return <h1>Loading...</h1>
+
+    if(isLoading )return <Stack justifyContent={'center'} gap={2} padding={2} direction={'row'} flexWrap={"wrap"} >
+        {
+        [1,2,3,1,2,2,3].map((index)=><Skeleton key={index} variant="rounded" height={"200px"} width={'300px'} />)
+        }
+    </Stack>
     if(!data)return <h1>No series found</h1>
     const totalItems = data?.length
-    return (<Box className="h-full">
+    return (<Box className="h-full min-h-[50vh]">
         <Box padding={3}>
         <SichuBreadCrumbs breadcrumbs={breadcrumbs} />
         </Box>
@@ -32,7 +36,7 @@ const Series = ({itemsPerPage=16}) => {
             })
         }
        </Stack>
-       {totalItems>itemsPerPage?<div className="flex justify-center mb-3"><Pagination  className={`pagination-label dark:text-white`} count={Math.ceil(totalItems/itemsPerPage)} onChange={handleChange}  page={page}  /></div>:null}  
+       {totalItems>itemsPerPage?<div className="flex justify-center mb-3"><Pagination  className={`pagination-label text-black`} count={Math.ceil(totalItems/itemsPerPage)} onChange={handleChange}  page={page}  /></div>:null}  
     </Box>);
 }
  

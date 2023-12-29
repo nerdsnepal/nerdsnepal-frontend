@@ -1,5 +1,5 @@
 
-import { API_URL } from '@/app/lib/utils/utils';
+import { API_URL, orderStatusStyle } from '@/app/lib/utils/utils';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -43,11 +43,7 @@ const OrderList = ({rows,columns,title="Recent Orders",hideStyle=false}) => {
                                         return <Link key={index} href={`/account/orders/detail?orderId=${product['orginalId']}`}>{hideStyle?'Order details':'Manage'}</Link>
                                     }
                                     if(field==="status"){
-                                        let style = `rounded-lg  text-center `;
-                                        if(product[field]==='Pending'){
-                                            style+='text-orange-300 bg-orange-500'
-                                        }
-                                      return   <Typography bgcolor={'red'} padding={0.5} paddingLeft={1.5} paddingRight={1.5} className={style} key={index} variant='body1'>{product[field]}</Typography>
+                                      return   <Typography  className={orderStatusStyle(product[field])} key={index} variant='body1'>{product[field]}</Typography>
                                     }
                                     return <Box width={width}  key={index}>
                                         <Typography width={width}  className={`w-[${width}]`}>{product[field]}</Typography>

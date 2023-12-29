@@ -8,6 +8,7 @@ import { equalAddress } from "@/app/lib/utils/utils";
 import EditAddress from "./edit-address";
 import { postRequestSichu } from "@/app/www/actions/action";
 import { LabelBox } from "./label-address";
+import { RenderAddress } from "@/app/www/component/user/address";
 
 const MyAddress = ({user,props,accessToken}) => {
     const [address,setAddress] = React.useState(user.address)
@@ -38,27 +39,12 @@ const MyAddress = ({user,props,accessToken}) => {
     
     }
     
-    const RenderAddress = ()=>{
-       const BillingAddress  = ({billingAddress})=>{
-        return <>
-            <Typography>{billingAddress.street},{billingAddress.city},{billingAddress.state},{billingAddress.country}</Typography>
-        </>
-       }
-       const DeliveryAddress = ({deliveryAddress})=>{
-        return <>
-            <Typography>{deliveryAddress.street},{deliveryAddress.city},{deliveryAddress.state},{deliveryAddress.country}</Typography>
-        </>
-       }
-     
-      
+    const AddressRender = ()=>{
        const DefaultBox = ({value})=>{
         return <Box className="bg-gray-200 w-fit p-2 rounded-md">
              <Typography>{value}</Typography>
         </Box>
        }
-
-       
-
        
        const SameAddress = ({address,id,isDefault})=>{
         return <Box className='border border-slate-300 bg-gray-50 rounded-md p-4 mobile:m-1 m-0 w-full mobile:w-[40vw] space-y-2'>
@@ -88,11 +74,19 @@ const MyAddress = ({user,props,accessToken}) => {
                     if(equalAddress(delivery,billing)){
                        return <SameAddress isDefault={_address.default} id={_address._id} address={delivery} key={index} />
                     }
-                    return <div key={index}>
-                    {/*<DeliveryAddress deliveryAddress={_address.delivery} />
-        
-                    <BillingAddress billingAddress={_address.billing}  />*/}
-                    </div>
+                    return <Box key={index} className='border border-slate-300 bg-gray-50 rounded-md p-4 mobile:m-1 m-0 w-full mobile:w-[40vw]  space-y-2'>
+                        <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+                        <Typography fontWeight={'bold'}>{address.fullName}</Typography>
+                        <Stack direction={'row'} gap={2}>
+                        <Button variant="text" className="capitalize"><Link href={`?mode=edit&id=${_address._id}`}>Edit</Link></Button>
+                        <Button onClick={()=>handleDelete(_address._id)} variant="text" className="capitalize text-red-800">Delete</Button>
+                        </Stack>
+                        </Stack>
+                       <Stack  direction={'row'}>
+                         <RenderAddress address={delivery} type={`${_address.default?'Default':''} Delivery Address`} />
+                         <RenderAddress address={billing} type={`${_address.default?'Default':''} Billing Address`} />
+                    </Stack>
+                    </Box>
                 })
              }
         </Stack>
@@ -103,7 +97,7 @@ const MyAddress = ({user,props,accessToken}) => {
          <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
          </Stack>
          {
-            user.address===null?<Typography variant="h5">No address</Typography>:<RenderAddress/>
+            user.address===null?<Typography variant="h5">No address</Typography>:<AddressRender/>
          }
         <Link href={'?mode=add'}>Add new address</Link>
     </Box> );

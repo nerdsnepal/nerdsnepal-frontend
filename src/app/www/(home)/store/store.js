@@ -3,11 +3,13 @@ import ProductList from "../../component/products/product-list";
 import { CategoryItem } from "../../component/category-item";
 import { StoreInfoMenu } from "./menu";
 import { isEmpty } from "@/app/lib/utils/utils";
+import  { sanitize } from "dompurify";
 
 
 const StoreProductInfo = ({data,tab,storeId,q}) => {
     const regexPattern = new RegExp(q, 'i');
-   const Category = ()=>{
+    const {about} = data;
+     const Category = ()=>{
     let categories = data.categories;
     if(!isEmpty(q)){
         categories = categories.filter(({name})=>regexPattern.test(name))
@@ -39,7 +41,7 @@ const StoreProductInfo = ({data,tab,storeId,q}) => {
         child:<ProductList products={products} itemsPerPage={20}/>,
         label:"All products"},
 
-        {tab:"about",child:<>About</>,label:"About"}
+        {tab:"about",child: <div dangerouslySetInnerHTML={{ __html: sanitize('<p>Your HTML content here</p>') }}></div>,label:"About"}
 
     ];
 

@@ -1,11 +1,15 @@
-import UnderDevelopment from "@/app/under_dev"
+import { Suspense } from "react"
+import StoreOrderList from "./order.list"
+
 
 export const metadata = {
     title:"Orders"
 }
-export default function OrderPage() {
+export default function OrderPage(props) {
     return <>
-      <UnderDevelopment/>
+        <Suspense fallback ={<div>Loading...</div>}>
+        <StoreOrderList props={props} />
+        </Suspense>
     </>
 
 
