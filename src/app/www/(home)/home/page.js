@@ -1,6 +1,5 @@
 'use client'
 import { Box } from "@mui/material";
-
 import ProductSlider from "../../component/home/product-slider";
 import ShopByCategory from "../../component/home/section-category";
 import { useSichuFetch } from "../../hooks/use-fetch";
