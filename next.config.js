@@ -12,17 +12,26 @@ const nextConfig = {
             hostname: 'flagcdn.com',
             pathname: '**',
           },
-          {
-            protocol: 'http',
-            hostname: 'localhost',
+            {
+            protocol: 'https',
+            hostname: "sichunepal.com",
             pathname: '**',
           },
-          
           {
             protocol: 'https',
-            hostname: 'd1xll3zf-8000.asse.devtunnels.ms',
+            hostname: "api.sichunepal.com",
             pathname: '**',
           },
+            {
+            protocol: 'http',
+            hostname: "sichunepal.com",
+            pathname: '**',
+          },
+          {
+            protocol: 'http',
+            hostname: "api.sichunepal.com",
+            pathname: '**',
+          }
         ],
       },
     serverRuntimeConfig:{

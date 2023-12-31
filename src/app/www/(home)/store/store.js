@@ -41,7 +41,7 @@ const StoreProductInfo = ({data,tab,storeId,q}) => {
         child:<ProductList products={products} itemsPerPage={20}/>,
         label:"All products"},
 
-        {tab:"about",child: <div dangerouslySetInnerHTML={{ __html: sanitize('<p>Your HTML content here</p>') }}></div>,label:"About"}
+        {tab:"about",child: <div dangerouslySetInnerHTML={{ __html: sanitize(about) }}></div>,label:"About"}
 
     ];
 
