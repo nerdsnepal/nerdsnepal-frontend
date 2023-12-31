@@ -13,11 +13,6 @@ const nextConfig = {
             pathname: '**',
           },
           {
-            protocol: 'http',
-            hostname: 'localhost',
-            pathname: '**',
-          },
-          {
             protocol: 'https',
             hostname: "sichunepal.com",
             pathname: '**',
