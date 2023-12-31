@@ -1,7 +1,9 @@
+import { DOMAIN } from "./lib/utils/utils"
 import { fetchSichu } from "./www/actions/action"
 
 export default async function  sitemap() {
-    const base_url = "http://localhost:3000"
+    const base_url = `https://${DOMAIN}`
+  
     let others = [] 
 try {
    const {data,success}= await fetchSichu({accessToken:null,endPoint:'',revalidate:60})
