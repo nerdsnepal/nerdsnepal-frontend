@@ -14,6 +14,11 @@ const nextConfig = {
           },
           {
             protocol: 'https',
+            hostname: "www.sichunepal.com",
+            pathname: '**',
+          },
+          {
+            protocol: 'https',
             hostname: "sichunepal.com",
             pathname: '**',
           },
@@ -46,7 +51,7 @@ const nextConfig = {
 module.exports = {
     darkMode: 'class',
     middleware:['middleware/default'],
-    compress: false,
+    compress: true,
     env: {
         NODE_ENV: 'production',
     },
