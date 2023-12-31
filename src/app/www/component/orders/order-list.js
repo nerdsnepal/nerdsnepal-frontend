@@ -1,11 +1,13 @@
-"use client"
 import { API_URL, orderStatusStyle } from '@/app/lib/utils/utils';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import Box from "@mui/material/Box"; 
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import Image from 'next/image';
 import Link from 'next/link';
 const OrderList = ({rows,columns,title="Recent Orders",hideStyle=false}) => {
     if(rows.length===0){
-        return (<Box className={`bg-slate-50 p-4 border h-[70vh]  w-[60vw] overflow-auto`}>
+        return (<Box className={`bg-slate-50 p-4 border h-[70vh] w-[90vw] mobile:w-[60vw] overflow-auto`}>
         <Typography  className='pt-4 pb-4 font-bold text-[#0F172A]'>{title}</Typography>
            
             <Stack className='h-[80%]' direction={'column'}  gap={1} justifyContent={'center'} alignItems={'center'}>

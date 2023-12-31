@@ -1,6 +1,6 @@
+import { Suspense, lazy } from "react";
 import { fetchSichu } from "../../actions/action";
-import * as React from 'react';
-const OrderList = React.lazy(()=>import("./order-list")) ;
+const OrderList = lazy(()=>import("./order-list")) ;
 
 const RecentOrder =async ({accessToken}) => {
     let data;
@@ -38,12 +38,12 @@ const RecentOrder =async ({accessToken}) => {
                 date:new Date(item.createdAt).toLocaleDateString("en-US",options)
             })
         }
-      }
-      
-      
-    return (<React.Suspense fallback={<></>}>
-        <OrderList columns={columns} rows={rows} />
-    </React.Suspense>);
+      }  
+    return (
+        <Suspense fallback={<></>}>
+            <OrderList columns={columns} rows={rows} />
+        </Suspense>
+  );
 }
 
 

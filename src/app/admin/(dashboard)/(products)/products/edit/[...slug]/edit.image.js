@@ -1,6 +1,7 @@
 import { API_URL } from "@/app/lib/utils/utils"
 import { useState } from "react"
 import { productAPI } from "../../action"
+import Link from "next/link"
 const { default: UploadMedia } = require("@/app/lib/components/UploadMedia")
 const { Delete } = require("@mui/icons-material")
 const { Stack, Box, Card, Typography, Button } = require("@mui/material")
@@ -23,9 +24,9 @@ const EditProductImage = ({product,handleResponse,accessToken})=>{
         const newURl = url?.replace('assets/','')
         return <Stack className="relative ml-2 p-1" direction={'row'}   justifyContent={'start'} alignItems={'center'}>
             {/*<Typography variant="body1" className="sticky top-1" padding={4} right={7}>Media</Typography>*/}
-            <a href={API_URL(newURl)} target="_blank">
+            <Link href={API_URL(newURl)} target="_blank">
             <Image  height={48} width={48} className="h-12 w-12 "  src={API_URL(newURl)}  loading="lazy" alt="" />
-            </a>
+            </Link>
             <Delete onClick={onDelete} className="absolute cursor-pointer hover:text-red-600 right-3" />
 
         </Stack>

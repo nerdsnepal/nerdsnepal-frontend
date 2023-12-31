@@ -4,7 +4,7 @@ import { fetchSichu } from "../../actions/action";
 const StoreDetails =lazy(()=>import("../../component/store/store"));
 import { Box, Stack } from "@mui/material/index";
 const  SichuBreadCrumbs = lazy(()=>import("../../component/breadcrumbs"))
-import StoreProductInfo from "./store";
+const  StoreProductInfo = lazy((()=>import("./store"))) ;
 import { Suspense, lazy } from "react";
 
  const StorePage =async (params) => {

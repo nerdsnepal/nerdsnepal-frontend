@@ -1,5 +1,6 @@
-import { Box, Stack, Typography } from "@mui/material";
-
+import Box from "@mui/material/Box"; 
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 const Profile = ({user}) => {
     
     return (<Box className='border border-slate-300 bg-gray-50 rounded-md p-4 mobile:m-1 m-0 w-screen mobile:w-[25vw]'>

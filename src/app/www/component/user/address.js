@@ -1,4 +1,6 @@
-import { Box, Stack, Typography } from "@mui/material";
+import Box from "@mui/material/Box"; 
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { CountryCode } from "../country-input-field";
 import { getDefaultAddress } from "@/app/lib/utils/utils";

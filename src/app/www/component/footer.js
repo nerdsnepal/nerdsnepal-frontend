@@ -1,6 +1,7 @@
 'use client'
 import { Facebook, Instagram } from "@mui/icons-material";
 import { Box, Button, Divider, Stack, TextField, Typography } from "@mui/material";
+import Link from "next/link";
 
 const AboutPlatformOrShop = ({logo="logo.svg",name,description})=>{
     return <div>
@@ -17,7 +18,7 @@ const QuickLinks = ({name,links})=>{
         <Stack>
         {
             links.map(({url,name},index)=>{
-               return <a href={url} key={index}>{name}</a>
+               return <Link href={url} key={index}>{name}</Link>
             })
         }
         </Stack>

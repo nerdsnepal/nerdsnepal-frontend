@@ -1,12 +1,14 @@
 import { API_URL } from "@/app/lib/utils/utils";
-import { Avatar, Box, Button, Stack, Typography } from "@mui/material/index";
+import { Avatar, Box, Stack, Typography } from "@mui/material/index";
 import UpdateProfile from "./update";
 import Link from "next/link";
 
 
 const Profile = ({user,props,accessToken}) => {
-    const {mode} = props.searchParams;
-    console.log(user);
+    let mode = null;
+    if(props){
+        mode = props.searchParams.mode;
+    }
     if(mode==='edit'){
         return <UpdateProfile user={user} accessToken={accessToken}  />
     }
