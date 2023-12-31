@@ -1,6 +1,6 @@
 'use client'
 import { API_URL } from "@/app/lib/utils/utils";
-import { Alert, Box,  Snackbar, Stack } from "@mui/material";
+import { Alert, Box,  Snackbar, Stack } from "@mui/material/index";
 import { DataGrid } from "@mui/x-data-grid"
 import Image from "next/image";
 import ImageIcon from '@mui/icons-material/Image';

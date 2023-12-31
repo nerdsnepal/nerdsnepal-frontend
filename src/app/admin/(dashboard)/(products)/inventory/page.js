@@ -1,7 +1,7 @@
-import UnderDevelopment from "@/app/under_dev";
+
 
 const InventoryPage = () => {
-    return <UnderDevelopment/>
+    return <></>
 }
  
 export default InventoryPage;

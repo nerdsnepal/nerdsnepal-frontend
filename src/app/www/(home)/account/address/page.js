@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material/index";
 import { authOptions } from "@/app/admin/api/auth/[...nextauth]/route";
 import { fetchSichu } from "@/app/www/actions/action";
 import { getServerSession } from "next-auth";

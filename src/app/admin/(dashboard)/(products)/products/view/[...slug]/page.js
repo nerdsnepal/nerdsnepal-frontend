@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { getProductDetailsById } from "../../actions/action"
-import { Skeleton, Stack, Typography } from "@mui/material"
+import { Skeleton, Stack, Typography } from "@mui/material/index"
 import { API_URL, currency_code, isEmpty, skeletonSX } from "@/app/lib/utils/utils"
 import Image from "next/image"
 import Avatar from '@mui/material/Avatar';

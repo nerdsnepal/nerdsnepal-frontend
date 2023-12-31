@@ -5,7 +5,7 @@ import {   useSearchParams } from "next/navigation"
 import {  useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getAllStoreRelatedProduct } from "./actions/action";
-import { Stack } from "@mui/material";
+import { Stack } from "@mui/material/index";
 import { StoreProductList } from "./components/product-list";
 import StoreLoadingSkeleton from "../../store/components/store-loading-skeleton";
 

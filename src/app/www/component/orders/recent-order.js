@@ -1,7 +1,6 @@
-
 import { fetchSichu } from "../../actions/action";
 import * as React from 'react';
-import OrderList from "./order-list";
+const OrderList = React.lazy(()=>import("./order-list")) ;
 
 const RecentOrder =async ({accessToken}) => {
     let data;
@@ -42,9 +41,9 @@ const RecentOrder =async ({accessToken}) => {
       }
       
       
-    return (<>
+    return (<React.Suspense fallback={<></>}>
         <OrderList columns={columns} rows={rows} />
-    </>);
+    </React.Suspense>);
 }
 
 

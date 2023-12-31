@@ -1,10 +1,11 @@
 import { isEmpty } from "@/app/lib/utils/utils";
 import { notFound } from "next/navigation";
 import { fetchSichu } from "../../actions/action";
-import StoreDetails from "../../component/store/store";
-import { Box, Stack } from "@mui/material";
-import SichuBreadCrumbs from "../../component/breadcrumbs";
+const StoreDetails =lazy(()=>import("../../component/store/store"));
+import { Box, Stack } from "@mui/material/index";
+const  SichuBreadCrumbs = lazy(()=>import("../../component/breadcrumbs"))
 import StoreProductInfo from "./store";
+import { Suspense, lazy } from "react";
 
  const StorePage =async (params) => {
     const {id,tab,q}= params.searchParams;
@@ -29,6 +30,7 @@ import StoreProductInfo from "./store";
         {value:data.store.name,url:"#"}
     ]
     return ( <Stack justifyContent={'center'} alignItems={'center'} > 
+    <Suspense fallback={<></>}>
     <Box className="w-[95vw]">
     <Box padding={3}>
         <SichuBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -36,6 +38,7 @@ import StoreProductInfo from "./store";
     <StoreDetails store={data.store} />
     <StoreProductInfo data={data} tab={tab} storeId={id} q={q}  />
     </Box>
+    </Suspense>
     </Stack> );
 }
  

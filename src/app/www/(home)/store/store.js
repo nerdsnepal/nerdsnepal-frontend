@@ -1,14 +1,16 @@
+"use client"
 import { Box,  Stack,  Typography } from "@mui/material";
 import ProductList from "../../component/products/product-list";
 import { CategoryItem } from "../../component/category-item";
 import { StoreInfoMenu } from "./menu";
 import { isEmpty } from "@/app/lib/utils/utils";
-import  { sanitize } from "dompurify";
+import DOMPurify from 'dompurify';
 
 
 const StoreProductInfo = ({data,tab,storeId,q}) => {
     const regexPattern = new RegExp(q, 'i');
     const {about} = data;
+    const cleanHTML = DOMPurify.sanitize(about)
      const Category = ()=>{
     let categories = data.categories;
     if(!isEmpty(q)){
@@ -41,7 +43,7 @@ const StoreProductInfo = ({data,tab,storeId,q}) => {
         child:<ProductList products={products} itemsPerPage={20}/>,
         label:"All products"},
 
-        {tab:"about",child: <div dangerouslySetInnerHTML={{ __html: sanitize('<p>Your HTML content here</p>') }}></div>,label:"About"}
+        {tab:"about",child: <div dangerouslySetInnerHTML={{ __html: cleanHTML }}></div>,label:"About"}
 
     ];
 

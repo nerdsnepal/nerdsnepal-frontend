@@ -1,4 +1,3 @@
-import UnderDevelopment from "@/app/under_dev"
 import AdminHomePage from "./home"
 
 export const metadata= {

@@ -7,7 +7,7 @@ const feather = require('feather-icons')
 import { redirect, usePathname } from "next/navigation";
 import { removeQueryPart } from "@/app/lib/utils/utils";
 import StoreIcon from '@mui/icons-material/Store';
-import { Backdrop, Box, Button, Stack } from "@mui/material";
+import {  Box, Button, Stack } from "@mui/material/index";
 import CategoryIcon from '@mui/icons-material/Category';
 import { useDispatch, useSelector } from "react-redux";
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -30,10 +30,10 @@ const  Navbar = ()=>{
          name:"Products",icon:getIcon(feather.icons.tag,options),url:'/products?selectedView=all&role=merchant',
          isOpen:true,
          subNavs:[
-            { 
-             key:"navProduct2Child1",
-             name:"Inventory",icon:getIcon(feather.icons.layers,options),url:'/inventory'
-             },
+            // { 
+            //  key:"navProduct2Child1",
+            //  name:"Inventory",icon:getIcon(feather.icons.layers,options),url:'/inventory'
+            //  },
              { 
                 key:"navProduct2Child2",
                 name:"Category",icon:<CategoryIcon/>,url:'/category'
@@ -54,12 +54,12 @@ const  Navbar = ()=>{
              isOpen:false,
              subNavs:[]
          },
-         {
-             key:"navCustomers3",
-             name:"Customers",icon:getIcon(feather.icons.users,options),url:'/customers',
-             isOpen:false,
-             subNavs:[]
-         },
+        //  {
+        //      key:"navCustomers3",
+        //      name:"Customers",icon:getIcon(feather.icons.users,options),url:'/customers',
+        //      isOpen:false,
+        //      subNavs:[]
+        //  },
          {
             key:"navStore4",
             name:"Store",icon:<StoreIcon/>,url:'/store',

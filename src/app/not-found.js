@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { API_URL,SICHU_API_KEY } from './lib/utils/utils'
 import { fetchSichu } from './www/actions/action'
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, Stack, Typography } from '@mui/material/index'
 import Image from 'next/image'
 import ProductItem from './www/component/products/product-item'
  

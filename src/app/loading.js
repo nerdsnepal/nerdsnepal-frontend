@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Stack } from "@mui/material/index";
 import Image from "next/image";
 
 const Loading = () => {

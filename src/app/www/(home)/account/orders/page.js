@@ -1,6 +1,6 @@
 import { authOptions } from "@/app/www/api/auth/[...nextauth]/route";
 import AllOrders from "@/app/www/component/orders/all-orders";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material/index";
 import { getServerSession } from "next-auth";
 export const metadata={
     title:"Orders"

@@ -1,5 +1,7 @@
 import { API_URL, currency_code } from "@/app/lib/utils/utils";
-import { Box, Stack, Typography } from "@mui/material";
+import  Box  from "@mui/material/Box";
+import  Stack  from "@mui/material/Stack";
+import  Typography  from "@mui/material/Typography";
 import Image from "next/image";
 
 const OrderItem = ({product}) => {

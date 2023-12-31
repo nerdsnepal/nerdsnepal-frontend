@@ -1,16 +1,19 @@
 'use client'
 import { Provider } from "react-redux";
-import {store,persistor, persitor_store} from "./state/store";
-import { PersistGate } from "redux-persist/integration/react";
-
+import {store} from "./state/store";
+import React from "react";
+import { CssBaseline } from "@mui/material";
 
 
 const ReactReducerProvider = ({children}) => {
     return ( 
-   
+        <React.Fragment>
+        <CssBaseline />
         <Provider store={store}>
             {children}
-        </Provider>);
+        </Provider>
+     </React.Fragment>        
+        );
 }
  
 export default ReactReducerProvider;

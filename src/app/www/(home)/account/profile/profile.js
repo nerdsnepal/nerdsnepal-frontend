@@ -1,5 +1,5 @@
 import { API_URL } from "@/app/lib/utils/utils";
-import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Button, Stack, Typography } from "@mui/material/index";
 import UpdateProfile from "./update";
 import Link from "next/link";
 

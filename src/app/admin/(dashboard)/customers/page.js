@@ -1,4 +1,3 @@
-import UnderDevelopment from "@/app/under_dev"
 
 export const metadata = {
     title:"Customers"
@@ -6,7 +5,7 @@ export const metadata = {
 
 export default  function CustomerPage (){
     return <>
-       <UnderDevelopment/>
+       <h1>Dev</h1>
     </>
 
 

@@ -1,5 +1,5 @@
 'use client'
-import { Alert, Card, Checkbox, FormControl, MenuItem, Select, Snackbar, Stack, TextField } from "@mui/material";
+import { Alert, Card, Checkbox, Snackbar, Stack, TextField } from "@mui/material/index";
 import AddProductPageToolbar from "../../../../components/add-product-toolbar";
 
 import UploadMedia from "@/app/lib/components/UploadMedia";

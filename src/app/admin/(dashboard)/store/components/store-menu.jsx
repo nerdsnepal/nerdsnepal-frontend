@@ -11,7 +11,7 @@ const StoreMenu = () => {
     const isSuperUser = useSelector((state)=>state.auth.isSuperAdmin)
     if(isSuperUser){
         return ( 
-            <div>
+            <div className='relative'>
                 <Button variant='outlined' onClick={()=>dispatch(toggler())} title='Create Store' className={`font-medium capitalize float-right `} startIcon={<AddIcon/>}>Create Store</Button>
                 <CreateStoreDialog/>
             </div>

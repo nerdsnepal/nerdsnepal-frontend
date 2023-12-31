@@ -125,7 +125,7 @@ function StoreList({stores}){
     )
    
     return <div className="flex justify-center items-center mt-14" >
-    <Box className=" rounded-lg w-[100%] mobile:w-[72vw]" sx={{ height: 520}}>
+    <Box className=" rounded-lg w-[100vw] mobile:w-[72vw]" sx={{ height: 520}}>
     <DataGrid
         columns={columns}
         rows={stores}

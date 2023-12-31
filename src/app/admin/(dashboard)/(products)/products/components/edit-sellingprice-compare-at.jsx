@@ -1,7 +1,7 @@
 'use client'
 import { currency_code, isEmpty } from "@/app/lib/utils/utils";
 import { Edit } from "@mui/icons-material";
-import { Alert, Button, Card, Stack, TextField, Typography } from "@mui/material";
+import { Alert, Button, Card, Stack, TextField, Typography } from "@mui/material/index";
 import { useRef, useState } from "react";
 import { productAPI } from "../actions/action";
 

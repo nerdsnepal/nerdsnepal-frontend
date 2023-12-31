@@ -1,5 +1,4 @@
-import UnderDevelopment from "@/app/under_dev"
-import { Box } from "@mui/material"
+import { Box } from "@mui/material/index"
 import AdminAnalytics from "./analytics"
 
 

@@ -1,4 +1,4 @@
-
+"use client"
 import { API_URL, orderStatusStyle } from '@/app/lib/utils/utils';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
