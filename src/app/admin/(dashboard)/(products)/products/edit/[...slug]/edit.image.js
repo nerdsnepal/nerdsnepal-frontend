@@ -24,7 +24,7 @@ const EditProductImage = ({product,handleResponse,accessToken})=>{
         return <Stack className="relative ml-2 p-1" direction={'row'}   justifyContent={'start'} alignItems={'center'}>
             {/*<Typography variant="body1" className="sticky top-1" padding={4} right={7}>Media</Typography>*/}
             <a href={API_URL(newURl)} target="_blank">
-            <Image  height={48} width={48} className="h-12 w-12 "  src={API_URL(newURl)} loading="lazy" alt="" />
+            <Image  height={48} width={48} className="h-12 w-12 "  src={API_URL(newURl)}  loading="lazy" alt="" />
             </a>
             <Delete onClick={onDelete} className="absolute cursor-pointer hover:text-red-600 right-3" />
 

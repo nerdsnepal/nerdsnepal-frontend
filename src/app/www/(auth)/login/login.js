@@ -58,7 +58,7 @@ const Login = ({props}) => {
     }
     if(status==="loading")return null
     return (<Stack direction={'row'} gap={2}>
-        <Image alt="deadpool-welcome-back"  src={'/deadpool-welcome-back.png'} loading="lazy" className="h-[35vh] object-cover  w-fit mobile:block hidden select-none" height={250} width={250} />
+        <Image alt="deadpool-welcome-back" unoptimized  src={'/deadpool-welcome-back.png'} loading="lazy" className="h-[35vh] object-cover  w-fit mobile:block hidden select-none" height={250} width={250} />
        <div className="dark:text-black tablet_md:w-[70vw] md_laptop:w-[50vw] above_laptop:w-[30vw] w-full mobile:m-0 m-2 p-3 space-y-2 rounded-md transition-all">
        <Typography variant="h5">Welcome Back!</Typography>
         <Typography variant="body1" color={"gray"}>Login to your account</Typography>

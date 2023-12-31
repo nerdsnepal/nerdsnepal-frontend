@@ -90,7 +90,7 @@ const LoginPage = () => {
       </div>
     <div className="flex flex-col mobile:shadow-2xl mobile_tablet:justify-self-center mobile:bg-white tablet_laptop:justify-items-start mobile:justify-self-end mobile:border border-solid border-gray-300 rounded-xl h-fit w-auto mobile:w-fit justify-center items-center p-[25px]">
         <h1 className="p-4 font-bold  text-2xl text-black">Admin Portal</h1>
-    <Image src={process.env.NEXT_PUBLIC_APP_LOGO} className="break-all mb-[2px] h-[96px]  w-[120px] object-cover" draggable={false} width={120} height={96} alt="logo"/>
+    <Image src={process.env.NEXT_PUBLIC_APP_LOGO} unoptimized className="break-all mb-[2px] h-[96px]  w-[120px] object-cover" draggable={false} width={120} height={96} alt="logo"/>
         <form onSubmit={handleSubmit}  className="basis-full flex flex-col m-1 gap-3 w-full mobile:w-fit dark:text-black">
         <input type="text"  minLength={4} maxLength={25}
          value={loginUser.username_email} onChange={(e)=>onChangeHandler(e,"username_email")} className="p-2 outline-none border border-gray-500 rounded-sm" inputMode="text" placeholder="Username or email" id="username_or_email" required name="username_or_email" />

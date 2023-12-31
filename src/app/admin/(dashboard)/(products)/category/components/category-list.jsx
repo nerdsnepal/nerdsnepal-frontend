@@ -112,7 +112,7 @@ const CategoryList = ({categories,accessToken,onDelete}) => {
                 const len = images?.length 
                 if(len>0){
                     const {url} = images[0]
-                    return <Image src={API_URL(url)} className="cursor-pointer" alt={name} width={100} height={100} />;
+                    return <Image src={API_URL(url)} unoptimized className="cursor-pointer" alt={name} width={100} height={100} />;
                 }
               return <CategoryIcon />
             }, autoWidth:true

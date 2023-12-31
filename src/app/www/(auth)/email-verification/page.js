@@ -25,7 +25,7 @@ const EmailValidatorPage = async(props) => {
 
     return (<>
         <Stack direction={{xs:'column',md:'row'}} justifyContent={'center'} alignItems={'center'} gap={2}>
-        <Image src={'/gojo-email-verification.png'} alt="gojo-email-verification.png" height={431} width={431}/>
+        <Image src={'/gojo-email-verification.png'} unoptimized alt="gojo-email-verification.png" height={431} width={431}/>
         <EmailVerificationForm email={email}  />
         </Stack>
     

@@ -83,7 +83,7 @@ export const StoreProductList = ({products,onDelete})=>{
                 const len = mediaUrls?.length 
                 if(len>0){
                     const url = mediaUrls[0]
-                    return <Image src={API_URL(url)} className="cursor-pointer" alt={name} width={100} height={100} />;
+                    return <Image src={API_URL(url)} unoptimized className="cursor-pointer" alt={name} width={100} height={100} />;
                 }
               return <ImageIcon/>
             }, autoWidth:true

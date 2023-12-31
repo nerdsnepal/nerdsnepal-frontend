@@ -73,7 +73,7 @@ const Register = () => {
         })
     }
     return (<Stack direction={'row'} gap={2}>
-        <Image src={'/naruto-register.png'} className="h-[493px] object-cover  w-fit mobile:block hidden select-none" alt="naruto-register" height={380} width={380} />
+        <Image src={'/naruto-register.png'} unoptimized className="h-[493px] object-cover  w-fit mobile:block hidden select-none" alt="naruto-register" height={380} width={380} />
         <div className=" dark:text-black tablet_md:w-[70vw] md_laptop:w-[50vw] above_laptop:w-[30vw] w-full p-3 space-y-2 rounded-xl transition-all">
         <Typography variant="h5">Register</Typography>
         <Typography variant="body1" color={"gray"}>Create your account</Typography>
