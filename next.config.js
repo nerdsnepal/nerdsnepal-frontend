@@ -17,12 +17,26 @@ const nextConfig = {
             hostname: 'localhost',
             pathname: '**',
           },
-          
           {
             protocol: 'https',
-            hostname: 'd1xll3zf-8000.asse.devtunnels.ms',
+            hostname: "sichunepal.com",
             pathname: '**',
           },
+          {
+            protocol: 'https',
+            hostname: "api.sichunepal.com",
+            pathname: '**',
+          },
+          {
+            protocol: 'http',
+            hostname: "sichunepal.com",
+            pathname: '**',
+          },
+          {
+            protocol: 'http',
+            hostname: "api.sichunepal.com",
+            pathname: '**',
+          }
         ],
       },
     serverRuntimeConfig:{
