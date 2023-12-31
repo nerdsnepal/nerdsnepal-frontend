@@ -1,5 +1,5 @@
 "use client"
-import { Box,  Stack,  Typography } from "@mui/material";
+import { Box,  Stack,  Typography } from "@mui/material/index";
 import ProductList from "../../component/products/product-list";
 import { CategoryItem } from "../../component/category-item";
 import { StoreInfoMenu } from "./menu";

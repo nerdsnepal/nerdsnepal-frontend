@@ -19,7 +19,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
   }));
 const Logo = ()=>{
-    return <Image alt="" draggable={false} className={`ml-2 h-24 w-24 object-fit overflow-hidden`} src={'/logo.png'} height={65} width={100} />
+    return <Image alt="" draggable={false} className={`ml-2 h-24 w-24 object-fit overflow-hidden`} src={'/logo.png'} height={65} width={100} unoptimized />
 }
 const Cart = ({onClick})=>{
     const items = useSelector((state)=>state.cart.items)

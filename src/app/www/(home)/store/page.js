@@ -29,8 +29,8 @@ import { Suspense, lazy } from "react";
         {value:'Store',url:"/store"},
         {value:data.store.name,url:"#"}
     ]
-    return ( <Stack justifyContent={'center'} alignItems={'center'} > 
-    <Suspense fallback={<></>}>
+    return ( 
+    <Stack justifyContent={'center'} alignItems={'center'} > 
     <Box className="w-[95vw]">
     <Box padding={3}>
         <SichuBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -38,8 +38,8 @@ import { Suspense, lazy } from "react";
     <StoreDetails store={data.store} />
     <StoreProductInfo data={data} tab={tab} storeId={id} q={q}  />
     </Box>
-    </Suspense>
-    </Stack> );
+    </Stack> 
+    );
 }
  
 export default StorePage;

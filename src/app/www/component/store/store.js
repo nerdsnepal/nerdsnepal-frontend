@@ -1,5 +1,5 @@
 import { API_URL } from "@/app/lib/utils/utils";
-import { Box,  Divider,  Stack, Typography } from "@mui/material";
+import { Box,    Stack, Typography } from "@mui/material";
 import Image from "next/image";
 
 const StoreDetails = ({store}) => {
