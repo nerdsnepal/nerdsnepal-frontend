@@ -5,7 +5,7 @@ const StoreDetails =lazy(()=>import("../../component/store/store"));
 import { Box, Stack } from "@mui/material/index";
 const  SichuBreadCrumbs = lazy(()=>import("../../component/breadcrumbs"))
 const  StoreProductInfo = lazy((()=>import("./store"))) ;
-import { Suspense, lazy } from "react";
+import {  Suspense, lazy } from "react";
 
  const StorePage =async (params) => {
     const {id,tab,q}= params.searchParams;
@@ -26,10 +26,11 @@ import { Suspense, lazy } from "react";
     }
     const breadcrumbs =[
         {value:'Home',url:"/"},
-        {value:'Store',url:"/store"},
+        {value:'Store',url:"#"},
         {value:data.store.name,url:"#"}
     ]
     return ( 
+    <Suspense fallback={<></>}>
     <Stack justifyContent={'center'} alignItems={'center'} > 
     <Box className="w-[95vw]">
     <Box padding={3}>
@@ -39,6 +40,7 @@ import { Suspense, lazy } from "react";
     <StoreProductInfo data={data} tab={tab} storeId={id} q={q}  />
     </Box>
     </Stack> 
+    </Suspense>
     );
 }
  

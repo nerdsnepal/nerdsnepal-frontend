@@ -36,7 +36,6 @@ const filter = ({searchParams,data})=>{
 
 const ShopAll = ({props,data}) => {
     data= filter({data,searchParams:props.searchParams})
-    console.log(props);
     return (<Stack direction={{xs:'column',md:'row'}}> 
         <Box padding={4} gap={2} className="w-full mobile:w-[350px]" >
         <Typography variant="body1" className="font-bold">Filters</Typography>

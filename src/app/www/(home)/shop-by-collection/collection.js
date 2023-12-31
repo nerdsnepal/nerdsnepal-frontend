@@ -23,7 +23,7 @@ const Collection = ({itemsPerPage=16,horiZ=false}) => {
     </Stack>
     if(isLoading )return <Stack justifyContent={'center'} gap={2} padding={2} direction={'row'} flexWrap={"wrap"} >
        {
-        [1,2,3,1,2,2,3].map((index)=><Skeleton key={index} variant="rounded" height={"200px"} width={'300px'} />)
+        [1,2,3,4,5,6,7].map((index)=><Skeleton key={"collection-"+index} variant="rounded" height={"200px"} width={'300px'} />)
        }
     </Stack>
     if(!data)return <h1>No collection found</h1>
@@ -50,7 +50,7 @@ const Collection = ({itemsPerPage=16,horiZ=false}) => {
        {
             data?.slice((page-1)*itemsPerPage,page*itemsPerPage).map((category,index)=>{
                 const url = category?.images[0]?.url
-                return <CategoryItem height="200px" href={`/shop-by-collection/collection?_id=${category._id}`} key={index}  url={url} name={category.name} _id={category._id} />
+                return <CategoryItem height="200px" href={`/shop-by-collection/collection?_id=${category._id}`} key={"current-collecction"+index}  url={url} name={category.name} _id={category._id} />
             })
         }
        </Stack>

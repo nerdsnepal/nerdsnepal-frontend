@@ -1,26 +1,42 @@
 "use client"
-import { Category, CheckBox, ExpandLess, ExpandMore } from "@mui/icons-material";
+import {  CheckBox, ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useState } from "react";
 import CheckboxTree from "react-checkbox-tree";
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
-import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "@/app/state/reducer/filter";
 
-const converCategoryIntoTreeNode = (categories)=>{
-    let nodes =[]
-    categories?.map((category,index)=>{
-        let children = []
-        category?.subCategory.map((value,index)=>{
-            children.push({value:value,label:value})
-        })
-        nodes.push({value:category.name,label:category.name,children:Array.from(new Set(children))})
-    })
-    return Array.from(new Set(nodes))
-}
+const converCategoryIntoTreeNode = (categories) => {
+    const nodes = new Map(); // Using Map to maintain uniqueness
+
+    categories?.forEach((category) => {
+        const uniqueCategory = new Set();
+
+        category?.subCategory?.forEach((value) => {
+            uniqueCategory.add({ value: value, label: value });
+        });
+
+        const children = Array.from(uniqueCategory);
+        const existingNode = nodes.get(category.name);
+
+        if (existingNode) {
+            existingNode.children.push(...children); 
+        } else {
+            nodes.set(category.name, {
+                value: category.name,
+                label: category.name,
+                children: children,
+            });
+        }
+    });
+
+    const uniqueNodes = Array.from(nodes.values()); 
+    return uniqueNodes;
+};
+
 const CategoryList = ({categories}) => {
     const checked = useSelector((state)=>state.proFilter?.categories)
     const dispatch = useDispatch()

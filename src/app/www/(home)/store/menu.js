@@ -1,5 +1,7 @@
-"use client"
-import { Box, InputAdornment, Stack, TextField } from "@mui/material/index";
+import Box   from "@mui/material/Box";
+import InputAdornment   from "@mui/material/InputAdornment";
+import Stack   from "@mui/material/Stack";
+import TextField   from "@mui/material/TextField";
 import Link from "next/link";
 import { Search } from "@mui/icons-material";
 import { isEmpty } from "@/app/lib/utils/utils";
