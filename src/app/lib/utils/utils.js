@@ -1,6 +1,6 @@
 import { grey } from "@mui/material/colors"
-//export const DOMAIN = 'sichunepal.com'
-export const DOMAIN = 'localhost:5000'
+export const DOMAIN = 'sichunepal.com'
+// export const DOMAIN = 'localhost:5000'
 export const API_URL =(name)=> `https://api.sichunepal.com/${name}`
 export const COOKIE_NAME = 'token'
 export const removeQueryPart = (path)=> path.split('?')[0]
